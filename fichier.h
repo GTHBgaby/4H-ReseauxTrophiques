@@ -1,7 +1,3 @@
-//
-// Created by louis on 22/11/2024.
-//
-
 #ifndef INC_4E_RESEAUXTROPHIQUES_FICHIER_H
 #define INC_4E_RESEAUXTROPHIQUES_FICHIER_H
 #ifndef FILE_HANDLER_H
