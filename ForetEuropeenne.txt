@@ -1,0 +1,15 @@
+14
+Graines/Glands;Ecureuil,Mulot,Cerf,Sanglier
+Herbes/Feuilles;Larves/Insectes,Lapin,Mulot,Cerf,Sanglier
+Seve;
+Charogne;Larves/Insectes
+Larves/Insectes;Pic-vert,Sanglier
+Lapin;
+Ecureuil;Chouette,Buse
+Mulot;Chouette,Buse,Loup
+Pic-vert;Buse
+Cerf;Loup
+Sanglier;Loup
+Chouette;
+Buse;
+Loup;
