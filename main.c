@@ -1,8 +1,6 @@
 #include "graph.h"
 #include "lecteurFichiers.h"
 
-
-
 int main() {
 
     // Test de lecture du fichier

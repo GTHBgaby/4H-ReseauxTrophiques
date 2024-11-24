@@ -1,4 +1,5 @@
 digraph mongraphe {
+    rankdir=BT;
     renard -> lapin
     lapin -> carotte
 }
