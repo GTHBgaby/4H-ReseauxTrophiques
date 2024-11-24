@@ -1,7 +1,45 @@
 digraph mongraphe {
-    rankdir=BT;
+    rankdir=TB; // du haut vers le bas
     node [shape=ellipse, style=filled, fillcolor=white];
 
-    renard -> lapin
-    lapin -> carotte
+
+    "Herbe a elephant"
+    "Feuille"
+    "Carcasse"
+    "Vers/Insecte"
+    "Marabout"
+    "Musaraigne"
+    "Antilope"
+    "Buffle"
+    "Girafe"
+    "Hyene"
+    "Guepard"
+    "Lion"
+    "Vautour"
+
+    "Musaraigne" -> "Herbe a elephant"
+    "Antilope" -> "Herbe a elephant"
+    "Buffle" -> "Herbe a elephant"
+
+    "Antilope" -> "Feuille"
+    "Buffle" -> "Feuille"
+    "Girafe" -> "Feuille"
+
+    "Vers/Insecte" -> "Carcasse"
+    "Hyene" -> "Carcasse"
+    "Vautour" -> "Carcasse"
+
+    "Marabout" -> "Vers/Insecte"
+    "Musaraigne" -> "Vers/Insecte"
+
+    "Guepard" -> "Marabout"
+
+    "Hyene" -> "Musaraigne"
+
+    "Guepard" -> "Antilope"
+    "Lion" -> "Antilope"
+
+    "Lion" -> "Buffle"
+
+    "Lion" -> "Girafe"
 }
