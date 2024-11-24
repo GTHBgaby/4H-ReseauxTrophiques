@@ -56,9 +56,97 @@ digraph multigraphe {
         bgcolor = "lightgreen";
         node [shape=ellipse, style=filled, fillcolor=white];
 
-        "Renard" -> "Lapin"
 
-        {rank=same; "Renard"}
+
+
+"Ecureuil" -> "Graines/Glands"
+"Mulot" -> "Graines/Glands"
+"Cerf" -> "Graines/Glands"
+"Sanglier" -> "Graines/Glands"
+
+"Larves/Insectes" -> "Herbes/Feuilles"
+"Lapin" -> "Herbes/Feuilles"
+"Mulot" -> "Herbes/Feuilles"
+"Cerf" -> "Herbes/Feuilles"
+"Sanglier" -> "Herbes/Feuilles"
+
+"Larves/Insectes" -> "Charogne"
+
+"Pic-vert" -> "Larves/Insectes"
+"Sanglier" -> "Larves/Insectes"
+
+"Chouette" -> "Ecureuil"
+"Buse" -> "Ecureuil"
+
+"Chouette" -> "Mulot"
+"Buse" -> "Mulot"
+"Loup" -> "Mulot"
+
+"Buse" -> "Pic-vert"
+
+"Loup" -> "Cerf"
+"Loup" -> "Sanglier"
+
+        // Force la disposition
+        {rank=same; "Graines/Glands"}
+        {rank=same; "Herbes/Feuilles"}
+        {rank=same; "Seve"}
+        {rank=same; "Charogne"}
+        {rank=same; "Larves/Insectes"}
         {rank=same; "Lapin"}
+        {rank=same; "Ecureuil"}
+        {rank=same; "Mulot"}
+        {rank=same; "Pic-vert"}
+        {rank=same; "Cerf"}
+        {rank=same; "Sanglier"}
+        {rank=same; "Chouette"}
+        {rank=same; "Buse"}
+        {rank=same; "Loup"}
+
     }
+
+
+        subgraph cluster_3 {
+        label = "Cours D'eau"
+        bgcolor = "lightblue";
+        node [shape=ellipse, style=filled, fillcolor=white];
+
+
+
+
+"Limnee" -> "Debris vegetaux"
+"Gammare" -> "Debris vegetaux"
+
+"Micro-organisme" -> "Microalgue"
+"Limnee" -> "Microalgue"
+
+"Ver de vase" -> "Cadavre"
+"Gammare" -> "Cadavre"
+"Carpe" -> "Cadavre"
+"Brochet" -> "Cadavre"
+
+"Carpe" -> "Ver de vase"
+"Carpe" -> "Micro-organisme"
+"Carpe" -> "Limnee"
+"Carpe" -> "Gammare"
+
+"Brochet" -> "Carpe"
+
+
+    {rank=same; "Debris vegetaux"}
+    {rank=same; "Microalgue"}
+    {rank=same; "Cadavre"}
+    {rank=same; "Ver de vase"}
+    {rank=same; "Micro-organisme"}
+    {rank=same; "Limnee"}
+    {rank=same; "Gammare"}
+    {rank=same; "Brochet"}
+
 }
+
+}
+
+
+
+
+
