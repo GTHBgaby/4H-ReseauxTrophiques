@@ -1,6 +1,16 @@
-#include <stdio.h>
+#include "graph.h"
+#include "lecteurFichiers.h"
+
+
 
 int main() {
-    printf("Hello, World!\n");
+
+    // Test de lecture du fichier
+    Graph* ecosystem = read_ecosystem_file("../CoursDeau.txt");
+    if (ecosystem) {
+        print_ecosystem(ecosystem);
+        destroy_graph(ecosystem);
+    }
+
     return 0;
 }

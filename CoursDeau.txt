@@ -1,10 +1,10 @@
 9
-Debris vegetaux;Limnee,Gammare
-Microalgue;Micro-organisme,Limnee
-Cadavre;Ver de vase,Gammare,Carpe,Brochet
-Ver de vase;Carpe
-Micro-organisme;Carpe
-Limnee;Carpe
-Gammare;Carpe
-Carpe;Brochet
-Brochet;
+Debris vegetaux
+Microalgue
+Cadavre
+Ver de vase
+Micro-organisme
+Limnee
+Gammare
+Carpe
+Brochet
