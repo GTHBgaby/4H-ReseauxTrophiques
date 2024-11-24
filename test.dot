@@ -1,0 +1,4 @@
+digraph mongraphe {
+    renard -> lapin
+    lapin -> carotte
+}
