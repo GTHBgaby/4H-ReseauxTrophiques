@@ -1,5 +1,7 @@
 digraph mongraphe {
     rankdir=BT;
+    node [shape=ellipse, style=filled, fillcolor=white];
+
     renard -> lapin
     lapin -> carotte
 }
