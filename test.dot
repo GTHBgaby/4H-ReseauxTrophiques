@@ -1,5 +1,5 @@
 digraph mongraphe {
-    rankdir=BT;
+    rankdir=TB;
     node [shape=ellipse, style=filled, fillcolor=white];
 
     renard -> lapin
