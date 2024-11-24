@@ -87,7 +87,6 @@ digraph multigraphe {
         // Force la disposition
         {rank=same; "Graines/Glands"}
         {rank=same; "Herbes/Feuilles"}
-        {rank=same; "Seve"}
         {rank=same; "Charogne"}
         {rank=same; "Larves/Insectes"}
         {rank=same; "Lapin"}
@@ -101,38 +100,38 @@ digraph multigraphe {
         {rank=same; "Loup"}
     }
 
-        subgraph cluster_3 {
-            label = "Cours D'eau"
-            bgcolor = "lightblue";
-            node [shape=ellipse, style=filled, fillcolor=white];
+    subgraph cluster_3 {
+        label = "Cours D'eau"
+        bgcolor = "lightblue";
+        node [shape=ellipse, style=filled, fillcolor=white];
 
-            "Limnee" -> "Debris vegetaux"
-            "Gammare" -> "Debris vegetaux"
+        "Limnee" -> "Debris vegetaux"
+        "Gammare" -> "Debris vegetaux"
 
-            "Micro-organisme" -> "Microalgue"
-            "Limnee" -> "Microalgue"
+        "Micro-organisme" -> "Microalgue"
+        "Limnee" -> "Microalgue"
 
-            "Ver de vase" -> "Cadavre"
-            "Gammare" -> "Cadavre"
-            "Carpe" -> "Cadavre"
-            "Brochet" -> "Cadavre"
+        "Ver de vase" -> "Cadavre"
+        "Gammare" -> "Cadavre"
+        "Carpe" -> "Cadavre"
+        "Brochet" -> "Cadavre"
 
-            "Carpe" -> "Ver de vase"
-            "Carpe" -> "Micro-organisme"
-            "Carpe" -> "Limnee"
-            "Carpe" -> "Gammare"
+        "Carpe" -> "Ver de vase"
+        "Carpe" -> "Micro-organisme"
+        "Carpe" -> "Limnee"
+        "Carpe" -> "Gammare"
 
-            "Brochet" -> "Carpe"
+        "Brochet" -> "Carpe"
 
-            {rank=same; "Debris vegetaux"}
-            {rank=same; "Microalgue"}
-            {rank=same; "Cadavre"}
-            {rank=same; "Ver de vase"}
-            {rank=same; "Micro-organisme"}
-            {rank=same; "Limnee"}
-            {rank=same; "Gammare"}
-            {rank=same; "Brochet"}
-            }
+        {rank=same; "Debris vegetaux"}
+        {rank=same; "Microalgue"}
+        {rank=same; "Cadavre"}
+        {rank=same; "Ver de vase"}
+        {rank=same; "Micro-organisme"}
+        {rank=same; "Limnee"}
+        {rank=same; "Gammare"}
+        {rank=same; "Brochet"}
+        }
 }
 
 
