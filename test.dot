@@ -1,45 +1,64 @@
-digraph mongraphe {
+digraph multigraphe {
     rankdir=TB; // du haut vers le bas
-    node [shape=ellipse, style=filled, fillcolor=white];
+    compound=true;
+    newrank=true;
 
+    subgraph cluster_0 {
+        label = "Savane";
+        bgcolor = "lightyellow";
+        node [shape=ellipse, style=filled, fillcolor=white];
 
-    "Herbe a elephant"
-    "Feuille"
-    "Carcasse"
-    "Vers/Insecte"
-    "Marabout"
-    "Musaraigne"
-    "Antilope"
-    "Buffle"
-    "Girafe"
-    "Hyene"
-    "Guepard"
-    "Lion"
-    "Vautour"
+        // Relations
+        "Musaraigne" -> "Herbe a elephant"
+        "Antilope" -> "Herbe a elephant"
+        "Buffle" -> "Herbe a elephant"
 
-    "Musaraigne" -> "Herbe a elephant"
-    "Antilope" -> "Herbe a elephant"
-    "Buffle" -> "Herbe a elephant"
+        "Antilope" -> "Feuille"
+        "Buffle" -> "Feuille"
+        "Girafe" -> "Feuille"
 
-    "Antilope" -> "Feuille"
-    "Buffle" -> "Feuille"
-    "Girafe" -> "Feuille"
+        "Vers/Insecte" -> "Carcasse"
+        "Hyene" -> "Carcasse"
+        "Vautour" -> "Carcasse"
 
-    "Vers/Insecte" -> "Carcasse"
-    "Hyene" -> "Carcasse"
-    "Vautour" -> "Carcasse"
+        "Marabout" -> "Vers/Insecte"
+        "Musaraigne" -> "Vers/Insecte"
 
-    "Marabout" -> "Vers/Insecte"
-    "Musaraigne" -> "Vers/Insecte"
+        "Guepard" -> "Marabout"
 
-    "Guepard" -> "Marabout"
+        "Hyene" -> "Musaraigne"
 
-    "Hyene" -> "Musaraigne"
+        "Guepard" -> "Antilope"
+        "Lion" -> "Antilope"
 
-    "Guepard" -> "Antilope"
-    "Lion" -> "Antilope"
+        "Lion" -> "Buffle"
 
-    "Lion" -> "Buffle"
+        "Lion" -> "Girafe"
 
-    "Lion" -> "Girafe"
+        // Force la disposition
+        {rank=same; "Herbe a elephant"}
+        {rank=same; Feuille}
+        {rank=same; Carcasse}
+        {rank=same; "Vers/Insecte"}
+        {rank=same; Marabout}
+        {rank=same; Musaraigne}
+        {rank=same; Antilope}
+        {rank=same; Buffle}
+        {rank=same; Girafe}
+        {rank=same; Hyene}
+        {rank=same; Guepard}
+        {rank=same; Lion}
+        {rank=same; Vautour}
+        }
+
+    subgraph cluster_1 {
+        label = "Foret Europeenne";
+        bgcolor = "lightgreen";
+        node [shape=ellipse, style=filled, fillcolor=white];
+
+        "Renard" -> "Lapin"
+
+        {rank=same; "Renard"}
+        {rank=same; "Lapin"}
+    }
 }
