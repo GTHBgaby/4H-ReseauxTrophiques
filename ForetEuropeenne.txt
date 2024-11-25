@@ -1,4 +1,5 @@
 14
+20
 Graines/Glands
 Herbes/Feuilles
 Seve
@@ -13,3 +14,23 @@ Sanglier
 Chouette
 Buse
 Loup
+5 2
+5 4
+6 2
+7 1
+8 1
+8 2
+9 5
+10 1
+10 2
+11 1
+11 2
+11 5
+12 7
+12 8
+13 7
+13 8
+13 9
+14 8
+14 10
+14 11
