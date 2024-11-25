@@ -1,14 +1,32 @@
 13
-Herbe a elephant;Musaraigne,Antilope,Buffle
-Feuille;Antilope,Buffle,Girafe
-Carcasse;Vers/Insecte,Hyene,Vautour
-Vers/Insecte;Marabout,Musaraigne
-Marabout;Guepard
-Musaraigne;Hyene
-Antilope;Guepard,Lion
-Buffle;Lion
-Girafe;Lion
-Hyene;
-Guepard;
-Lion;
-Vautour;
+17
+Herbe a elephant
+Feuille
+Carcasse
+Vers/Insecte
+Marabout
+Musaraigne
+Antilope
+Buffle
+Girafe
+Hyene
+Guepard
+Lion
+Vautour
+4 3
+5 4
+6 1
+6 4
+7 1
+7 2
+8 1
+8 2
+9 2
+10 3
+10 6
+11 5
+11 7
+12 7
+12 8
+12 9
+13 3

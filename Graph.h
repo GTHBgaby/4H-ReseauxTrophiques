@@ -9,7 +9,7 @@
 typedef struct a{
     int IDb;             // ID de l'espèce source
     int IDs;             // ID de l'espèce destination
-    a* arcsuivant;    // permet de passer à l'arc suivant
+    struct a* arcsuivant;    // permet de passer à l'arc suivant
     double infl;       // Coefficient d'influence
 }Arc;
 
