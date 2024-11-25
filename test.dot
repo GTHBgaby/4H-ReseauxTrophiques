@@ -8,6 +8,20 @@ digraph multigraphe {
         bgcolor = "lightyellow";
         node [shape=ellipse, style=filled, fillcolor=white];
 
+        "Musaraigne" [label="Musaraigne\n[100]"]
+        "Herbe a elephant" [label="Herbe a elephant\n[100]"]
+        "Antilope" [label="Antilope\n[100]"]
+        "Buffle" [label="Buffle\n[100]"]
+        "Feuille" [label="Feuille\n[100]"]
+        "Girafe" [label="Girafe\n[100]"]
+        "Vers/Insecte" [label="Vers/Insecte\n[100]"]
+        "Carcasse" [label="Carcasse\n[100]"]
+        "Hyene" [label="Hyene\n[100]"]
+        "Vautour" [label="Vautour\n[100]"]
+        "Marabout" [label="Marabout\n[100]"]
+        "Guepard" [label="Guepard\n[100]"]
+        "Lion" [label="Lion\n[100]"]
+
         // Relations
         "Musaraigne" -> "Herbe a elephant"
         "Antilope" -> "Herbe a elephant"
@@ -55,6 +69,20 @@ digraph multigraphe {
         label = "Foret Europeenne";
         bgcolor = "lightgreen";
         node [shape=ellipse, style=filled, fillcolor=white];
+
+        "Ecureuil" [label="Ecureuil\n[100]"]
+        "Graines/Glands" [label="Graines/Glands\n[100]"]
+        "Mulot" [label="Mulot\n[100]"]
+        "Cerf" [label="Cerf\n[100]"]
+        "Sanglier" [label="Sanglier\n[100]"]
+        "Larves/Insectes" [label="Larves/Insectes\n[100]"]
+        "Herbes/Feuilles" [label="Herbes/Feuilles\n[100]"]
+        "Lapin" [label="Lapin\n[100]"]
+        "Charogne" [label="Charogne\n[100]"]
+        "Pic-vert" [label="Pic-vert\n[100]"]
+        "Chouette" [label="Chouette\n[100]"]
+        "Buse" [label="Buse\n[100]"]
+        "Loup" [label="Loup\n[100]"]
 
         "Ecureuil" -> "Graines/Glands"
         "Mulot" -> "Graines/Glands"
@@ -104,6 +132,16 @@ digraph multigraphe {
         label = "Cours D'eau"
         bgcolor = "lightblue";
         node [shape=ellipse, style=filled, fillcolor=white];
+
+        "Limnee" [label="Limnee\n[100]"]
+        "Debris vegetaux" [label="Debris vegetaux\n[100]"]
+        "Gammare" [label="Gammare\n[100]"]
+        "Micro-organisme" [label="Micro-organisme\n[100]"]
+        "Microalgue" [label="Microalgue\n[100]"]
+        "Ver de vase" [label="Ver de vase\n[100]"]
+        "Cadavre" [label="Cadavre\n[100]"]
+        "Carpe" [label="Carpe\n[100]"]
+        "Brochet" [label="Brochet\n[100]"]
 
         "Limnee" -> "Debris vegetaux"
         "Gammare" -> "Debris vegetaux"
