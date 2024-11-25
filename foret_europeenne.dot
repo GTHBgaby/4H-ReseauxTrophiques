@@ -2,6 +2,7 @@ digraph foret_europ {
     rankdir=TB;
     compound=true;
     newrank=true;
+
     label = "Forêt Européenne";
     bgcolor = "lightgreen";
     node [shape=ellipse, style=filled, fillcolor=white];

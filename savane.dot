@@ -2,6 +2,7 @@ digraph multigraphe {
     rankdir=TB; // du haut vers le bas
     compound=true;
     newrank=true;
+
     label = "Savane";
     bgcolor = "lightyellow";
     node [shape=ellipse, style=filled, fillcolor=white];
