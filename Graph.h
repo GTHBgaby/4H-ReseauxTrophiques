@@ -6,6 +6,12 @@
 #define longueur_Max 50
 #define MAX_connexion 10
 
+typedef struct a{
+    int IDb;             // ID de l'espèce source
+    int IDs;             // ID de l'espèce destination
+    a* arcsuivant;    // permet de passer à l'arc suivant
+    double infl;       // Coefficient d'influence
+}Arc;
 
 typedef struct {
     int id;
@@ -18,14 +24,6 @@ typedef struct {
     double capacite;       // Capacité de charge
     int niveauTrophique;     // Niveau trophique
 } Especes;
-
-
-typedef struct a{
-    int IDb;             // ID de l'espèce source
-    int IDs;             // ID de l'espèce destination
-    a* arcsuivant;    // permet de passer à l'arc suivant
-    double infl;       // Coefficient d'influence
-}Arc;
 
 
 typedef struct {

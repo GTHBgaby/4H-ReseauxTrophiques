@@ -8,3 +8,13 @@ Limnee
 Gammare
 Carpe
 Brochet
+4 3
+5 2
+6 1
+6 2
+7 1
+7 3
+8 3
+8 5
+8 6
+8 7
