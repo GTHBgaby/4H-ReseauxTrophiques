@@ -2,7 +2,6 @@ digraph multigraphe {
     rankdir=TB; // du haut vers le bas
     compound=true;
     newrank=true;
-
     label = "Cours D'eau"
     bgcolor = "lightblue";
     node [shape=ellipse, style=filled, fillcolor=white];
