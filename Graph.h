@@ -39,6 +39,18 @@ typedef struct {
 Graph* create_graph(int nbEspeces);
 void destroy_graph(Graph* g);
 
+void add_edge(Graph* g, int source, int dest, float weight);
+void print_ecosystem(Graph* g);
+
+
+
+
+// Fonctions de base pour la manipulation des graphes
+Graph* create_graph(int nb_especes);
+void destroy_graph(Graph* g);
+int add_species(Graph* g, char* name, double initial_population, double tauxDeCroissance);
+void add_relation(Graph* g, int from, int to, double poids);
+void remove_relation(Graph* g, int from, int to);
 
 
 
