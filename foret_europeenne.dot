@@ -1,0 +1,66 @@
+digraph foret_europ {
+    rankdir=TB;
+    compound=true;
+    newrank=true;
+
+    label = "Forêt Européenne";
+    bgcolor = "lightgreen";
+    node [shape=ellipse, style=filled, fillcolor=white];
+
+    "Ecureuil" [label="Ecureuil\n[100]"]
+    "Graines/Glands" [label="Graines/Glands\n[100]"]
+    "Mulot" [label="Mulot\n[100]"]
+    "Cerf" [label="Cerf\n[100]"]
+    "Sanglier" [label="Sanglier\n[100]"]
+    "Larves/Insectes" [label="Larves/Insectes\n[100]"]
+    "Herbes/Feuilles" [label="Herbes/Feuilles\n[100]"]
+    "Lapin" [label="Lapin\n[100]"]
+    "Charogne" [label="Charogne\n[100]"]
+    "Pic-vert" [label="Pic-vert\n[100]"]
+    "Chouette" [label="Chouette\n[100]"]
+    "Buse" [label="Buse\n[100]"]
+    "Loup" [label="Loup\n[100]"]
+
+    "Ecureuil" -> "Graines/Glands"
+    "Mulot" -> "Graines/Glands"
+    "Cerf" -> "Graines/Glands"
+    "Sanglier" -> "Graines/Glands"
+
+    "Larves/Insectes" -> "Herbes/Feuilles"
+    "Lapin" -> "Herbes/Feuilles"
+    "Mulot" -> "Herbes/Feuilles"
+    "Cerf" -> "Herbes/Feuilles"
+    "Sanglier" -> "Herbes/Feuilles"
+
+    "Larves/Insectes" -> "Charogne"
+
+    "Pic-vert" -> "Larves/Insectes"
+    "Sanglier" -> "Larves/Insectes"
+
+    "Chouette" -> "Ecureuil"
+    "Buse" -> "Ecureuil"
+
+    "Chouette" -> "Mulot"
+    "Buse" -> "Mulot"
+    "Loup" -> "Mulot"
+
+    "Buse" -> "Pic-vert"
+
+    "Loup" -> "Cerf"
+    "Loup" -> "Sanglier"
+
+    // Force la disposition
+    {rank=same; "Graines/Glands"}
+    {rank=same; "Herbes/Feuilles"}
+    {rank=same; "Charogne"}
+    {rank=same; "Larves/Insectes"}
+    {rank=same; "Lapin"}
+    {rank=same; "Ecureuil"}
+    {rank=same; "Mulot"}
+    {rank=same; "Pic-vert"}
+    {rank=same; "Cerf"}
+    {rank=same; "Sanglier"}
+    {rank=same; "Chouette"}
+    {rank=same; "Buse"}
+    {rank=same; "Loup"}
+}
