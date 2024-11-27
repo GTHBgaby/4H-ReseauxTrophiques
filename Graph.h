@@ -34,8 +34,8 @@ typedef struct {
 
 
 // Fonctions de base pour la manipulation des graphes
-Graph* lireGraphFichier(const char* nomFichier);
-Especes* CreerArete(Especes* sommet,int s1,int s2);
+Graph* lireGraphFichier(const char* nomFichier, Arc* man);
+Especes* CreerArete(Especes* sommet,int s1,int s2, Arc* ark);
 void libererGraph(Graph* graph);
 void printEcosysteme(Graph* g);
 

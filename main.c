@@ -53,11 +53,12 @@
     return 0;
 }*/
 int main() {
+    Arc* man = malloc(sizeof (Arc));
     char nomFichier[50];
     Graph* graph = NULL;
     //printf("Donnez le nom du fichier a analyser :");
     //scanf("%s", nomFichier);
-    graph = lireGraphFichier(nomFichier);
+    graph = lireGraphFichier(nomFichier,man);
     printEcosysteme(graph);
     return 0;
 }
