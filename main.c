@@ -1,6 +1,6 @@
 #include "Graph.h"
 #include "generationDOT.h"
-#include <stdlib.h>
+#include<stdlib.h>
 
 /*int main() {
 
