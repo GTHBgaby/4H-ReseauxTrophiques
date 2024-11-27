@@ -2,16 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #define TAUX_BASE 15
 #define POP_BASE 100
 #define CAP_BASE 200
 
-Graph* lireGraphFichier(const char* nomFichier) {
+Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
     int nbArrete, n , p, a;
     FILE* fichier = fopen("../CoursDeau.txt", "r");
     if (!fichier) return NULL;
@@ -41,8 +36,6 @@ Graph* lireGraphFichier(const char* nomFichier) {
         graph->especes[i].tauxDeCroissance = TAUX_BASE;
         graph->especes[i].capacite = CAP_BASE;
     }
-    n = 0;
-    p = 0;
     for (int i = 0; i < nbArrete -1; i++) {
         a = 0;
         fscanf(fichier, "%d%d", &n, &p);
@@ -56,20 +49,16 @@ Graph* lireGraphFichier(const char* nomFichier) {
             ++a;
         }
         graph->especes[p].suc[a] = n;
-        graph->especes = CreerArete(graph->especes, n, p);
+        graph->especes = CreerArete(graph->especes, n, p, man);
     }
     fclose(fichier);
     return graph;
 }
 // Ajouter l'arête entre les sommets s1 et s2 du graphe
-Especes* CreerArete(Especes* sommet,int s1,int s2)
+Especes* CreerArete(Especes* sommet,int s1,int s2,Arc* ark)
 {
     if(1)
     {
-        printf("pipi");
-        Arc* ark = NULL;
-        ark = malloc(sizeof(Arc));
-        printf("caca");
         ark->IDb=s2;
         ark->IDs=s1;
         ark->arcsuivant = NULL;
@@ -101,18 +90,18 @@ void printEcosysteme(Graph* g) {
     }
 
     // Affichage du titre
-    printf("\n=== Écosystème: %s ===\n", g->nom);
-    printf("Nombre d'espèces: %d\n\n", g->nbEspeces);
+    printf("\n=== Ecosysteme: %s ===\n", g->nom);
+    printf("Nombre d'especes: %d\n\n", g->nbEspeces);
 
     // 1. Affichage de la liste des sommets (espèces) avec leurs informations
-    printf("LISTE DES ESPÈCES:\n");
+    printf("LISTE DES ESPECES:\n");
     printf("------------------\n");
     for (int i = 0; i < g->nbEspeces; i++) {
         Especes esp = g->especes[i];
-        printf("Espèce %d: %s\n", esp.id, esp.nom);
+        printf("Espece %d: %s\n", esp.id, esp.nom);
         printf("  Population: %.2f\n", esp.population);
         printf("  Taux de croissance: %.2f\n", esp.tauxDeCroissance);
-        printf("  Capacité maximale: %.2f\n", esp.capacite);
+        printf("  Capacite maximale: %.2f\n", esp.capacite);
         printf("  Niveau trophique: %d\n\n", esp.niveauTrophique);
     }
 
@@ -132,26 +121,30 @@ void printEcosysteme(Graph* g) {
     printf("\n");
 
     // 3. Pour chaque sommet, affichage des successeurs et prédécesseurs
-    printf("SUCCESSEURS ET PRÉDÉCESSEURS:\n");
+    printf("SUCCESSEURS ET PREDECESSEURS:\n");
     printf("----------------------------\n");
     for (int i = 0; i < g->nbEspeces; i++) {
         Especes esp = g->especes[i];
-        printf("Espèce %d (%s):\n", esp.id, esp.nom);
+        printf("Espece %d (%s):\n", esp.id, esp.nom);
 
         // Affichage des successeurs
         printf("  Successeurs: ");
         int j = 0;
         while (j < MAX_connexion && esp.suc[j] != 0) {
-            printf("%d ", esp.suc[j]);
+            if(esp.suc[j]!=-1){
+                printf("%d ", esp.suc[j]);
+            }
             j++;
         }
         printf("\n");
 
         // Affichage des prédécesseurs
-        printf("  Prédécesseurs: ");
+        printf("  Predecesseurs: ");
         j = 0;
         while (j < MAX_connexion && esp.pred[j] != 0) {
-            printf("%d ", esp.pred[j]);
+            if(esp.pred[j]!=-1){
+                printf("%d ", esp.pred[j]);
+            }
             j++;
         }
         printf("\n\n");
