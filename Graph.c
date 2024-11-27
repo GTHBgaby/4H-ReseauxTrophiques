@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #define TAUX_BASE 15
 #define POP_BASE 100
 #define CAP_BASE 200
