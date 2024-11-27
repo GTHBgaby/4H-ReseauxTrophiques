@@ -22,33 +22,33 @@ digraph multigraphe {
     "Lion" [label="Lion\n[100]"]
 
     // Relations
-    "Musaraigne" -> "Herbe a elephant"
-    "Antilope" -> "Herbe a elephant"
-    "Buffle" -> "Herbe a elephant"
+    "Herbe a elephant"->"Musaraigne"
+    "Herbe a elephant"->"Antilope"
+    "Herbe a elephant"->"Buffle"
 
-    "Antilope" -> "Feuille"
-    "Buffle" -> "Feuille"
-    "Girafe" -> "Feuille"
+    "Feuille"->"Antilope"
+    "Feuille"->"Buffle"
+    "Feuille"->"Girafe"
 
-    "Vers/Insecte" -> "Carcasse"
-    "Hyene" -> "Carcasse"
-    "Vautour" -> "Carcasse"
+    "Carcasse"->"Vers/Insecte"
+    "Carcasse"->"Hyene"
+    "Carcasse" ->"Vautour"
 
-    "Marabout" -> "Vers/Insecte"
-    "Musaraigne" -> "Vers/Insecte"
+    "Vers/Insecte" ->"Marabout"
+    "Vers/Insecte"->"Musaraigne"
 
-    "Guepard" -> "Marabout"
+    "Marabout" ->"Guepard"
 
-    "Hyene" -> "Musaraigne"
+    "Musaraigne"->"Hyene"
 
-    "Guepard" -> "Antilope"
-    "Lion" -> "Antilope"
+    "Antilope"->"Guepard"
+    "Antilope" ->"Lion"
 
-    "Lion" -> "Buffle"
+    "Buffle" ->"Lion"
 
-    "Lion" -> "Girafe"
+    "Girafe" ->"Lion"
 
-    // Force la disposition
+   // Force la disposition
     {rank=same; "Herbe a elephant"}
     {rank=same; Feuille}
     {rank=same; Carcasse}

@@ -21,35 +21,35 @@ digraph foret_europ {
     "Buse" [label="Buse\n[100]"]
     "Loup" [label="Loup\n[100]"]
 
-    "Ecureuil" -> "Graines/Glands"
-    "Mulot" -> "Graines/Glands"
-    "Cerf" -> "Graines/Glands"
-    "Sanglier" -> "Graines/Glands"
+     "Graines/Glands"->"Ecureuil"
+     "Graines/Glands"->"Mulot"
+     "Graines/Glands"->"Cerf"
+     "Graines/Glands"->"Sanglier"
 
-    "Larves/Insectes" -> "Herbes/Feuilles"
-    "Lapin" -> "Herbes/Feuilles"
-    "Mulot" -> "Herbes/Feuilles"
-    "Cerf" -> "Herbes/Feuilles"
-    "Sanglier" -> "Herbes/Feuilles"
+     "Herbes/Feuilles"->"Larves/Insectes"
+     "Herbes/Feuilles"->"Lapin"
+     "Herbes/Feuilles"->"Mulot"
+     "Herbes/Feuilles"->"Cerf"
+     "Herbes/Feuilles"->"Sanglier"
 
-    "Larves/Insectes" -> "Charogne"
+     "Charogne"->"Larves/Insectes"
 
-    "Pic-vert" -> "Larves/Insectes"
-    "Sanglier" -> "Larves/Insectes"
+     "Larves/Insectes" -> "Pic-vert"
+     "Larves/Insectes"->"Sanglier"
 
-    "Chouette" -> "Ecureuil"
-    "Buse" -> "Ecureuil"
+     "Ecureuil"->"Chouette"
+     "Ecureuil"->"Buse"
 
-    "Chouette" -> "Mulot"
-    "Buse" -> "Mulot"
-    "Loup" -> "Mulot"
+    "Mulot"  ->"Chouette"
+    "Mulot"->"Buse"
+    "Mulot"->"Loup"
 
-    "Buse" -> "Pic-vert"
+     "Pic-vert" ->"Buse"
 
-    "Loup" -> "Cerf"
-    "Loup" -> "Sanglier"
+     "Cerf" ->"Loup"
+     "Sanglier"->"Loup"
 
-    // Force la disposition
+ // Force la disposition
     {rank=same; "Graines/Glands"}
     {rank=same; "Herbes/Feuilles"}
     {rank=same; "Charogne"}

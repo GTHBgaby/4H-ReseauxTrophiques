@@ -17,23 +17,22 @@ digraph multigraphe {
     "Carpe" [label="Carpe\n[100]"]
     "Brochet" [label="Brochet\n[100]"]
 
-    "Limnee" -> "Debris vegetaux"
-    "Gammare" -> "Debris vegetaux"
+    "Debris vegetaux" ->"Limnee"
+    "Debris vegetaux"->"Gammare"
 
-    "Micro-organisme" -> "Microalgue"
-    "Limnee" -> "Microalgue"
+     "Microalgue"->"Micro-organisme"
+     "Microalgue" ->"Limnee"
 
-    "Ver de vase" -> "Cadavre"
-    "Gammare" -> "Cadavre"
-    "Carpe" -> "Cadavre"
-    "Brochet" -> "Cadavre"
+     "Cadavre" ->"Ver de vase"
+    "Cadavre" ->"Gammare"
+     "Cadavre"->"Carpe"
+     "Cadavre"->"Brochet"
+     "Ver de vase"->"Carpe"
+    "Micro-organisme"-> "Carpe"
+    "Limnee"->"Carpe"
+    "Gammare"->"Carpe"
 
-    "Carpe" -> "Ver de vase"
-    "Carpe" -> "Micro-organisme"
-    "Carpe" -> "Limnee"
-    "Carpe" -> "Gammare"
-
-    "Brochet" -> "Carpe"
+    "Carpe"->"Brochet"
 
     {rank=same; "Debris vegetaux"}
     {rank=same; "Microalgue"}
