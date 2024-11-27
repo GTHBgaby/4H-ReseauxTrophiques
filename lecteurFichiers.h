@@ -1,6 +1,6 @@
 #ifndef LECTEURFICHIERS_H
 #define LECTEURFICHIERS_H
-#include "graph.h"
+#include "Graph.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"

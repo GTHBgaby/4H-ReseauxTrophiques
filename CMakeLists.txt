@@ -3,5 +3,10 @@ project(4E_ReseauxTrophiques C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(4E_ReseauxTrophiques main.c Graph.h Graph.c lecteurFichiers.c lecteurFichiers.h population.c population.c)
-
+add_executable(4E_ReseauxTrophiques
+        main.c
+        Graph.h Graph.c
+        lecteurFichiers.h lecteurFichiers.c
+        population.h population.c
+        generationDOT.h generationDOT.c
+)
