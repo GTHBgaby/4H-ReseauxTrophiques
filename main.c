@@ -13,7 +13,7 @@
 
     return 0;
 }*/
-int main() {
+/*int main() {
     Espece especes[] = {
             {"phytoplancton", "lightgreen", 1, 100, 50.0},
             {"zooplancton", "lightyellow", 2, 100, 50.0}
@@ -49,4 +49,15 @@ int main() {
     } while (choix != 4);
 
     return 0;
+}*/
+int main(){
+    Arc* man = malloc(sizeof (Arc));
+    char nomFichier[50];
+    Graph* graph = NULL;
+    //printf("Donnez le nom du fichier a analyser :");
+    //scanf("%s", nomFichier);
+    graph = lireGraphFichier(nomFichier,man);
+    printEcosysteme(graph);
+    return 0;
 }
+

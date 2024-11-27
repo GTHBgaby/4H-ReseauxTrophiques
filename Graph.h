@@ -21,36 +21,24 @@ typedef struct {
     Arc* arc;
     double population;     // Taille de la population
     double tauxDeCroissance;    // Taux de croissance
-    double capacite;       // Capacité de charge
+    double capacite;       // Capacité maximale de la pop
     int niveauTrophique;     // Niveau trophique
 } Especes;
 
 
 typedef struct {
     Especes* especes;     // Tableau des espèces
-    int** adjacence;      // Matrice d'adjacence
-    double** poids;     // Matrice des poids
     int nbEspeces;       // Nombre d'espèces
     char nom[longueur_Max]; // Nom de l'écosystème
 } Graph;
 
 
-
-Graph* create_graph(int nbEspeces);
-void destroy_graph(Graph* g);
-
-void add_edge(Graph* g, int source, int dest, float weight);
-void print_ecosystem(Graph* g);
-
-
-
-
 // Fonctions de base pour la manipulation des graphes
-Graph* create_graph(int nb_especes);
-void destroy_graph(Graph* g);
-int add_species(Graph* g, char* name, double initial_population, double tauxDeCroissance);
-void add_relation(Graph* g, int from, int to, double poids);
-void remove_relation(Graph* g, int from, int to);
+Graph* lireGraphFichier(const char* nomFichier, Arc* man);
+Especes* CreerArete(Especes* sommet,int s1,int s2,Arc* ark);
+void libererGraph(Graph* graph);
+void printEcosysteme(Graph* g);
+
 
 
 
