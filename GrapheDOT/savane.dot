@@ -22,31 +22,31 @@ digraph multigraphe {
     "Lion" [label="Lion\n[100]\n50.00%"]
 
     // Relations
-    "Herbe a elephant"->"Musaraigne"
-    "Herbe a elephant"->"Antilope"
-    "Herbe a elephant"->"Buffle"
+    "Herbe a elephant"->"Musaraigne" [label="0.8", weight=0.8, penwidth=2.4]
+    "Herbe a elephant"->"Antilope" [label="0.8", weight=0.8, penwidth=2.4]
+    "Herbe a elephant"->"Buffle" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Feuille"->"Antilope"
-    "Feuille"->"Buffle"
-    "Feuille"->"Girafe"
+    "Feuille"->"Antilope" [label="0.8", weight=0.8, penwidth=2.4]
+    "Feuille"->"Buffle" [label="0.8", weight=0.8, penwidth=2.4]
+    "Feuille"->"Girafe" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Carcasse"->"Vers/Insecte"
-    "Carcasse"->"Hyene"
-    "Carcasse" ->"Vautour"
+    "Carcasse"->"Vers/Insecte" [label="0.8", weight=0.8, penwidth=2.4]
+    "Carcasse"->"Hyene" [label="0.8", weight=0.8, penwidth=2.4]
+    "Carcasse" ->"Vautour" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Vers/Insecte" ->"Marabout"
-    "Vers/Insecte"->"Musaraigne"
+    "Vers/Insecte" ->"Marabout" [label="0.8", weight=0.8, penwidth=2.4]
+    "Vers/Insecte"->"Musaraigne" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Marabout" ->"Guepard"
+    "Marabout" ->"Guepard" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Musaraigne"->"Hyene"
+    "Musaraigne"->"Hyene" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Antilope"->"Guepard"
-    "Antilope" ->"Lion"
+    "Antilope"->"Guepard" [label="0.8", weight=0.8, penwidth=2.4]
+    "Antilope" ->"Lion" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Buffle" ->"Lion"
+    "Buffle" ->"Lion" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Girafe" ->"Lion"
+    "Girafe" ->"Lion" [label="0.8", weight=0.8, penwidth=2.4]
 
    // Force la disposition
     {rank=same; "Herbe a elephant"}

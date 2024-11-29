@@ -17,22 +17,22 @@ digraph multigraphe {
     "Carpe" [label="Carpe\n[100]\n5%"]
     "Brochet" [label="Brochet\n[100]\n5%"]
 
-    "Debris vegetaux" ->"Limnee"
-    "Debris vegetaux"->"Gammare"
+    "Debris vegetaux" ->"Limnee" [label="0.8", weight=0.8, penwidth=2.4]
+    "Debris vegetaux"->"Gammare" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Microalgue"->"Micro-organisme"
-     "Microalgue" ->"Limnee"
+     "Microalgue"->"Micro-organisme" [label="0.8", weight=0.8, penwidth=2.4]
+     "Microalgue" ->"Limnee" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Cadavre" ->"Ver de vase"
-    "Cadavre" ->"Gammare"
-     "Cadavre"->"Carpe"
-     "Cadavre"->"Brochet"
-     "Ver de vase"->"Carpe"
-    "Micro-organisme"-> "Carpe"
-    "Limnee"->"Carpe"
-    "Gammare"->"Carpe"
+     "Cadavre" ->"Ver de vase" [label="0.8", weight=0.8, penwidth=2.4]
+    "Cadavre" ->"Gammare" [label="0.8", weight=0.8, penwidth=2.4]
+     "Cadavre"->"Carpe" [label="0.8", weight=0.8, penwidth=2.4]
+     "Cadavre"->"Brochet" [label="0.8", weight=0.8, penwidth=2.4]
+     "Ver de vase"->"Carpe" [label="0.8", weight=0.8, penwidth=2.4]
+    "Micro-organisme"-> "Carpe" [label="0.8", weight=0.8, penwidth=2.4]
+    "Limnee"->"Carpe" [label="0.8", weight=0.8, penwidth=2.4]
+    "Gammare"->"Carpe" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Carpe"->"Brochet"
+    "Carpe"->"Brochet" [label="0.8", weight=0.8, penwidth=2.4]
 
     {rank=same; "Debris vegetaux"}
     {rank=same; "Microalgue"}

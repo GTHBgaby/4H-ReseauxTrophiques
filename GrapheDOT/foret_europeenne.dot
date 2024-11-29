@@ -21,33 +21,33 @@ digraph foret_europ {
     "Buse" [label="Buse\n[100]\n50.00%"]
     "Loup" [label="Loup\n[100]\n50.00%"]
 
-     "Graines/Glands"->"Ecureuil"
-     "Graines/Glands"->"Mulot"
-     "Graines/Glands"->"Cerf"
-     "Graines/Glands"->"Sanglier"
+     "Graines/Glands"->"Ecureuil" [label="0.8", weight=0.8, penwidth=2.4]
+     "Graines/Glands"->"Mulot" [label="0.8", weight=0.8, penwidth=2.4]
+     "Graines/Glands"->"Cerf" [label="0.8", weight=0.8, penwidth=2.4]
+     "Graines/Glands"->"Sanglier" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Herbes/Feuilles"->"Larves/Insectes"
-     "Herbes/Feuilles"->"Lapin"
-     "Herbes/Feuilles"->"Mulot"
-     "Herbes/Feuilles"->"Cerf"
-     "Herbes/Feuilles"->"Sanglier"
+     "Herbes/Feuilles"->"Larves/Insectes" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Lapin" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Mulot" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Cerf" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Sanglier" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Charogne"->"Larves/Insectes"
+     "Charogne"->"Larves/Insectes" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Larves/Insectes" -> "Pic-vert"
-     "Larves/Insectes"->"Sanglier"
+     "Larves/Insectes" -> "Pic-vert" [label="0.8", weight=0.8, penwidth=2.4]
+     "Larves/Insectes"->"Sanglier" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Ecureuil"->"Chouette"
-     "Ecureuil"->"Buse"
+     "Ecureuil"->"Chouette" [label="0.8", weight=0.8, penwidth=2.4]
+     "Ecureuil"->"Buse" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Mulot"  ->"Chouette"
-    "Mulot"->"Buse"
-    "Mulot"->"Loup"
+    "Mulot"  ->"Chouette" [label="0.8", weight=0.8, penwidth=2.4]
+    "Mulot"->"Buse" [label="0.8", weight=0.8, penwidth=2.4]
+    "Mulot"->"Loup" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Pic-vert" ->"Buse"
+     "Pic-vert" ->"Buse" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Cerf" ->"Loup"
-     "Sanglier"->"Loup"
+     "Cerf" ->"Loup" [label="0.8", weight=0.8, penwidth=2.4]
+     "Sanglier"->"Loup" [label="0.8", weight=0.8, penwidth=2.4]
 
  // Force la disposition
     {rank=same; "Graines/Glands"}
