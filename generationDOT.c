@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "generationDOT.h"
+#include "Graph.h"
 
 void lire_fichier_dot(const char* nom_fichier, Especes* especes, int* nb_especes) {
     char filepath[256];
