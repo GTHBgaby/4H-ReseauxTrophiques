@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "generationDOT.h"
 
-void lire_fichier_dot(const char* nom_fichier, Espece* especes, int* nb_especes) {
+void lire_fichier_dot(const char* nom_fichier, Especes* especes, int* nb_especes) {
     char filepath[256];
     snprintf(filepath, sizeof(filepath), "../GrapheDOT/%s.dot", nom_fichier);
 
@@ -52,7 +52,7 @@ void lire_fichier_dot(const char* nom_fichier, Espece* especes, int* nb_especes)
     fclose(f);
 }
 
-int modifier_espece(Espece* especes, int nb_especes, const char* nom_espece) {
+int modifier_espece(Especes* especes, int nb_especes, const char* nom_espece) {
     int i;
     int trouve = 0;
     int choix;
@@ -97,7 +97,7 @@ int modifier_espece(Espece* especes, int nb_especes, const char* nom_espece) {
     }
 }
 
-void mettre_a_jour_fichier_dot(const char* nom_fichier, Espece* especes, int nb_especes) {
+void mettre_a_jour_fichier_dot(const char* nom_fichier, Especes* especes, int nb_especes) {
     char filepath[256];
     snprintf(filepath, sizeof(filepath), "../GrapheDOT/%s.dot", nom_fichier);
 

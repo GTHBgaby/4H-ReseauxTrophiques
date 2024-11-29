@@ -59,7 +59,7 @@ int main(){
 
     char nom_fichierDOT[100];
     char nom_espece[100];
-    Espece especes[MAX_ESPECES];
+    Especes especes[MAX_ESPECES];
     int nb_especes;
     char choix;
     int fichier_valide;
