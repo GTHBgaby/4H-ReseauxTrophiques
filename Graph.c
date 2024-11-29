@@ -4,7 +4,7 @@
 
 #define TAUX_BASE 15
 #define POP_BASE 100
-#define CAP_BASE 200
+#define CAP_BASE 100
 
 Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
     int nbArrete, n , p, a;
@@ -93,7 +93,7 @@ void printEcosysteme(Graph* g) {
 
     // Affichage du titre
     printf("\n=== Ecosysteme: %s ===\n", g->nom);
-    printf("Nombre d'especes: %d\n\n", g->nbEspeces);
+    printf("Nombre despeces: %d\n\n", g->nbEspeces);
 
     // 1. Affichage de la liste des sommets (espèces) avec leurs informations
     printf("LISTE DES ESPECES:\n");
