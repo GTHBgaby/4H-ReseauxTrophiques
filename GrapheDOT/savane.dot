@@ -7,19 +7,19 @@ digraph multigraphe {
     bgcolor = "lightyellow";
     node [shape=ellipse, style=filled, fillcolor=white];
 
-    "Musaraigne" [label="Musaraigne\n[100]"]
-    "Herbe a elephant" [label="Herbe a elephant\n[100]"]
-    "Antilope" [label="Antilope\n[100]"]
-    "Buffle" [label="Buffle\n[100]"]
-    "Feuille" [label="Feuille\n[100]"]
-    "Girafe" [label="Girafe\n[100]"]
-    "Vers/Insecte" [label="Vers/Insecte\n[100]"]
-    "Carcasse" [label="Carcasse\n[100]"]
-    "Hyene" [label="Hyene\n[100]"]
-    "Vautour" [label="Vautour\n[100]"]
-    "Marabout" [label="Marabout\n[100]"]
-    "Guepard" [label="Guepard\n[100]"]
-    "Lion" [label="Lion\n[100]"]
+    "Musaraigne" [label="Musaraigne\n[100]\n50.00%"]
+    "Herbe a elephant" [label="Herbe a elephant\n[100]\n50.00%"]
+    "Antilope" [label="Antilope\n[100]\n50.00%"]
+    "Buffle" [label="Buffle\n[100]\n50.00%"]
+    "Feuille" [label="Feuille\n[100]\n50.00%"]
+    "Girafe" [label="Girafe\n[100]\n50.00%"]
+    "Vers/Insecte" [label="Vers/Insecte\n[100]\n50.00%"]
+    "Carcasse" [label="Carcasse\n[100]\n50.00%"]
+    "Hyene" [label="Hyene\n[100]\n50.00%"]
+    "Vautour" [label="Vautour\n[100]\n50.00%"]
+    "Marabout" [label="Marabout\n[100]\n50.00%"]
+    "Guepard" [label="Guepard\n[100]\n50.00%"]
+    "Lion" [label="Lion\n[100]\n50.00%"]
 
     // Relations
     "Herbe a elephant"->"Musaraigne"

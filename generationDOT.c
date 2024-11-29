@@ -27,11 +27,11 @@ void lire_fichier_dot(const char* nom_fichier, Espece* especes, int* nb_especes)
                     strncpy(especes[*nb_especes].nom, debut_nom, longueur);
                     especes[*nb_especes].nom[longueur] = '\0';
 
-                    char* pop_debut = strstr(ligne, "\\n[");
+                    char* pop_debut = strstr(ligne, "\\n[") + 3;
+                    char* taux_debut = strstr(pop_debut, "\\n") + 2;
                     if (pop_debut) {
-                        pop_debut += 3; // Sauter \n[
                         especes[*nb_especes].population = atoi(pop_debut);
-                        especes[*nb_especes].taux_accroissement = 0.0;
+                        especes[*nb_especes].taux_accroissement = atof(taux_debut);
                         /*printf("Espece trouvee : %s (population: %d)\n",
                                especes[*nb_especes].nom,
                                especes[*nb_especes].population);*/
@@ -45,7 +45,7 @@ void lire_fichier_dot(const char* nom_fichier, Espece* especes, int* nb_especes)
     printf("\nTotal des especes trouvees : %d\n", *nb_especes);
     printf("Liste des especes disponibles :\n");
     for (int i = 0; i < *nb_especes; i++) {
-        printf("- %s\n  Population : %d\n  Taux d'accroissement : %f\n", especes[i].nom, especes[i].population, especes[i].taux_accroissement);
+        printf("- %s\n  Population : %d\n  Taux d'accroissement : %.2f%%\n", especes[i].nom, especes[i].population, especes[i].taux_accroissement);
     }
     printf("\n");
 
@@ -62,7 +62,7 @@ int modifier_espece(Espece* especes, int nb_especes, const char* nom_espece) {
         if (strcmp(especes[i].nom, nom_espece) == 0) {
             trouve = 1;
             printf("\nModification de l'espece %s\n", nom_espece);
-            printf("Population actuelle: %d\nTaux d'accroissement: %f\n", especes[i].population, especes[i].taux_accroissement);
+            printf("Population actuelle: %d\nTaux d'accroissement: %.2f%%\n", especes[i].population, especes[i].taux_accroissement);
 
             do {
                 printf("Que voulez-vous modifier ?\n");
@@ -122,13 +122,13 @@ void mettre_a_jour_fichier_dot(const char* nom_fichier, Espece* especes, int nb_
         strcpy(ligne_modifiee, ligne);
 
         for (int i = 0; i < nb_especes; i++) {
-            char recherche[256];
-            snprintf(recherche, sizeof(recherche), "\"%s\" [label=\"%s\\n[",
-                     especes[i].nom, especes[i].nom);
+            char recherche[100];
+            sprintf(recherche, "\"%s\" [label=\"%s\\n[", especes[i].nom, especes[i].nom);
 
             if (strstr(ligne, recherche)) {
-                snprintf(ligne_modifiee, MAX_LIGNE, "    \"%s\" [label=\"%s\\n[%d]\"]\n",
-                         especes[i].nom, especes[i].nom, especes[i].population);
+                snprintf(ligne_modifiee, MAX_LIGNE, "    \"%s\" [label=\"%s\\n[%d]\\n%.2f%%\"]\n",
+                         especes[i].nom, especes[i].nom,
+                         especes[i].population, especes[i].taux_accroissement);
                 break;
             }
         }

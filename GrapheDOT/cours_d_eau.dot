@@ -7,15 +7,15 @@ digraph multigraphe {
     bgcolor = "lightblue";
     node [shape=ellipse, style=filled, fillcolor=white];
 
-    "Limnee" [label="Limnee\n[100]"]
-    "Debris vegetaux" [label="Debris vegetaux\n[100]"]
-    "Gammare" [label="Gammare\n[100]"]
-    "Micro-organisme" [label="Micro-organisme\n[100]"]
-    "Microalgue" [label="Microalgue\n[100]"]
-    "Ver de vase" [label="Ver de vase\n[100]"]
-    "Cadavre" [label="Cadavre\n[100]"]
-    "Carpe" [label="Carpe\n[100]"]
-    "Brochet" [label="Brochet\n[100]"]
+    "Limnee" [label="Limnee\n[100]\n5%"]
+    "Debris vegetaux" [label="Debris vegetaux\n[100]\n5%"]
+    "Gammare" [label="Gammare\n[100]\n5%"]
+    "Micro-organisme" [label="Micro-organisme\n[100]\n5%"]
+    "Microalgue" [label="Microalgue\n[100]\n5%"]
+    "Ver de vase" [label="Ver de vase\n[100]\n5%"]
+    "Cadavre" [label="Cadavre\n[100]\n5%"]
+    "Carpe" [label="Carpe\n[100]\n5%"]
+    "Brochet" [label="Brochet\n[100]\n5%"]
 
     "Debris vegetaux" ->"Limnee"
     "Debris vegetaux"->"Gammare"
