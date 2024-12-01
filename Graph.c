@@ -16,7 +16,6 @@ Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
     // Lecture du nombre d'espèces
     fscanf(fichier, "%d" ,&graph->nbEspeces);
     fscanf(fichier, "%d" , &nbArrete);
-    printf("\n%d %d", graph->nbEspeces, nbArrete);
 
     // Allouer les matrices
     graph->especes = malloc(graph->nbEspeces * sizeof(Especes));
@@ -24,7 +23,6 @@ Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
     for (int i = 1; i <= graph->nbEspeces; i++) {
         graph->especes[i].id = i;
         fscanf(fichier, "%s", graph->especes[i].nom);
-        printf("\n %s", graph->especes[i].nom);
 
         // Initialiser les tableaux pred et suc
         for (int j = 0; j < MAX_connexion; j++) {
@@ -32,58 +30,71 @@ Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
             graph->especes[i].suc[j] = -1;
         }
         graph->especes[i].arc = NULL;
+        graph->especes[i].niveauTrophique = 0;
         graph->especes[i].population = POP_BASE;
         graph->especes[i].tauxDeCroissance = TAUX_BASE;
         graph->especes[i].capacite = CAP_BASE;
     }
-    for (int i = 0; i < nbArrete -1; i++) {
-        a = 0;
+    for (int i = 0; i < nbArrete; i++) {
+        a = 1;
         fscanf(fichier, "%d%d", &n, &p);
-        printf("\n%d %d",n ,p);
         while(graph->especes[n].pred[a] != -1){
             ++a;
         }
         graph->especes[n].pred[a] = p;
-        a = 0;
+        a = 1;
         while(graph->especes[p].suc[a] != -1){
             ++a;
         }
         graph->especes[p].suc[a] = n;
-        graph->especes = CreerArete(graph->especes, n, p, man);
     }
+    for (int i = 1; i <= graph->nbEspeces; i++) {
+        Arc* dernierArc = NULL;
+        for (int j = 0; graph->especes[i].suc[j] != -1 && j < MAX_connexion; j++) {
+            Arc* nouvelArc = (Arc*)malloc(sizeof(Arc));
+            if (!nouvelArc) continue;
+
+            nouvelArc->IDb = i;
+            nouvelArc->IDs = graph->especes[i].suc[j];
+            nouvelArc->infl = 5.0;
+            nouvelArc->arcsuivant = NULL;
+
+            if (!graph->especes[i].arc) {
+                graph->especes[i].arc = nouvelArc;
+            } else {
+                dernierArc->arcsuivant = nouvelArc;
+            }
+            dernierArc = nouvelArc;
+        }
+    }
+    if(graph->especes[3].arc == NULL){printf("prout");}
     fclose(fichier);
     return graph;
 }
-// Ajouter l'arête entre les sommets s1 et s2 du graphe
-Especes* CreerArete(Especes* sommet,int s1,int s2,Arc* ark)
-{
-    if(1)
-    {
-        printf("pipi");
-        printf("caca");
-        ark->IDb=s2;
-        ark->IDs=s1;
-        ark->arcsuivant = NULL;
-        ark->infl = 5.0;
-        sommet[s2].arc = ark;
-        return sommet;
+Especes* CreerToutesAretes(Graph* graph) {
+    // Créer les nouveaux arcs
+    for (int i = 0; i < graph->nbEspeces; i++) {
+        Arc* dernierArc = NULL;
+
+        for (int j = 0; graph->especes[i].suc[j] != -1 && j < MAX_connexion; j++) {
+            Arc* nouvelArc = (Arc*)malloc(sizeof(Arc));
+            if (!nouvelArc) continue;
+
+            nouvelArc->IDb = i;
+            nouvelArc->IDs = graph->especes[i].suc[j];
+            nouvelArc->infl = 5.0;
+            nouvelArc->arcsuivant = NULL;
+
+            if (!graph->especes[i].arc) {
+                graph->especes[i].arc = nouvelArc;
+            } else {
+                dernierArc->arcsuivant = nouvelArc;
+            }
+            dernierArc = nouvelArc;
+        }
     }
 
-    else
-    {
-        Arc* temp = sommet[s2].arc;
-        while(temp->arcsuivant !=NULL )
-        {
-            temp = temp->arcsuivant;
-        }
-        Arc* Newarc = malloc(sizeof(Arc));
-        Newarc->IDb=s2;
-        Newarc->IDs=s1;
-        Newarc->arcsuivant = NULL;
-        Newarc->infl = 5.0;
-        temp->arcsuivant=Newarc;
-        return sommet;
-    }
+    return graph->especes;
 }
 void printEcosysteme(Graph* g) {
     if (g == NULL) {
@@ -98,7 +109,7 @@ void printEcosysteme(Graph* g) {
     // 1. Affichage de la liste des sommets (espèces) avec leurs informations
     printf("LISTE DES ESPECES:\n");
     printf("------------------\n");
-    for (int i = 0; i < g->nbEspeces; i++) {
+    for (int i = 1; i <= g->nbEspeces; i++) {
         Especes esp = g->especes[i];
         printf("Espece %d: %s\n", esp.id, esp.nom);
         printf("  Population: %.2f\n", esp.population);
@@ -110,7 +121,7 @@ void printEcosysteme(Graph* g) {
     // 2. Affichage de la liste des arcs avec leurs pondérations
     printf("LISTE DES INTERACTIONS:\n");
     printf("----------------------\n");
-    for (int i = 0; i < g->nbEspeces; i++) {
+    for (int i = 1; i <= g->nbEspeces; i++) {
         Arc* arc_courant = g->especes[i].arc;
         while (arc_courant != NULL) {
             printf("Arc %d -> %d: Influence = %.2f\n",
@@ -125,7 +136,7 @@ void printEcosysteme(Graph* g) {
     // 3. Pour chaque sommet, affichage des successeurs et prédécesseurs
     printf("SUCCESSEURS ET PREDECESSEURS:\n");
     printf("----------------------------\n");
-    for (int i = 0; i < g->nbEspeces; i++) {
+    for (int i = 1; i <= g->nbEspeces; i++) {
         Especes esp = g->especes[i];
         printf("Espece %d (%s):\n", esp.id, esp.nom);
 
