@@ -4,7 +4,7 @@
 
 #define TAUX_BASE 15
 #define POP_BASE 100
-#define CAP_BASE 200
+#define CAP_BASE 100
 
 Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
     int nbArrete, n , p, a;
@@ -32,7 +32,7 @@ Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
         graph->especes[i].arc = NULL;
         graph->especes[i].niveauTrophique = 0;
         graph->especes[i].population = POP_BASE;
-        graph->especes[i].tauxDeCroissance = TAUX_BASE;
+        graph->especes[i].taux_accroissement = TAUX_BASE;
         graph->especes[i].capacite = CAP_BASE;
     }
     for (int i = 0; i < nbArrete; i++) {
@@ -104,7 +104,7 @@ void printEcosysteme(Graph* g) {
 
     // Affichage du titre
     printf("\n=== Ecosysteme: %s ===\n", g->nom);
-    printf("Nombre d'especes: %d\n\n", g->nbEspeces);
+    printf("Nombre despeces: %d\n\n", g->nbEspeces);
 
     // 1. Affichage de la liste des sommets (espèces) avec leurs informations
     printf("LISTE DES ESPECES:\n");
@@ -113,7 +113,7 @@ void printEcosysteme(Graph* g) {
         Especes esp = g->especes[i];
         printf("Espece %d: %s\n", esp.id, esp.nom);
         printf("  Population: %.2f\n", esp.population);
-        printf("  Taux de croissance: %.2f\n", esp.tauxDeCroissance);
+        printf("  Taux de croissance: %.2f\n", esp.taux_accroissement);
         printf("  Capacite maximale: %.2f\n", esp.capacite);
         printf("  Niveau trophique: %d\n\n", esp.niveauTrophique);
     }

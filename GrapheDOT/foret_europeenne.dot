@@ -7,47 +7,47 @@ digraph foret_europ {
     bgcolor = "lightgreen";
     node [shape=ellipse, style=filled, fillcolor=white];
 
-    "Ecureuil" [label="Ecureuil\n[100]"]
-    "Graines/Glands" [label="Graines/Glands\n[100]"]
-    "Mulot" [label="Mulot\n[100]"]
-    "Cerf" [label="Cerf\n[100]"]
-    "Sanglier" [label="Sanglier\n[100]"]
-    "Larves/Insectes" [label="Larves/Insectes\n[100]"]
-    "Herbes/Feuilles" [label="Herbes/Feuilles\n[100]"]
-    "Lapin" [label="Lapin\n[100]"]
-    "Charogne" [label="Charogne\n[100]"]
-    "Pic-vert" [label="Pic-vert\n[100]"]
-    "Chouette" [label="Chouette\n[100]"]
-    "Buse" [label="Buse\n[100]"]
-    "Loup" [label="Loup\n[100]"]
+    "Ecureuil" [label="Ecureuil\n[100]\n50.00%"]
+    "Graines/Glands" [label="Graines/Glands\n[100]\n50.00%"]
+    "Mulot" [label="Mulot\n[100]\n50.00%"]
+    "Cerf" [label="Cerf\n[100]\n50.00%"]
+    "Sanglier" [label="Sanglier\n[100]\n50.00%"]
+    "Larves/Insectes" [label="Larves/Insectes\n[100]\n50.00%"]
+    "Herbes/Feuilles" [label="Herbes/Feuilles\n[100]\n50.00%"]
+    "Lapin" [label="Lapin\n[100]\n50.00%"]
+    "Charogne" [label="Charogne\n[100]\n50.00%"]
+    "Pic-vert" [label="Pic-vert\n[100]\n50.00%"]
+    "Chouette" [label="Chouette\n[100]\n50.00%"]
+    "Buse" [label="Buse\n[100]\n50.00%"]
+    "Loup" [label="Loup\n[100]\n50.00%"]
 
-     "Graines/Glands"->"Ecureuil"
-     "Graines/Glands"->"Mulot"
-     "Graines/Glands"->"Cerf"
-     "Graines/Glands"->"Sanglier"
+     "Graines/Glands"->"Ecureuil" [label="0.8", weight=0.8, penwidth=2.4]
+     "Graines/Glands"->"Mulot" [label="0.8", weight=0.8, penwidth=2.4]
+     "Graines/Glands"->"Cerf" [label="0.8", weight=0.8, penwidth=2.4]
+     "Graines/Glands"->"Sanglier" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Herbes/Feuilles"->"Larves/Insectes"
-     "Herbes/Feuilles"->"Lapin"
-     "Herbes/Feuilles"->"Mulot"
-     "Herbes/Feuilles"->"Cerf"
-     "Herbes/Feuilles"->"Sanglier"
+     "Herbes/Feuilles"->"Larves/Insectes" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Lapin" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Mulot" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Cerf" [label="0.8", weight=0.8, penwidth=2.4]
+     "Herbes/Feuilles"->"Sanglier" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Charogne"->"Larves/Insectes"
+     "Charogne"->"Larves/Insectes" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Larves/Insectes" -> "Pic-vert"
-     "Larves/Insectes"->"Sanglier"
+     "Larves/Insectes" -> "Pic-vert" [label="0.8", weight=0.8, penwidth=2.4]
+     "Larves/Insectes"->"Sanglier" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Ecureuil"->"Chouette"
-     "Ecureuil"->"Buse"
+     "Ecureuil"->"Chouette" [label="0.8", weight=0.8, penwidth=2.4]
+     "Ecureuil"->"Buse" [label="0.8", weight=0.8, penwidth=2.4]
 
-    "Mulot"  ->"Chouette"
-    "Mulot"->"Buse"
-    "Mulot"->"Loup"
+    "Mulot"  ->"Chouette" [label="0.8", weight=0.8, penwidth=2.4]
+    "Mulot"->"Buse" [label="0.8", weight=0.8, penwidth=2.4]
+    "Mulot"->"Loup" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Pic-vert" ->"Buse"
+     "Pic-vert" ->"Buse" [label="0.8", weight=0.8, penwidth=2.4]
 
-     "Cerf" ->"Loup"
-     "Sanglier"->"Loup"
+     "Cerf" ->"Loup" [label="0.8", weight=0.8, penwidth=2.4]
+     "Sanglier"->"Loup" [label="0.8", weight=0.8, penwidth=2.4]
 
  // Force la disposition
     {rank=same; "Graines/Glands"}
