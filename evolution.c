@@ -109,53 +109,31 @@ void miseAJourPopulations(Graph* graph) {
 }
 
 
+
+
 /*#include <stdio.h>
-#include "Graph.h"
-#include "evolution.h"
+  #include "Graph.h"
+  #include "evolution.h"
 
-int main() {
-    Arc* man = NULL;
-    Graph* ecosysteme = lireGraphFichier("../CoursDeau.txt", man);
-    if (!ecosysteme) return 1;
+  int main() {
+      Arc* man = NULL;
+      Graph* ecosysteme = lireGraphFichier("../CoursDeau.txt", man);
+      if (!ecosysteme) return 1;
 
-    printf("=== Etat initial de l'ecosysteme ===\n");
-    printEcosysteme(ecosysteme);
+      printf("=== Etat initial de l'ecosysteme ===\n");
+      printEcosysteme(ecosysteme);
 
-    char reponse;
-    printf("\nVoulez vous modifier un parametre ? (y/n)");
-    scanf(" %c", &reponse);
+      for(int t = 1; t <= 2; t++) {
+          miseAJourPopulations(ecosysteme);
 
-    if (reponse == 'y') {
-        int choix;
-        printf(" Que voulez vous modifier ?\n");
-        printf("1--> population\n");
-        scanf("%d", &choix);
+          printf("\n=== Temps t=%d ===\n", t);
+          for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+              printf("%s: Population = %.2f\n",
+                     ecosysteme->especes[i].nom,
+                     ecosysteme->especes[i].population);
+          }
+      }
 
-        if (choix == 1) {
-            int id;
-            double nouvelle_pop;
-            printf("Entrez l'ID de l'espece a modifier (1-%d):", ecosysteme->nbEspeces);
-            scanf("%d", &id);
-            printf(" Entrez la nouvelle population pour %s (valeur > 0):", ecosysteme->especes[id].nom);
-            scanf("%lf", &nouvelle_pop);
-            modifierPopulation(ecosysteme, id, nouvelle_pop);
-                printf("Population modifiee\n");
-
-        }
-    }
-
-    for(int t = 1; t <= 2; t++) {
-
-        miseAJourPopulations(ecosysteme);
-
-        printf("\n=== Temps t=%d ===\n", t);
-        for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
-            printf("%s: Population = %.2f\n",
-                   ecosysteme->especes[i].nom,
-                   ecosysteme->especes[i].population);
-        }
-    }
-
-    libererGraph(ecosysteme);
-    return 0;
-}*/
+      libererGraph(ecosysteme);
+      return 0;
+  }*/
