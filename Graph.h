@@ -32,11 +32,10 @@ typedef struct {
     char nom[longueur_Max]; // Nom de l'écosystème
 } Graph;
 
-
+void Menu();
 // Fonctions de base pour la manipulation des graphes
-Graph* lireGraphFichier(const char* nomFichier, Arc* man);
-Especes* CreerArete(Especes* esp, int s1, int s2, Arc* ark);
-Especes* CreerToutesAretes(Graph* graph);
+Graph* lireGraphFichier(const char* nomFichier);
+Graph* choisirGraph();
 void libererGraph(Graph* graph);
 void printEcosysteme(Graph* g);
 

@@ -6,9 +6,9 @@
 #define POP_BASE 100
 #define CAP_BASE 100
 
-Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
+Graph* lireGraphFichier(const char* nomFichier) {
     int nbArrete, n, p, a;
-    FILE* fichier = fopen("../CoursDeau.txt", "r");
+    FILE* fichier = fopen(nomFichier, "r");
     if (!fichier) return NULL;
 
     Graph* graph = malloc(sizeof(Graph));
@@ -87,12 +87,12 @@ Graph* lireGraphFichier(const char* nomFichier, Arc* man) {
             dernierArc = nouvelArc;
         }
     }
-
     fclose(fichier);
     return graph;
 }
 
 void printEcosysteme(Graph* g) {
+    int fini;
     if (g == NULL) {
         printf("Erreur: Graphe invalide\n");
         return;
@@ -114,6 +114,20 @@ void printEcosysteme(Graph* g) {
             printf("  Niveau trophique: %d\n\n", g->especes[i].niveauTrophique);
         }
     }
+    // 2. Affichage de la liste des arcs avec leurs pondérations
+    printf("LISTE DES INTERACTIONS:\n");
+    printf("----------------------\n");
+    for (int i = 1; i <= g->nbEspeces; i++) {
+            Arc *arc_courant = g->especes[i].arc;
+            while (arc_courant != NULL) {
+                printf("Arc %d -> %d: Influence = %.2f\n",
+                       arc_courant->IDb,
+                       arc_courant->IDs,
+                       arc_courant->infl);
+                arc_courant = arc_courant->arcsuivant;
+            }
+    }
+    printf("\n");
 
     // Affichage des interactions
     printf("SUCCESSEURS ET PREDECESSEURS:\n");
@@ -137,6 +151,42 @@ void printEcosysteme(Graph* g) {
             printf("\n\n");
         }
     }
+    printf("\nAppuyer sur n'importe quelle touche pour continuer\n");
+    scanf("%d",&fini);
+}
+Graph* choisirGraph(){
+    int a;
+    int choix = 0;
+    Graph* ecosysteme = NULL;
+    do {
+        a = 0;
+        system("cls");
+        printf("Choisissez votre graphe :\n");
+        printf("1. Cours d'eau\n");
+        printf("2. Foret Europeenne\n");
+        printf("3. Savane\n");
+
+        scanf("%d", &choix);
+        switch (choix) {
+            case 1:
+                ecosysteme = lireGraphFichier("../CoursDeau.txt");
+                printEcosysteme(ecosysteme);
+                break;
+            case 2:
+                ecosysteme = lireGraphFichier("../ForetEuropeenne.txt");
+                printEcosysteme(ecosysteme);
+                break;
+            case 3:
+                ecosysteme = lireGraphFichier("../Savane.txt");
+                printEcosysteme(ecosysteme);
+                break;
+            default:
+                printf("Votre choix n'est pas valable\n\n");
+                a = 1;
+                break;
+        }
+    }while(a);
+    return ecosysteme;
 }
 
 
