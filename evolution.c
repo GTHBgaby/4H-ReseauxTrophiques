@@ -1,6 +1,7 @@
 #include "evolution.h"
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #define POP_BASE 100.0
 #define DELTA_T 0.1

@@ -1,7 +1,8 @@
 #include "Graph.h"
 #include "generationDOT.h"
-#include<stdlib.h>
-#include<stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 /*int main() {
 
     // Test de lecture du fichier
