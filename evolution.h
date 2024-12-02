@@ -7,6 +7,7 @@
 
 void miseAJourPopulations(Graph* graph);
 void modifierPopulation(Graph* graph, int id, double nouvelle_population);
+void afficherPopulations(Graph* graph);
 
 
 

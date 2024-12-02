@@ -5,6 +5,15 @@
 #define POP_BASE 100.0
 #define DELTA_T 0.1
 
+
+
+void afficherPopulations(Graph* graph) {
+    for(int i = 1; i <= graph->nbEspeces; i++) {
+        printf("%s: %.2f\n", graph->especes[i].nom, graph->especes[i].population);
+    }
+}
+
+
 void modifierPopulation(Graph* graph, int id, double nouvelle_population) {
     if (!graph || id < 1 || id > graph->nbEspeces) return;
     graph->especes[id].population = nouvelle_population;
