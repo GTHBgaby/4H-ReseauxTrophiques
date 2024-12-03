@@ -1,13 +1,18 @@
 #ifndef INC_4E_RESEAUXTROPHIQUES_EVOLUTION_H
 #define INC_4E_RESEAUXTROPHIQUES_EVOLUTION_H
+
+
+
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "Graph.h"
 #include "stdlib.h"
 
 
 
-void miseAJourPopulations(Graph* graph);
-void modifierPopulation(Graph* graph, int id, double nouvelle_population);
-void afficherPopulations(Graph* graph);
+
+void evoluerPopulations(Graph* g);
 
 
 

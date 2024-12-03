@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAUX_BASE 15
+#define TAUX_BASE 30
 #define POP_BASE 100.00
-#define CAP_BASE 200
-
+#define CAP_BASE 200.00
 
 Graph* lireGraphFichier(const char* nomFichier) {
     int nbArrete, n, p, a;
@@ -78,7 +77,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
 
             nouvelArc->IDb = i;
             nouvelArc->IDs = graph->especes[i].suc[j];
-            nouvelArc->infl = 5.0;
+            nouvelArc->infl = 0.1;
             nouvelArc->arcsuivant = NULL;
 
             if (!graph->especes[i].arc) {
@@ -110,7 +109,7 @@ void printEcosysteme(Graph* g) {
     for (int i = 1; i <= g->nbEspeces; i++) {
         if (g->especes[i].nom[0] != '\0') {  // Vérifier que l'espèce existe
             printf("Espece %d: %s\n", g->especes[i].id, g->especes[i].nom);
-            printf("  Population: %.2d\n", g->especes[i].population );
+            printf("  Population: %.2f\n", g->especes[i].population);
             printf("  Taux de croissance: %.2f\n", g->especes[i].taux_accroissement);
             printf("  Capacite maximale: %.2f\n", g->especes[i].capacite);
             printf("  Niveau trophique: %d\n\n", g->especes[i].niveauTrophique);
