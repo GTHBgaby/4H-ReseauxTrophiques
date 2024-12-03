@@ -50,7 +50,7 @@ void Menu(){
             for(int t = 1; t <= tempsSimulation;) {
                 system("cls");
                 printf("=== Jour %d/%d ===\n", t, tempsSimulation);
-                printf("Appuyez sur Entrée pour avancer, 'q' pour quitter\n\n");
+                printf("Appuyez sur Entree pour avancer, 'q' pour quitter\n\n");
 
                 evoluerPopulations(ecosysteme);
                 for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
