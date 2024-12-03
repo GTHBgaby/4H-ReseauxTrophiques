@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TAUX_BASE 15
-#define POP_BASE 100
-#define CAP_BASE 100
+#define TAUX_BASE 30
+#define POP_BASE 100.00
+#define CAP_BASE 200.00
 
 Graph* lireGraphFichier(const char* nomFichier) {
     int nbArrete, n, p, a;
@@ -76,7 +76,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
 
             nouvelArc->IDb = i;
             nouvelArc->IDs = graph->especes[i].suc[j];
-            nouvelArc->infl = 5.0;
+            nouvelArc->infl = 0.1;
             nouvelArc->arcsuivant = NULL;
 
             if (!graph->especes[i].arc) {

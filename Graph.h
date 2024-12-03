@@ -19,7 +19,7 @@ typedef struct {
     int suc[MAX_connexion];
     char nom[longueur_Max];
     Arc* arc;
-    int population;     // Taille de la population
+    float population;     // Taille de la population
     float taux_accroissement;    // Taux de croissance
     double capacite;       // Capacité maximale de la pop
     int niveauTrophique;     // Niveau trophique

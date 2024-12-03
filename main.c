@@ -1,12 +1,15 @@
 #include "Graph.h"
+#include "evolution.h"
 #include "generationDOT.h"
 #include<stdlib.h>
-#include<stdio.h>
+#include "stdio.h"
+
 
 void Menu(){
     int choix = 0;
     char input;
     Graph* ecosysteme = NULL;
+    int tempsSimulation;
 
     ecosysteme = choisirGraph();
 
@@ -35,7 +38,25 @@ void Menu(){
                 printf("Vous avez choisi l'option 3\n");
                 break;
             case '4':
+
                 printf("Vous avez choisi l'option 4\n");
+
+                printf("entrez le temps de simulation en jours\n");
+                scanf("%d",&tempsSimulation);
+
+                for(int t = 1; t <= tempsSimulation ; t++) {
+                    evoluerPopulations(ecosysteme);
+
+                    printf("\n=== Temps t=%d ===\n", t);
+                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                        printf("%s: Population = %.2f\n",
+                               ecosysteme->especes[i].nom,
+                               ecosysteme->especes[i].population);
+                    }
+                }
+
+                int a;
+                scanf("%d", a);
                 break;
             case '5':
                 printf("Vous avez choisi l'option 5\n");
