@@ -49,9 +49,7 @@ void Menu(){
 
                     printf("\n=== Temps t=%d ===\n", t);
                     for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                        printf("%s: Population = %.2f\n",
-                               ecosysteme->especes[i].nom,
-                               ecosysteme->especes[i].population);
+                        printf("%s: Population = %.2f\n",ecosysteme->especes[i].nom,ecosysteme->especes[i].population);
                     }
                 }
 
