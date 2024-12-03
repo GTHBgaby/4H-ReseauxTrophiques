@@ -44,7 +44,7 @@ void Menu(){
 
             case '4':
 
-            printf("Entrez le temps de simulation (jours): ");
+            printf("Entrez le temps de simulation (en mois): ");
             scanf("%d", &tempsSimulation);
             getchar(); // Vide le buffer
 
