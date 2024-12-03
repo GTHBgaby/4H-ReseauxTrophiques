@@ -5,7 +5,7 @@
 
 #define TAUX_BASE 30
 #define POP_BASE 100.00
-#define CAP_BASE 200.00
+#define CAP_BASE 1200.00
 
 Graph* lireGraphFichier(const char* nomFichier) {
     int nbArrete, n, p, a;
@@ -106,6 +106,7 @@ void printEcosysteme(Graph* g) {
     // Affichage des espèces
     printf("LISTE DES ESPECES:\n");
     printf("------------------\n");
+
     for (int i = 1; i <= g->nbEspeces; i++) {
         if (g->especes[i].nom[0] != '\0') {  // Vérifier que l'espèce existe
             printf("Espece %d: %s\n", g->especes[i].id, g->especes[i].nom);
@@ -209,10 +210,10 @@ void libererGraph(Graph* graph) {
 Graph* modifierGraph(Graph* graph){
     int a;
     do{
-        printf("Que voulez vous modifier:\n ");
+        printf("Que voulez vous modifier:\n");
         printf("1. Espece\n");
         printf("2. Coefficient d'influence\n");
-        printf("3. Preset fonctionnel");
+        printf("3. Preset fonctionnel\n");
         printf("4. Quitter\n");
         scanf("%d",&a);
         switch(a){
@@ -238,6 +239,7 @@ Graph* modifierEspece(Graph* graph){
     int fini;
     int choix;
     char nom[longueur_Max];
+
     do {
         choix = 0;
         a = 0;
@@ -258,18 +260,18 @@ Graph* modifierEspece(Graph* graph){
             scanf("%d",&choix);
             switch(choix){
                 case 1:
-                    printf("Quel nouvelle valeur pour la population de %s (%f):\n",graph->espece[a].nom,graph->espece[a].population);
-                    scanf("%d",graph->especes[a].population);
+                    printf("Quel nouvelle valeur pour la population de %s (%f):\n",graph->especes[a].nom,graph->especes[a].population);
+                    scanf("%.2f",graph->especes[a].population);
                     break;
                 case 2:
-                    printf("Quel nouvelle valeur pour le taux d'accroissement de %s (%f):\n", graph->espece[a].nom, graph->espece[a].taux_accroissement);
-                    scanf("%d",graph->especes[a].taux_accroissement);
+                    printf("Quel nouvelle valeur pour le taux d'accroissement de %s (%f):\n", graph->especes[a].nom, graph->especes[a].taux_accroissement);
+                    scanf("%.2f",graph->especes[a].taux_accroissement);
                     break;
                 default:
                     printf("Choix non valide\n");
                     break;
             }
-            printf("Voulez vous continuer ? (OUI/1) (NON/2):\n")
+            printf("Voulez vous continuer ? (OUI/1) (NON/2):\n");
             scanf("%d",&fini);
             if(fini == 1){
                 return graph;
@@ -277,6 +279,9 @@ Graph* modifierEspece(Graph* graph){
         }
     }while(1);
 }
+
+
+
 Graph* modifierCoeff(Graph* graph){
     int n,p;
     int fini;
@@ -296,131 +301,156 @@ Graph* modifierCoeff(Graph* graph){
         printf("Quelle coefficient voulez vous mettre pour l'arc %d %d :\n",n,p);
         scanf("%.2f",ark->infl);
 
-        printf("Voulez vous continuer ? (OUI/1) (NON/2):\n")
+        printf("Voulez vous continuer ? (OUI/1) (NON/2):\n");
         scanf("%d",&fini);
         if(fini == 1){
             return graph;
         }
     }while(1);
+
 }
+
 Graph* preset(Graph* graph){
+
     switch(graph->nbEspeces){
-        case 9:
-            graph->especes[1].population =
-            graph->especes[1].taux_accroissement =
 
-            graph->especes[2].population =
-            graph->especes[2].taux_accroissement =
+        case 9:  // Cours d'eau
 
-            graph->especes[3].population =
-            graph->especes[3].taux_accroissement =
+            // Producteurs primaires - populations plus élevées car base de la chaîne
+            graph->especes[1].population = 1000;     // Débris végétaux
+            graph->especes[1].taux_accroissement = 1.2f;
 
-            graph->especes[4].population =
-            graph->especes[4].taux_accroissement =
+            graph->especes[2].population = 800;      // Microalgue
+            graph->especes[2].taux_accroissement = 1.3f;
 
-            graph->especes[5].population =
-            graph->especes[5].taux_accroissement =
+            graph->especes[3].population = 200;      // Cadavre
+            graph->especes[3].taux_accroissement = 0.8f;
 
-            graph->especes[6].population =
-            graph->especes[6].taux_accroissement =
+            // Décomposeur
+            graph->especes[4].population = 400;      // Ver de vase
+            graph->especes[4].taux_accroissement = 1.1f;
 
-            graph->especes[7].population =
-            graph->especes[7].taux_accroissement =
+            // Producteurs secondaires
+            graph->especes[5].population = 300;      // Micro-organisme
+            graph->especes[5].taux_accroissement = 1.2f;
 
-            graph->especes[8].population =
-            graph->especes[8].taux_accroissement =
+            graph->especes[6].population = 250;      // Limnée
+            graph->especes[6].taux_accroissement = 1.1f;
 
-            graph->especes[9].population =
-            graph->especes[9].taux_accroissement = 1;
-            printf("\nLe preset Cours d'eau a ete ajoute");
+            graph->especes[7].population = 200;      // Gammare
+            graph->especes[7].taux_accroissement = 1.1f;
+
+            graph->especes[8].population = 100;      // Carpe
+            graph->especes[8].taux_accroissement = 1.0f;
+
+            // Prédateur au sommet
+            graph->especes[9].population = 50;       // Brochet
+            graph->especes[9].taux_accroissement = 0.9f;
+
+            printf("\nLe preset Cours d'eau a ete ajoute\n");
             break;
-        case 13:
-            graph->especes[1].population =
-            graph->especes[1].taux_accroissement =
 
-            graph->especes[2].population =
-            graph->especes[2].taux_accroissement =
+        case 13:  // Savane
 
-            graph->especes[3].population =
-            graph->especes[3].taux_accroissement =
+            // Producteurs primaires
+            graph->especes[1].population = 1000;     // Herbe à éléphant
+            graph->especes[1].taux_accroissement = 1.3f;
 
-            graph->especes[4].population =
-            graph->especes[4].taux_accroissement =
+            graph->especes[2].population = 800;      // Feuille
+            graph->especes[2].taux_accroissement = 1.2f;
 
-            graph->especes[5].population =
-            graph->especes[5].taux_accroissement =
+            graph->especes[3].population = 200;      // Carcasse
+            graph->especes[3].taux_accroissement = 0.8f;
 
-            graph->especes[6].population =
-            graph->especes[6].taux_accroissement =
+            // Décomposeur
+            graph->especes[4].population = 500;      // Vers/Insecte
+            graph->especes[4].taux_accroissement = 1.2f;
 
-            graph->especes[7].population =
-            graph->especes[7].taux_accroissement =
+            // Producteurs secondaires
+            graph->especes[5].population = 200;      // Marabout
+            graph->especes[5].taux_accroissement = 1.0f;
 
-            graph->especes[8].population =
-            graph->especes[8].taux_accroissement =
+            graph->especes[6].population = 300;      // Musaraigne
+            graph->especes[6].taux_accroissement = 1.1f;
 
-            graph->especes[9].population =
-            graph->especes[9].taux_accroissement =
+            graph->especes[7].population = 400;      // Antilope
+            graph->especes[7].taux_accroissement = 1.0f;
 
-            graph->especes[10].population =
-            graph->especes[10].taux_accroissement =
+            graph->especes[8].population = 300;      // Buffle
+            graph->especes[8].taux_accroissement = 0.9f;
 
-            graph->especes[11].population =
-            graph->especes[11].taux_accroissement =
+            graph->especes[9].population = 250;      // Girafe
+            graph->especes[9].taux_accroissement = 0.9f;
 
-            graph->especes[12].population =
-            graph->especes[12].taux_accroissement =
+            // Prédateurs
+            graph->especes[10].population = 100;     // Hyène
+            graph->especes[10].taux_accroissement = 0.9f;
 
-            graph->especes[13].population =
-            graph->especes[13].taux_accroissement = 1;
-            printf("\nLe preset Savane a ete ajoute");
+            graph->especes[11].population = 80;      // Guépard
+            graph->especes[11].taux_accroissement = 0.8f;
+
+            graph->especes[12].population = 60;      // Lion
+            graph->especes[12].taux_accroissement = 0.8f;
+
+            graph->especes[13].population = 150;     // Vautour
+            graph->especes[13].taux_accroissement = 0.9f;
+
+            printf("\nLe preset Savane a ete ajoute\n");
             break;
-        case 14:
-            graph->especes[1].population =
-            graph->especes[1].taux_accroissement =
 
-            graph->especes[2].population =
-            graph->especes[2].taux_accroissement =
+        case 14:  // Forêt européenne
 
-            graph->especes[3].population =
-            graph->especes[3].taux_accroissement =
+            // Producteurs primaires
+            graph->especes[1].population = 1000;     // Graines/Glands
+            graph->especes[1].taux_accroissement = 1.3f;
 
-            graph->especes[4].population =
-            graph->especes[4].taux_accroissement =
+            graph->especes[2].population = 1200;     // Herbes/Feuilles
+            graph->especes[2].taux_accroissement = 1.4f;
 
-            graph->especes[5].population =
-            graph->especes[5].taux_accroissement =
+            graph->especes[3].population = 800;      // Sève
+            graph->especes[3].taux_accroissement = 1.2f;
 
-            graph->especes[6].population =
-            graph->especes[6].taux_accroissement =
+            graph->especes[4].population = 200;      // Charogne
+            graph->especes[4].taux_accroissement = 0.8f;
 
-            graph->especes[7].population =
-            graph->especes[7].taux_accroissement =
+            // Décomposeur
+            graph->especes[5].population = 600;      // Larves/Insectes
+            graph->especes[5].taux_accroissement = 1.2f;
 
-            graph->especes[8].population =
-            graph->especes[8].taux_accroissement =
+            // Producteurs secondaires
+            graph->especes[6].population = 400;      // Lapin
+            graph->especes[6].taux_accroissement = 1.2f;
 
-            graph->especes[9].population =
-            graph->especes[9].taux_accroissement =
+            graph->especes[7].population = 300;      // Ecureuil
+            graph->especes[7].taux_accroissement = 1.1f;
 
-            graph->especes[10].population =
-            graph->especes[10].taux_accroissement =
+            graph->especes[8].population = 350;      // Mulot
+            graph->especes[8].taux_accroissement = 1.2f;
 
-            graph->especes[11].population =
-            graph->especes[11].taux_accroissement =
+            graph->especes[9].population = 200;      // Pic-vert
+            graph->especes[9].taux_accroissement = 1.0f;
 
-            graph->especes[12].population =
-            graph->especes[12].taux_accroissement =
+            graph->especes[10].population = 150;     // Cerf
+            graph->especes[10].taux_accroissement = 0.9f;
 
-            graph->especes[13].population =
-            graph->especes[13].taux_accroissement =
+            graph->especes[11].population = 180;     // Sanglier
+            graph->especes[11].taux_accroissement = 0.9f;
 
-            graph->especes[14].population =
-            graph->especes[14].taux_accroissement = 1;
-            printf("\nLe preset Foret a ete ajoute");
+            // Prédateurs
+            graph->especes[12].population = 80;      // Chouette
+            graph->especes[12].taux_accroissement = 0.9f;
+
+            graph->especes[13].population = 60;      // Buse
+            graph->especes[13].taux_accroissement = 0.8f;
+
+            graph->especes[14].population = 40;      // Loup
+            graph->especes[14].taux_accroissement = 0.8f;
+
+            printf("\nLe preset Foret a ete ajoute\n");
             break;
+
         default:
-            printf("\nLe preset n'a pas marche");
+            printf("\nLe preset n'a pas marche\n");
             break;
     }
     return graph;
