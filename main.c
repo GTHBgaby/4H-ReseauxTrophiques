@@ -3,11 +3,15 @@
 #include "generationDOT.h"
 #include <stdlib.h>
 #include "stdio.h"
-
+#include <time.h>
 
 void Menu(){
+
     int choix = 0;
     char input;
+    int a;
+
+
     Graph* ecosysteme = NULL;
     int tempsSimulation;
 
@@ -37,25 +41,27 @@ void Menu(){
             case '3':
                 printf("Vous avez choisi l'option 3\n");
                 break;
+
             case '4':
+            printf("Entrez le temps de simulation (jours): ");
+            scanf("%d", &tempsSimulation);
+            getchar(); // Vide le buffer
 
-                printf("Vous avez choisi l'option 4\n");
+            for(int t = 1; t <= tempsSimulation;) {
+                system("cls");
+                printf("=== Jour %d/%d ===\n", t, tempsSimulation);
+                printf("Appuyez sur Entrée pour avancer, 'q' pour quitter\n\n");
 
-                printf("entrez le temps de simulation en jours\n");
-                scanf("%d",&tempsSimulation);
-
-                for(int t = 1; t <= tempsSimulation ; t++) {
-                    evoluerPopulations(ecosysteme);
-
-                    printf("\n=== Temps t=%d ===\n", t);
-                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                        printf("%s: Population = %.2f\n",ecosysteme->especes[i].nom,ecosysteme->especes[i].population);
-                    }
+                evoluerPopulations(ecosysteme);
+                for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                    printf("%s: Population = %.2f\n",ecosysteme->especes[i].nom,ecosysteme->especes[i].population);
                 }
 
-                int a;
-                scanf("%d", a);
-                break;
+                if(getchar() == 'q') break;
+                t++;
+            }
+            break;
+
             case '5':
                 printf("Vous avez choisi l'option 5\n");
                 break;
@@ -72,6 +78,7 @@ int main(){
     Menu();
     return 0;
 }
+
 
 /*int main(){
     Arc* man = malloc(sizeof (Arc));
