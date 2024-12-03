@@ -16,7 +16,7 @@ void Menu(){
         printf("2. Afficher les especes \n");
         printf("3. Question specifique\n");
         printf("4. Simulation \n");
-        printf("5. Jsp\n");
+        printf("5. Modifier les valeurs\n");
         printf("6. Quitter\n");
         printf("\nVotre choix (1-6): ");
 
@@ -37,7 +37,7 @@ void Menu(){
                 printf("Vous avez choisi l'option 4\n");
                 break;
             case '5':
-                printf("Vous avez choisi l'option 5\n");
+                ecosysteme = modifierGraph(ecosysteme);
                 break;
             case '6':
                 libererGraph(ecosysteme);

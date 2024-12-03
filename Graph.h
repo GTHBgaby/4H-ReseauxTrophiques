@@ -19,7 +19,7 @@ typedef struct {
     int suc[MAX_connexion];
     char nom[longueur_Max];
     Arc* arc;
-    int population;     // Taille de la population
+    float population;     // Taille de la population
     float taux_accroissement;    // Taux de croissance
     double capacite;       // Capacité maximale de la pop
     int niveauTrophique;     // Niveau trophique
@@ -39,6 +39,11 @@ Graph* choisirGraph();
 void libererGraph(Graph* graph);
 void printEcosysteme(Graph* g);
 
+//Fonctions de modification
+Graph* modifierGraph(Graph* graph);
+Graph* modifierEspece(Graph* graph);
+Graph* modifierCoeff(Graph* graph);
+Graph* preset(Graph* graph);
 
 
 

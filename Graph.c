@@ -1,10 +1,12 @@
 #include "Graph.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define TAUX_BASE 15
-#define POP_BASE 100
-#define CAP_BASE 100
+#define POP_BASE 100.00
+#define CAP_BASE 200
+
 
 Graph* lireGraphFichier(const char* nomFichier) {
     int nbArrete, n, p, a;
@@ -108,7 +110,7 @@ void printEcosysteme(Graph* g) {
     for (int i = 1; i <= g->nbEspeces; i++) {
         if (g->especes[i].nom[0] != '\0') {  // Vérifier que l'espèce existe
             printf("Espece %d: %s\n", g->especes[i].id, g->especes[i].nom);
-            printf("  Population: %.2f\n", g->especes[i].population);
+            printf("  Population: %.2d\n", g->especes[i].population );
             printf("  Taux de croissance: %.2f\n", g->especes[i].taux_accroissement);
             printf("  Capacite maximale: %.2f\n", g->especes[i].capacite);
             printf("  Niveau trophique: %d\n\n", g->especes[i].niveauTrophique);
@@ -204,4 +206,223 @@ void libererGraph(Graph* graph) {
     }
     free(graph->especes);
     free(graph);
+}
+Graph* modifierGraph(Graph* graph){
+    int a;
+    do{
+        printf("Que voulez vous modifier:\n ");
+        printf("1. Espece\n");
+        printf("2. Coefficient d'influence\n");
+        printf("3. Preset fonctionnel");
+        printf("4. Quitter\n");
+        scanf("%d",&a);
+        switch(a){
+            case 1:
+                graph = modifierEspece(graph);
+                break;
+            case 2:
+                graph = modifierCoeff(graph);
+                break;
+            case 3:
+                graph = preset(graph);
+                break;
+            case 4:
+                return graph;
+            default:
+                printf("Option non valide\n\n");
+                break;
+        }
+    }while(1);
+}
+Graph* modifierEspece(Graph* graph){
+    int a;
+    int fini;
+    int choix;
+    char nom[longueur_Max];
+    do {
+        choix = 0;
+        a = 0;
+        fini = 1;
+        printf("Quel espece voulez vous modifier:\n");
+        scanf("%s", nom);
+        for (int i = 1; i <= graph->nbEspeces; i++){
+            if (strcmp(nom, graph->especes[i].nom) == 0){
+                a = i;
+            }
+        }
+        if (a == 0) {
+            printf("L'espece n'existe pas\n");
+        }else{
+            printf("Que voulez vous modifier ?\n");
+            printf("1. Population\n");
+            printf("2. Taux d'accroissement\n");
+            scanf("%d",&choix);
+            switch(choix){
+                case 1:
+                    printf("Quel nouvelle valeur pour la population de %s (%f):\n",graph->espece[a].nom,graph->espece[a].population);
+                    scanf("%d",graph->especes[a].population);
+                    break;
+                case 2:
+                    printf("Quel nouvelle valeur pour le taux d'accroissement de %s (%f):\n", graph->espece[a].nom, graph->espece[a].taux_accroissement);
+                    scanf("%d",graph->especes[a].taux_accroissement);
+                    break;
+                default:
+                    printf("Choix non valide\n");
+                    break;
+            }
+            printf("Voulez vous continuer ? (OUI/1) (NON/2):\n")
+            scanf("%d",&fini);
+            if(fini == 1){
+                return graph;
+            }
+        }
+    }while(1);
+}
+Graph* modifierCoeff(Graph* graph){
+    int n,p;
+    int fini;
+    double coeff;
+    do{
+        fini = 1;
+        printf("Quel arc voulez vous modifier :\n");
+        scanf("%d%d",&n,&p);
+        Arc* ark = graph->especes[p].arc;
+        while(ark->IDs != n && ark != NULL){
+            ark = ark->arcsuivant;
+        }
+        if(ark->IDs != n){
+            printf("L'arc n'existe pas\n");
+            return graph;
+        }
+        printf("Quelle coefficient voulez vous mettre pour l'arc %d %d :\n",n,p);
+        scanf("%.2f",ark->infl);
+
+        printf("Voulez vous continuer ? (OUI/1) (NON/2):\n")
+        scanf("%d",&fini);
+        if(fini == 1){
+            return graph;
+        }
+    }while(1);
+}
+Graph* preset(Graph* graph){
+    switch(graph->nbEspeces){
+        case 9:
+            graph->especes[1].population =
+            graph->especes[1].taux_accroissement =
+
+            graph->especes[2].population =
+            graph->especes[2].taux_accroissement =
+
+            graph->especes[3].population =
+            graph->especes[3].taux_accroissement =
+
+            graph->especes[4].population =
+            graph->especes[4].taux_accroissement =
+
+            graph->especes[5].population =
+            graph->especes[5].taux_accroissement =
+
+            graph->especes[6].population =
+            graph->especes[6].taux_accroissement =
+
+            graph->especes[7].population =
+            graph->especes[7].taux_accroissement =
+
+            graph->especes[8].population =
+            graph->especes[8].taux_accroissement =
+
+            graph->especes[9].population =
+            graph->especes[9].taux_accroissement = 1;
+            printf("\nLe preset Cours d'eau a ete ajoute");
+            break;
+        case 13:
+            graph->especes[1].population =
+            graph->especes[1].taux_accroissement =
+
+            graph->especes[2].population =
+            graph->especes[2].taux_accroissement =
+
+            graph->especes[3].population =
+            graph->especes[3].taux_accroissement =
+
+            graph->especes[4].population =
+            graph->especes[4].taux_accroissement =
+
+            graph->especes[5].population =
+            graph->especes[5].taux_accroissement =
+
+            graph->especes[6].population =
+            graph->especes[6].taux_accroissement =
+
+            graph->especes[7].population =
+            graph->especes[7].taux_accroissement =
+
+            graph->especes[8].population =
+            graph->especes[8].taux_accroissement =
+
+            graph->especes[9].population =
+            graph->especes[9].taux_accroissement =
+
+            graph->especes[10].population =
+            graph->especes[10].taux_accroissement =
+
+            graph->especes[11].population =
+            graph->especes[11].taux_accroissement =
+
+            graph->especes[12].population =
+            graph->especes[12].taux_accroissement =
+
+            graph->especes[13].population =
+            graph->especes[13].taux_accroissement = 1;
+            printf("\nLe preset Savane a ete ajoute");
+            break;
+        case 14:
+            graph->especes[1].population =
+            graph->especes[1].taux_accroissement =
+
+            graph->especes[2].population =
+            graph->especes[2].taux_accroissement =
+
+            graph->especes[3].population =
+            graph->especes[3].taux_accroissement =
+
+            graph->especes[4].population =
+            graph->especes[4].taux_accroissement =
+
+            graph->especes[5].population =
+            graph->especes[5].taux_accroissement =
+
+            graph->especes[6].population =
+            graph->especes[6].taux_accroissement =
+
+            graph->especes[7].population =
+            graph->especes[7].taux_accroissement =
+
+            graph->especes[8].population =
+            graph->especes[8].taux_accroissement =
+
+            graph->especes[9].population =
+            graph->especes[9].taux_accroissement =
+
+            graph->especes[10].population =
+            graph->especes[10].taux_accroissement =
+
+            graph->especes[11].population =
+            graph->especes[11].taux_accroissement =
+
+            graph->especes[12].population =
+            graph->especes[12].taux_accroissement =
+
+            graph->especes[13].population =
+            graph->especes[13].taux_accroissement =
+
+            graph->especes[14].population =
+            graph->especes[14].taux_accroissement = 1;
+            printf("\nLe preset Foret a ete ajoute");
+            break;
+        default:
+            printf("\nLe preset n'a pas marche");
+            break;
+    }
+    return graph;
 }
