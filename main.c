@@ -5,6 +5,7 @@
 #include "stdio.h"
 #include <time.h>
 
+
 void Menu(){
 
     int choix = 0;
@@ -25,8 +26,9 @@ void Menu(){
         printf("3. Question specifique\n");
         printf("4. Simulation \n");
         printf("5. Jsp\n");
-        printf("6. Quitter\n");
-        printf("\nVotre choix (1-6): ");
+        printf("6. Affichage des schemas (en .jpg)\n");
+        printf("7. Quitter\n");
+        printf("\nVotre choix (1-7): ");
 
         scanf(" %c", &input);
 
@@ -70,6 +72,9 @@ void Menu(){
             case '6':
                 libererGraph(ecosysteme);
                 return;
+            case '7':
+                // code gab
+            return;
             default:
                 printf("Choix invalide! Veuillez choisir entre 1 et 6.\n");
         }
