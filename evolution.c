@@ -1,6 +1,4 @@
 #include "evolution.h"
-
-
 #define POP_BASE 100.0
 #define DELTA_T 0.1
 
@@ -52,6 +50,7 @@ void evoluerPopulations(Graph* g) {
 
         // Assurer que la population ne devient pas négative
         nouvelles_populations[i] = (croissance > 0) ? (int)croissance : 0;
+        g->especes[i].capacite = K_modifie ;
     }
 
     // Mettre à jour les populations

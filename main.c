@@ -43,6 +43,7 @@ void Menu(){
                 break;
 
             case '4':
+
             printf("Entrez le temps de simulation (jours): ");
             scanf("%d", &tempsSimulation);
             getchar(); // Vide le buffer
@@ -55,6 +56,7 @@ void Menu(){
                 evoluerPopulations(ecosysteme);
                 for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
                     printf("%s: Population = %.2f\n",ecosysteme->especes[i].nom,ecosysteme->especes[i].population);
+                    printf("Capacite = %.2f\n",ecosysteme->especes[i].capacite);
                 }
 
                 if(getchar() == 'q') break;
