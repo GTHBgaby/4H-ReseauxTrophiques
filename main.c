@@ -1,7 +1,7 @@
 #include "Graph.h"
 #include "evolution.h"
 #include "generationDOT.h"
-#include<stdlib.h>
+#include <stdlib.h>
 #include "stdio.h"
 
 
