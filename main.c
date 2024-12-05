@@ -3,7 +3,6 @@
 #include "generationDOT.h"
 #include <stdlib.h>
 #include "stdio.h"
-#include <time.h>
 #include "star.h"
 
 
@@ -21,11 +20,7 @@ void Menu(){
 
     do {
 
-#ifdef _WIN32
-        system("cls");  // Windows
-#else
-        system("clear");  // macOS/Linux
-#endif
+        system("cls");
         printf("\n=== MENU PRINCIPAL ===\n");
         printf("1. Changer de graphe\n");
         printf("2. Afficher les especes \n");
@@ -53,16 +48,14 @@ void Menu(){
 
             case '4':
 
-            printf("Entrez le temps de simulation (en mois): ");
+            printf("Entrez le temps de simulation (en mois):\n");
             scanf("%d", &tempsSimulation);
             getchar(); // Vide le buffer
 
             for(int t = 1; t <= tempsSimulation;) {
-#ifdef _WIN32
-                system("cls");  // Windows
-#else
-                system("clear");  // macOS/Linux
-#endif
+
+                system("cls");
+
                 printf("=== Jour %d/%d ===\n", t, tempsSimulation);
                 printf("Appuyez sur Entree pour avancer, 'q' pour quitter\n\n");
 

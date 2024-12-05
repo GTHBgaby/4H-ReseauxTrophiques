@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>   // Ajoutez cette ligne pour utiliser bool, true, et false
-#include <limits.h>    // Ajoutez cette ligne pour utiliser INT_MAX
-
+#include <stdbool.h>
+#include <limits.h>
 #include "star.h"
 
 
@@ -14,11 +13,8 @@ void choix_a_star() {
 
     do {
 
-#ifdef _WIN32
-        system("cls");  // Windows
-#else
-        system("clear");  // macOS/Linux
-#endif
+
+        system("cls");
         printf("Choisissez l'environnement pour l'algorithme A* :\n");
         printf("1. Cours d'eau\n");
         printf("2. Foret Européenne\n");
@@ -56,27 +52,27 @@ void A_star(const char* filename) {
     }
 
     // Afficher les espèces et leurs identifiants
-    printf("\nListe des espèces et leurs identifiants :\n");
+    printf("\nListe des especes et leurs identifiants :\n");
     for (int i = 1; i <= graph->nbEspeces; i++) {
         printf("%d : %s\n", i, graph->especes[i].nom);
     }
 
     // Demander à l'utilisateur de choisir deux espèces
     int sourceId, destId;
-    printf("\nEntrez le numéro de l'espèce source : ");
+    printf("\nEntrez le numero de l'espece source : ");
     scanf("%d", &sourceId);
 
     if (sourceId < 1 || sourceId > graph->nbEspeces) {
-        printf("Erreur : numéro source invalide.\n");
+        printf("Erreur : numero source invalide.\n");
         libererGraph(graph);
         return;
     }
 
-    printf("Entrez le numéro de l'espèce destination : ");
+    printf("Entrez le numero de l'espece destination : ");
     scanf("%d", &destId);
 
     if (destId < 1 || destId > graph->nbEspeces) {
-        printf("Erreur : numéro destination invalide.\n");
+        printf("Erreur : numero destination invalide.\n");
         libererGraph(graph);
         return;
     }
@@ -125,7 +121,7 @@ void A_star(const char* filename) {
 
     // Affichage du chemin
     if (dist[destId] == INT_MAX) {
-        printf("Aucun chemin trouvé entre %s et %s.\n", graph->especes[sourceId].nom, graph->especes[destId].nom);
+        printf("Aucun chemin trouve entre %s et %s.\n", graph->especes[sourceId].nom, graph->especes[destId].nom);
     } else {
         printf("Le chemin le plus rapide entre %s et %s est :\n", graph->especes[sourceId].nom, graph->especes[destId].nom);
         int path[graph->nbEspeces + 1];

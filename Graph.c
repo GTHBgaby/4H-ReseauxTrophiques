@@ -7,6 +7,8 @@
 #define POP_BASE 100.00
 #define CAP_BASE 1200.00
 
+
+
 Graph* lireGraphFichier(const char* nomFichier) {
     int nbArrete, n, p, a;
     FILE* fichier = fopen(nomFichier, "r");
@@ -163,16 +165,13 @@ Graph* choisirGraph(){
     do {
         a = 0;
 
-#ifdef _WIN32
-        system("cls");  // Windows
-#else
-        system("clear");  // macOS/Linux
-#endif
+
+        system("cls");
         printf("Choisissez votre graphe :\n");
         printf("1. Cours d'eau\n");
         printf("2. Foret Europeenne\n");
         printf("3. Savane\n");
-        system("clear");
+
 
         scanf("%d", &choix);
         switch (choix) {
