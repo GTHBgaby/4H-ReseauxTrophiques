@@ -84,14 +84,13 @@ void Menu(){
                 ecosysteme = modifierGraph(ecosysteme);
                 break;
             case '6':
-                libererGraph(ecosysteme);
+                //code Gab
                 return;
             case '7':
                 choix_a_star();  // Appel à la fonction qui gère le choix de l'environnement et lance A_star
                 return;
             case '8':
-                // code gab
-                    libererGraph(ecosysteme);
+                libererGraph(ecosysteme);
             return;
             default:
                 printf("Choix invalide! Veuillez choisir entre 1 et 6.\n");
