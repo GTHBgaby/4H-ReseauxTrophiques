@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "stdio.h"
 #include "star.h"
-
+#include "Trophiques.h"
 
 void Menu(){
 
@@ -20,11 +20,11 @@ void Menu(){
 
     do {
 
-        system("cls");
+        //system("cls"); cette ligne fait bug tous l'affichage supp si elle sert a r
         printf("\n=== MENU PRINCIPAL ===\n");
         printf("1. Changer de graphe\n");
         printf("2. Afficher les especes \n");
-        printf("3. Question specifique\n");
+        printf("3. Niveau Trophique\n");
         printf("4. Simulation \n");
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
@@ -43,8 +43,24 @@ void Menu(){
                 printEcosysteme(ecosysteme);
                 break;
             case '3':
-                printf("Vous avez choisi l'option 3\n");
-                break;
+
+                printf("Vous avez choisi l'option 3\n\n");
+            calculNiveauTrophique(ecosysteme);
+
+            for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                if (ecosysteme->especes[i].pred[0] == -1) {
+                    printf("%s --> producteur primaire (niveau 1)\n", ecosysteme->especes[i].nom);
+                }
+                else {
+                    printf("%s --> niveau trophique %d\n",
+                        ecosysteme->especes[i].nom,
+                        (int)ecosysteme->especes[i].niveauTrophique);
+                }
+            }
+            printf("\nAppuyez sur Entree pour continuer...\n");
+            while(getchar() != '\n');
+            getchar();
+            break;
 
             case '4': {
                 printf("Entrez le temps de simulation (en mois):\n");

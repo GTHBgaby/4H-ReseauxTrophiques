@@ -5,6 +5,7 @@
 #define MAX_especes 100
 #define longueur_Max 50
 #define MAX_connexion 10
+#define MAX_niveaux 4
 
 typedef struct a{
     int IDb;             // ID de l'espèce source
@@ -22,7 +23,7 @@ typedef struct {
     float population;     // Taille de la population
     float taux_accroissement;    // Taux de croissance
     double capacite;       // Capacité maximale de la pop
-    int niveauTrophique;     // Niveau trophique
+    double niveauTrophique;     // Niveau trophique
 } Especes;
 
 
