@@ -1,11 +1,6 @@
-- Nom du fichier:
+graphModifiable.dot
 
+Source : Développé par l'équipe
 
-- Source:
-
-
-- Type de licence:
-
-
-- URL d'origine:
+Auteur : Gabriel
 
