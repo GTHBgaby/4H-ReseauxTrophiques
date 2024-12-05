@@ -6,21 +6,16 @@
 #include "star.h"
 #include "Trophiques.h"
 
-void Menu(){
 
-    int choix = 0;
+
+void Menu() {
     char input;
-    int a;
-
-
     Graph* ecosysteme = NULL;
-    int tempsSimulation;
 
+    // Initialisation de l'écosystème
     ecosysteme = choisirGraph();
 
     do {
-
-        //system("cls"); cette ligne fait bug tous l'affichage supp si elle sert a r
         printf("\n=== MENU PRINCIPAL ===\n");
         printf("1. Changer de graphe\n");
         printf("2. Afficher les especes \n");
@@ -32,88 +27,101 @@ void Menu(){
         printf("8. Quitter\n");
         printf("\nVotre choix (1-8): ");
 
+        // Lecture du choix avec un espace avant %c pour ignorer les caractères whitespace
         scanf(" %c", &input);
+        while(getchar() != '\n'); // Vide le buffer
 
         switch(input) {
-            case '1':
-                libererGraph(ecosysteme);
+            case '1': {
+                if(ecosysteme != NULL) {
+                    libererGraph(ecosysteme);
+                }
                 ecosysteme = choisirGraph();
+                printf("Appuyez sur Entree pour continuer...");
+                getchar();  // Attente de l'appui sur Entrée
                 break;
+            }
             case '2':
                 printEcosysteme(ecosysteme);
                 break;
-            case '3':
 
-                printf("Vous avez choisi l'option 3\n\n");
-            calculNiveauTrophique(ecosysteme);
+            case '3': {
+                printf("\nCalcul des niveaux trophiques :\n\n");
+                calculNiveauTrophique(ecosysteme);
 
-            for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                if (ecosysteme->especes[i].pred[0] == -1) {
-                    printf("%s --> producteur primaire (niveau 1)\n", ecosysteme->especes[i].nom);
-                }
-                else {
-                    printf("%s --> niveau trophique %d\n",
-                        ecosysteme->especes[i].nom,
-                        (int)ecosysteme->especes[i].niveauTrophique);
-                }
-            }
-            printf("\nAppuyez sur Entree pour continuer...\n");
-            while(getchar() != '\n');
-            getchar();
-            break;
-
-            case '4': {
-                printf("Entrez le temps de simulation (en mois):\n");
-                scanf("%d", &tempsSimulation);
-                while(getchar() != '\n'); // Vide le buffer correctement
-
-                char input;
-                int t = 1;
-
-                while(t <= tempsSimulation) {
-                    system("cls");
-                    printf("\n=== Jour %d/%d ===\n\n", t, tempsSimulation);
-                    printf("Appuyez sur Entree pour avancer, 'q' pour quitter\n\n");
-
-                    evoluerPopulations(ecosysteme);
-
-                    // Affichage formaté des populations
-                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                        printf("%-15s: Population = %6.2f  |  Capacite = %8.2f\n",
-                               ecosysteme->especes[i].nom,
-                               ecosysteme->especes[i].population,
-                               ecosysteme->especes[i].capacite);
+                for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                    if (ecosysteme->especes[i].pred[0] == -1) {
+                        printf("%-20s --> producteur primaire (niveau 1)\n", ecosysteme->especes[i].nom);
                     }
-
-                    printf("\n"); // Ligne vide pour meilleure lisibilité
-
-                    input = getchar();
-                    while(getchar() != '\n'); // Vide le buffer après la lecture
-
-                    if(input == 'q') break;
-                    t++;
+                    else {
+                        printf("%-20s --> niveau trophique %d\n",
+                            ecosysteme->especes[i].nom,
+                            (int)ecosysteme->especes[i].niveauTrophique);
+                    }
                 }
+                printf("\nAppuyez sur Entree pour continuer...");
+                getchar();
                 break;
             }
 
+            case '4': {
+                int tempsSimulation;
+                printf("\nEntrez le temps de simulation (en mois): ");
+                if (scanf("%d", &tempsSimulation) != 1) {
+                    printf("Erreur: veuillez entrer un nombre valide\n");
+                    while (getchar() != '\n');
+                    break;
+                }
+                while (getchar() != '\n');
+
+                int t = 1;
+                char simInput;
+
+                do {
+                    printf("\n=== Mois %d/%d ===\n\n", t, tempsSimulation);
+                    evoluerPopulations(ecosysteme);
+
+                    printf("%-20s | %-15s | %-15s\n", "Espece", "Population", "Capacite");
+                    printf("----------------------------------------\n");
+
+                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                        printf("%-20s | %11.2f    | %11.2f\n",
+                            ecosysteme->especes[i].nom,
+                            ecosysteme->especes[i].population,
+                            ecosysteme->especes[i].capacite);
+                    }
+
+                    if (t < tempsSimulation) {
+                        printf("\nAppuyez sur Entree pour continuer ou 'q' pour quitter... ");
+                        simInput = getchar();
+                        if (simInput != '\n') {
+                            while (getchar() != '\n');
+                        }
+                        if (simInput == 'q' || simInput == 'Q') break;
+                    }
+                    t++;
+                } while (t <= tempsSimulation);
+                break;
+            }
+
+            // Ajoutez les autres cas ici
             case '5':
                 ecosysteme = modifierGraph(ecosysteme);
                 break;
             case '6':
-                //code Gab
-                return;
+                choix_a_star();
+                break;
             case '7':
-                choix_a_star();  // Appel à la fonction qui gère le choix de l'environnement et lance A_star
-                return;
-            case '8':
                 libererGraph(ecosysteme);
-            return;
-            default:
-                printf("Choix invalide! Veuillez choisir entre 1 et 6.\n");
+                break;
         }
-    } while(1);
-}
+    } while(input != '8');
 
+    // Libération de la mémoire avant de quitter
+    if(ecosysteme != NULL) {
+        libererGraph(ecosysteme);
+    }
+}
 int main(){
     Menu();
     return 0;

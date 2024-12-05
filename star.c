@@ -17,7 +17,7 @@ void choix_a_star() {
         system("cls");
         printf("Choisissez l'environnement pour l'algorithme A* :\n");
         printf("1. Cours d'eau\n");
-        printf("2. Foret Européenne\n");
+        printf("2. Foret Europeenne\n");
         printf("3. Savane\n");
         printf("Entrez votre choix : ");
         scanf("%d", &choix);
@@ -33,7 +33,7 @@ void choix_a_star() {
                 fichier = "../Savane.txt";  // Fichier pour Savane
                 break;
             default:
-                printf("Choix invalide. Veuillez choisir un numéro valide.\n\n");
+                printf("Choix invalide. Veuillez choisir un numero valide.\n\n");
                 continue;  // Continue tant que l'utilisateur n'a pas fait un bon choix
         }
     } while (choix < 1 || choix > 3);
