@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "stdio.h"
 #include <time.h>
+#include "star.h"
 
 
 void Menu(){
@@ -19,7 +20,12 @@ void Menu(){
     ecosysteme = choisirGraph();
 
     do {
-        system("cls");
+
+#ifdef _WIN32
+        system("cls");  // Windows
+#else
+        system("clear");  // macOS/Linux
+#endif
         printf("\n=== MENU PRINCIPAL ===\n");
         printf("1. Changer de graphe\n");
         printf("2. Afficher les especes \n");
@@ -27,8 +33,9 @@ void Menu(){
         printf("4. Simulation \n");
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
-        printf("7. Quitter\n");
-        printf("\nVotre choix (1-7): ");
+        printf("7. Chemin le plus rapide\n");
+        printf("8. Quitter\n");
+        printf("\nVotre choix (1-8): ");
 
         scanf(" %c", &input);
 
@@ -51,7 +58,11 @@ void Menu(){
             getchar(); // Vide le buffer
 
             for(int t = 1; t <= tempsSimulation;) {
-                system("cls");
+#ifdef _WIN32
+                system("cls");  // Windows
+#else
+                system("clear");  // macOS/Linux
+#endif
                 printf("=== Jour %d/%d ===\n", t, tempsSimulation);
                 printf("Appuyez sur Entree pour avancer, 'q' pour quitter\n\n");
 
@@ -73,6 +84,9 @@ void Menu(){
                 libererGraph(ecosysteme);
                 return;
             case '7':
+                choix_a_star();  // Appel à la fonction qui gère le choix de l'environnement et lance A_star
+                return;
+            case '8':
                 // code gab
             return;
             default:

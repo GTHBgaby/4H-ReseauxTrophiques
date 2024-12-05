@@ -162,11 +162,17 @@ Graph* choisirGraph(){
     Graph* ecosysteme = NULL;
     do {
         a = 0;
-        system("cls");
+
+#ifdef _WIN32
+        system("cls");  // Windows
+#else
+        system("clear");  // macOS/Linux
+#endif
         printf("Choisissez votre graphe :\n");
         printf("1. Cours d'eau\n");
         printf("2. Foret Europeenne\n");
         printf("3. Savane\n");
+        system("clear");
 
         scanf("%d", &choix);
         switch (choix) {
