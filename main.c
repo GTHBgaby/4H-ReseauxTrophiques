@@ -55,7 +55,7 @@ void Menu(){
                 int t = 1;
 
                 while(t <= tempsSimulation) {
-                    system("cls"); // Clear screen
+                    system("cls");
                     printf("\n=== Jour %d/%d ===\n\n", t, tempsSimulation);
                     printf("Appuyez sur Entree pour avancer, 'q' pour quitter\n\n");
 
@@ -91,6 +91,7 @@ void Menu(){
                 return;
             case '8':
                 // code gab
+                    libererGraph(ecosysteme);
             return;
             default:
                 printf("Choix invalide! Veuillez choisir entre 1 et 6.\n");
