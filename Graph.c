@@ -210,6 +210,7 @@ void libererGraph(Graph* graph) {
 Graph* modifierGraph(Graph* graph){
     int a;
     do{
+        a = 0;
         printf("Que voulez vous modifier:\n");
         printf("1. Espece\n");
         printf("2. Coefficient d'influence\n");
@@ -243,7 +244,7 @@ Graph* modifierEspece(Graph* graph){
     do {
         choix = 0;
         a = 0;
-        fini = 1;
+        fini = 0;
         printf("Quel espece voulez vous modifier:\n");
         scanf("%s", nom);
         for (int i = 1; i <= graph->nbEspeces; i++){
@@ -261,19 +262,20 @@ Graph* modifierEspece(Graph* graph){
             switch(choix){
                 case 1:
                     printf("Quel nouvelle valeur pour la population de %s (%f):\n",graph->especes[a].nom,graph->especes[a].population);
-                    scanf("%.2f",graph->especes[a].population);
+                    scanf("%f",&graph->especes[a].population);
                     break;
                 case 2:
                     printf("Quel nouvelle valeur pour le taux d'accroissement de %s (%f):\n", graph->especes[a].nom, graph->especes[a].taux_accroissement);
-                    scanf("%.2f",graph->especes[a].taux_accroissement);
+                    scanf("%f",&graph->especes[a].taux_accroissement);
                     break;
                 default:
                     printf("Choix non valide\n");
                     break;
             }
             printf("Voulez vous continuer ? (OUI/1) (NON/2):\n");
-            scanf("%d",&fini);
-            if(fini == 1){
+            scanf("%d", &fini);
+
+            if(fini == 2){
                 return graph;
             }
         }
@@ -290,8 +292,12 @@ Graph* modifierCoeff(Graph* graph){
         fini = 1;
         printf("Quel arc voulez vous modifier :\n");
         scanf("%d%d",&n,&p);
+        if(graph->especes[p].arc == NULL){
+            printf("L'arc n'existe pas\n");
+            return graph;
+        }
         Arc* ark = graph->especes[p].arc;
-        while(ark->IDs != n && ark != NULL){
+        while(ark->IDs != n && ark->arcsuivant != NULL){
             ark = ark->arcsuivant;
         }
         if(ark->IDs != n){
@@ -299,11 +305,11 @@ Graph* modifierCoeff(Graph* graph){
             return graph;
         }
         printf("Quelle coefficient voulez vous mettre pour l'arc %d %d :\n",n,p);
-        scanf("%.2f",ark->infl);
+        scanf("%lf", &ark->infl);
 
         printf("Voulez vous continuer ? (OUI/1) (NON/2):\n");
-        scanf("%d",&fini);
-        if(fini == 1){
+        scanf("%d", &fini);
+        if(fini == 2){
             return graph;
         }
     }while(1);
