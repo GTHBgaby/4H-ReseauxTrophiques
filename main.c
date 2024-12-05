@@ -3,7 +3,7 @@
 #include "generationDOT.h"
 #include <stdlib.h>
 #include "stdio.h"
-#include <time.h>
+#include "star.h"
 
 
 void Menu(){
@@ -19,6 +19,7 @@ void Menu(){
     ecosysteme = choisirGraph();
 
     do {
+
         system("cls");
         printf("\n=== MENU PRINCIPAL ===\n");
         printf("1. Changer de graphe\n");
@@ -27,8 +28,9 @@ void Menu(){
         printf("4. Simulation \n");
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
-        printf("7. Quitter\n");
-        printf("\nVotre choix (1-7): ");
+        printf("7. Chemin le plus rapide\n");
+        printf("8. Quitter\n");
+        printf("\nVotre choix (1-8): ");
 
         scanf(" %c", &input);
 
@@ -44,27 +46,39 @@ void Menu(){
                 printf("Vous avez choisi l'option 3\n");
                 break;
 
-            case '4':
+            case '4': {
+                printf("Entrez le temps de simulation (en mois):\n");
+                scanf("%d", &tempsSimulation);
+                while(getchar() != '\n'); // Vide le buffer correctement
 
-            printf("Entrez le temps de simulation (en mois): ");
-            scanf("%d", &tempsSimulation);
-            getchar(); // Vide le buffer
+                char input;
+                int t = 1;
 
-            for(int t = 1; t <= tempsSimulation;) {
-                system("cls");
-                printf("=== Jour %d/%d ===\n", t, tempsSimulation);
-                printf("Appuyez sur Entree pour avancer, 'q' pour quitter\n\n");
+                while(t <= tempsSimulation) {
+                    system("cls");
+                    printf("\n=== Jour %d/%d ===\n\n", t, tempsSimulation);
+                    printf("Appuyez sur Entree pour avancer, 'q' pour quitter\n\n");
 
-                evoluerPopulations(ecosysteme);
-                for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                    printf("%s: Population = %.2f\n",ecosysteme->especes[i].nom,ecosysteme->especes[i].population);
-                    printf("Capacite = %.2f\n",ecosysteme->especes[i].capacite);
+                    evoluerPopulations(ecosysteme);
+
+                    // Affichage formaté des populations
+                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                        printf("%-15s: Population = %6.2f  |  Capacite = %8.2f\n",
+                               ecosysteme->especes[i].nom,
+                               ecosysteme->especes[i].population,
+                               ecosysteme->especes[i].capacite);
+                    }
+
+                    printf("\n"); // Ligne vide pour meilleure lisibilité
+
+                    input = getchar();
+                    while(getchar() != '\n'); // Vide le buffer après la lecture
+
+                    if(input == 'q') break;
+                    t++;
                 }
-
-                if(getchar() == 'q') break;
-                t++;
+                break;
             }
-            break;
 
             case '5':
                 ecosysteme = modifierGraph(ecosysteme);
@@ -73,7 +87,11 @@ void Menu(){
                 libererGraph(ecosysteme);
                 return;
             case '7':
+                choix_a_star();  // Appel à la fonction qui gère le choix de l'environnement et lance A_star
+                return;
+            case '8':
                 // code gab
+                    libererGraph(ecosysteme);
             return;
             default:
                 printf("Choix invalide! Veuillez choisir entre 1 et 6.\n");
