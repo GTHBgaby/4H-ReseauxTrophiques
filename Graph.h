@@ -1,6 +1,7 @@
 #ifndef INC_4E_RESEAUXTROPHIQUES_GRAPH_H
 #define INC_4E_RESEAUXTROPHIQUES_GRAPH_H
 
+#include <stdbool.h>
 
 #define MAX_especes 100
 #define longueur_Max 50
@@ -15,7 +16,9 @@ typedef struct a{
 }Arc;
 
 typedef struct {
+
     int id;
+    bool supp;
     int pred[MAX_connexion];
     int suc[MAX_connexion];
     char nom[longueur_Max];
@@ -45,6 +48,7 @@ Graph* modifierGraph(Graph* graph);
 Graph* modifierEspece(Graph* graph);
 Graph* modifierCoeff(Graph* graph);
 Graph* preset(Graph* graph);
+Graph* supprEspece(Graph* graph);
 
 
 

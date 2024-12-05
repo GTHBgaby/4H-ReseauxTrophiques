@@ -35,6 +35,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
             graph->especes[i].suc[j] = -1;
         }
         graph->especes[i].arc = NULL;
+        graph->especes[i].supp = false;
         graph->especes[i].niveauTrophique = 0;
         graph->especes[i].population = POP_BASE;
         graph->especes[i].taux_accroissement = TAUX_BASE;
@@ -220,7 +221,8 @@ Graph* modifierGraph(Graph* graph){
         printf("1. Espece\n");
         printf("2. Coefficient d'influence\n");
         printf("3. Preset fonctionnel\n");
-        printf("4. Quitter\n");
+        printf("4. Supprimer une espece\n");
+        printf("5. Quitter\n");
         scanf("%d",&a);
         switch(a){
             case 1:
@@ -233,6 +235,9 @@ Graph* modifierGraph(Graph* graph){
                 graph = preset(graph);
                 break;
             case 4:
+                graph = supprEspece(graph);
+                break;
+            case 5:
                 return graph;
             default:
                 printf("Option non valide\n\n");
@@ -318,7 +323,75 @@ Graph* modifierCoeff(Graph* graph){
             return graph;
         }
     }while(1);
+}
+Graph* supprEspece(Graph* graph){
+    int a = 0;
+    int f;
+    int cur;
+    char nom[longueur_Max];
+    printf("Quel espece voulez vous modifier:\n");
+    scanf("%s", nom);
+    for (int i = 1; i <= graph->nbEspeces; i++){
+        if (strcmp(nom, graph->especes[i].nom) == 0){
+            a = i;
+        }
+    }
+    if (a == 0) {
+        printf("L'espece n'existe pas\n");
+        return graph;
+    }
+    if(graph->especes[a].pred[0] != -1){
+        Arc* neuil = NULL;
+        Arc* ark = NULL;
+        for (int i = 0; graph->especes[a].pred[i] != -1; i++){
+            cur = graph->especes[a].pred[i];
+            if(graph->especes[cur].arc->IDs == a){
+                ark = graph->especes[cur].arc->arcsuivant;
+                free(graph->especes[cur].arc);
+                graph->especes[cur].arc = ark;
 
+                graph->especes[cur].suc[0] = -1;
+            }else{
+                f = 0;
+                neuil = graph->especes[cur].arc;
+                while(neuil->IDs != a && neuil->arcsuivant !=NULL){
+                    ++f;
+                    ark = neuil;
+                    neuil = neuil->arcsuivant;
+                }
+                while(graph->especes[cur].suc[f + 1] != -1){
+                    graph->especes[cur].suc[f] = graph->especes[cur].suc[f + 1];
+                    ++f;
+                }
+                graph->especes[cur].suc[f + 1] = -1;
+                ark->arcsuivant = neuil->arcsuivant;
+                free(neuil);
+            }
+        }
+    }
+    if(graph->especes[a].suc[0] != -1){
+        for(int i = 0; graph->especes[a].suc[i] != -1; i++){
+            cur = graph->especes[a].suc[i];
+            f = 0;
+            while(graph->especes[cur].pred[f] != a){
+                ++f;
+            }
+            while(graph->especes[cur].pred[f + 1] != -1){
+                graph->especes[cur].pred[f] = graph->especes[cur].pred[f + 1];
+                ++f;
+            }
+            graph->especes[cur].pred[f + 1] = -1;
+        }
+    }
+    while(graph->especes[a].arc != NULL){
+        Arc* ark = graph->especes[a].arc;
+        graph->especes[a].arc = ark->arcsuivant;
+        free(ark);
+    }
+
+    strncpy(graph->especes[a].nom, "Supprime", longueur_Max - 1);
+    graph->especes[a].nom[longueur_Max - 1] = '\0';
+    return graph;
 }
 
 Graph* preset(Graph* graph){
