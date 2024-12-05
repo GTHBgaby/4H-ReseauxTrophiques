@@ -27,9 +27,9 @@ void Menu() {
         printf("8. Quitter\n");
         printf("\nVotre choix (1-8): ");
 
-        // Lecture du choix avec un espace avant %c pour ignorer les caractères whitespace
+        // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
         scanf(" %c", &input);
-        while(getchar() != '\n'); // Vide le buffer
+        while(getchar() != '\n'){}; // Vide le buffer
 
         switch(input) {
             case '1': {
@@ -69,10 +69,10 @@ void Menu() {
                 printf("\nEntrez le temps de simulation (en mois): ");
                 if (scanf("%d", &tempsSimulation) != 1) {
                     printf("Erreur: veuillez entrer un nombre valide\n");
-                    while (getchar() != '\n');
+                    while (getchar() != '\n'){};
                     break;
                 }
-                while (getchar() != '\n');
+                while (getchar() != '\n'){};
 
                 int t = 1;
                 char simInput;
@@ -109,10 +109,10 @@ void Menu() {
                 ecosysteme = modifierGraph(ecosysteme);
                 break;
             case '6':
-                choix_a_star();
+                //code gab
                 break;
             case '7':
-                libererGraph(ecosysteme);
+                choix_a_star();
                 break;
         }
     } while(input != '8');
