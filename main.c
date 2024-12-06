@@ -136,7 +136,7 @@ void Menu() {
                 mettre_a_jour_fichier_dot(nom_fichierDOT, ecosysteme->especes, ecosysteme->nbEspeces);
                 break;
 
-            case '9':
+            case '7':
                 A_star();
                 break;
         }
