@@ -183,42 +183,30 @@ void printEcosysteme(Graph* g) {
     printf("\nAppuyer sur n'importe quelle touche pour continuer\n");
     scanf("%d",&fini);
 }
-Graph* choisirGraph(){
-    int a;
-    int choix = 0;
+
+Graph* choisirGraph() {
+    int choix;
     Graph* ecosysteme = NULL;
+
     do {
-        a = 0;
-
-
-        system("cls");
         printf("Choisissez votre graphe :\n");
         printf("1. Cours d'eau\n");
         printf("2. Foret Europeenne\n");
         printf("3. Savane\n");
 
-
-        scanf("%d", &choix);
-        switch (choix) {
-            case 1:
-                ecosysteme = lireGraphFichier("../CoursDeau.txt");
-                printEcosysteme(ecosysteme);
-                break;
-            case 2:
-                ecosysteme = lireGraphFichier("../ForetEuropeenne.txt");
-                printEcosysteme(ecosysteme);
-                break;
-            case 3:
-                ecosysteme = lireGraphFichier("../Savane.txt");
-                printEcosysteme(ecosysteme);
-                break;
-            default:
-                printf("Votre choix n'est pas valable\n\n");
-                a = 1;
-                break;
+        if (scanf("%d", &choix) != 1 || choix < 1 || choix > 3) {
+            printf("Choix invalide\n");
+            while(getchar() != '\n'); // Vide le buffer
+            continue;
         }
-    }while(a);
-    return ecosysteme;
+
+        switch (choix) {
+            case 1: return lireGraphFichier("../CoursDeau.txt");
+            case 2: return lireGraphFichier("../ForetEuropeenne.txt");
+            case 3: return lireGraphFichier("../Savane.txt");
+            default: return NULL;
+        }
+    } while(1);
 }
 
 

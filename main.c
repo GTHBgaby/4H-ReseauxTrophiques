@@ -14,6 +14,7 @@ void Menu() {
 
     // Initialisation de l'écosystème
     ecosysteme = choisirGraph();
+    if (!ecosysteme) return;
 
     do {
         printf("\n=== MENU PRINCIPAL ===\n");
@@ -118,7 +119,7 @@ void Menu() {
     } while(input != '8');
 
     // Libération de la mémoire avant de quitter
-    if(ecosysteme != NULL) {
+    if(ecosysteme) {
         libererGraph(ecosysteme);
     }
 }
