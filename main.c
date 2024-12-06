@@ -37,7 +37,7 @@ void Menu() {
 
         // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
         scanf(" %c", &input);
-        while(getchar() != '\n'){}; // Vide le buffer
+        getchar();
 
         switch(input) {
             case '1': {
@@ -88,14 +88,13 @@ void Menu() {
                     printf("\n=== Mois %d/%d ===\n\n", t, tempsSimulation);
                     evoluerPopulations(ecosysteme);
 
-                    printf("%-20s | %-15s | %-15s\n", "Espece", "Population", "Capacite");
+                    printf("%-20s | %-15s\n", "Espece", "Population");
                     printf("----------------------------------------\n");
 
-                    for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                        printf("%-20s | %11.2f    | %11.2f\n",
-                               ecosysteme->especes[i].nom,
-                               ecosysteme->especes[i].population,
-                               ecosysteme->especes[i].capacite);
+                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                        printf("%-20s | %11.2f\n",
+                            ecosysteme->especes[i].nom,
+                            ecosysteme->especes[i].population);
                     }
 
                     if (t < tempsSimulation) {
