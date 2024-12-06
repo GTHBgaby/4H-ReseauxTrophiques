@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <limits.h>
+#include "generationDOT.h"
 
 #define TAUX_BASE 30
 #define POP_BASE 100.00
@@ -417,6 +418,7 @@ Graph* supprEspece(Graph* graph){
 }
 
 Graph* preset(Graph* graph){
+    char nom_fichierDOT[longueur_Max];
 
     switch(graph->nbEspeces){
 
@@ -452,6 +454,9 @@ Graph* preset(Graph* graph){
             // Prédateur au sommet
             graph->especes[9].population = 50;       // Brochet
             graph->especes[9].taux_accroissement = 0.9f;
+
+            strncpy(nom_fichierDOT, "CoursDeau", longueur_Max - 1);
+            nom_fichierDOT[longueur_Max - 1] = '\0';
 
             printf("\nLe preset Cours d'eau a ete ajoute\n");
             break;
@@ -500,6 +505,9 @@ Graph* preset(Graph* graph){
 
             graph->especes[13].population = 150;     // Vautour
             graph->especes[13].taux_accroissement = 0.9f;
+
+            strncpy(nom_fichierDOT, "Savane", longueur_Max - 1);
+            nom_fichierDOT[longueur_Max - 1] = '\0';
 
             printf("\nLe preset Savane a ete ajoute\n");
             break;
@@ -552,6 +560,9 @@ Graph* preset(Graph* graph){
             graph->especes[14].population = 40;      // Loup
             graph->especes[14].taux_accroissement = 0.8f;
 
+            strncpy(nom_fichierDOT, "ForetEuropeenne", longueur_Max - 1);
+            nom_fichierDOT[longueur_Max - 1] = '\0';
+
             printf("\nLe preset Foret a ete ajoute\n");
             break;
 
@@ -559,6 +570,7 @@ Graph* preset(Graph* graph){
             printf("\nLe preset n'a pas marche\n");
             break;
     }
+    mettre_a_jour_fichier_dot(nom_fichierDOT, graph->especes, graph->nbEspeces);
     return graph;
 }
 

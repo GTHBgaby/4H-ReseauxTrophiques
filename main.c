@@ -13,10 +13,6 @@
 
 void Menu() {
     char input;
-    char nom_fichierDOT[longueur_Max];
-    char nom_espece[longueur_Max];
-    int fichier_valide;
-    char choix;
     Graph* ecosysteme = NULL;
 
     // Initialisation de l'écosystème
@@ -117,26 +113,7 @@ void Menu() {
                 break;
 
             case '6':
-                switch (ecosysteme->nbEspeces) {
-                    case 9 :
-                        strncpy(nom_fichierDOT, "CoursDeau", longueur_Max - 1);
-                        nom_fichierDOT[longueur_Max - 1] = '\0';
-                        break;
-                    case 13:
-                        strncpy(nom_fichierDOT, "Savane", longueur_Max - 1);
-                        nom_fichierDOT[longueur_Max - 1] = '\0';
-                        break;
-                    case 14:
-                        strncpy(nom_fichierDOT, "ForetEuropeenne", longueur_Max - 1);
-                        nom_fichierDOT[longueur_Max - 1] = '\0';
-                        break;
-                }
-
-                /*lire_fichier_dot(nom_fichierDOT, ecosysteme->especes, &ecosysteme->nbEspeces);
-                modifier_espece(ecosysteme->especes, ecosysteme->nbEspeces, nom_espece);*/
-                mettre_a_jour_fichier_dot(nom_fichierDOT, ecosysteme->especes, ecosysteme->nbEspeces);
                 break;
-
             case '7':
                 A_star();
                 break;
