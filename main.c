@@ -2,6 +2,7 @@
 #include "evolution.h"
 #include "generationDOT.h"
 #include <stdlib.h>
+#include <string.h>
 #include "stdio.h"
 #include "Trophiques.h"
 
@@ -12,6 +13,10 @@
 
 void Menu() {
     char input;
+    char nom_fichierDOT[longueur_Max];
+    char nom_espece[longueur_Max];
+    int fichier_valide;
+    char choix;
     Graph* ecosysteme = NULL;
 
     // Initialisation de l'écosystème
@@ -36,7 +41,7 @@ void Menu() {
 
         switch(input) {
             case '1': {
-                if(ecosysteme != NULL) {
+                if (ecosysteme != NULL) {
                     libererGraph(ecosysteme);
                 }
                 ecosysteme = choisirGraph();
@@ -55,11 +60,10 @@ void Menu() {
                 for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
                     if (ecosysteme->especes[i].pred[0] == -1) {
                         printf("%-20s --> producteur primaire (niveau 1)\n", ecosysteme->especes[i].nom);
-                    }
-                    else {
+                    } else {
                         printf("%-20s --> niveau trophique %d\n",
-                            ecosysteme->especes[i].nom,
-                            (int)ecosysteme->especes[i].niveauTrophique);
+                               ecosysteme->especes[i].nom,
+                               (int) ecosysteme->especes[i].niveauTrophique);
                     }
                 }
                 printf("\nAppuyez sur Entree pour continuer...");
@@ -72,10 +76,10 @@ void Menu() {
                 printf("\nEntrez le temps de simulation (en mois): ");
                 if (scanf("%d", &tempsSimulation) != 1) {
                     printf("Erreur: veuillez entrer un nombre valide\n");
-                    while (getchar() != '\n'){};
+                    while (getchar() != '\n') {};
                     break;
                 }
-                while (getchar() != '\n'){};
+                while (getchar() != '\n') {};
 
                 int t = 1;
                 char simInput;
@@ -87,11 +91,11 @@ void Menu() {
                     printf("%-20s | %-15s | %-15s\n", "Espece", "Population", "Capacite");
                     printf("----------------------------------------\n");
 
-                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                    for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
                         printf("%-20s | %11.2f    | %11.2f\n",
-                            ecosysteme->especes[i].nom,
-                            ecosysteme->especes[i].population,
-                            ecosysteme->especes[i].capacite);
+                               ecosysteme->especes[i].nom,
+                               ecosysteme->especes[i].population,
+                               ecosysteme->especes[i].capacite);
                     }
 
                     if (t < tempsSimulation) {
@@ -107,13 +111,30 @@ void Menu() {
                 break;
             }
 
-            // Ajoutez les autres cas ici
+                // Ajoutez les autres cas ici
             case '5':
                 ecosysteme = modifierGraph(ecosysteme);
                 break;
 
             case '6':
-                //code gab
+                switch (ecosysteme->nbEspeces) {
+                    case 9 :
+                        strncpy(nom_fichierDOT, "CoursDeau", longueur_Max - 1);
+                        nom_fichierDOT[longueur_Max - 1] = '\0';
+                        break;
+                    case 13:
+                        strncpy(nom_fichierDOT, "Savane", longueur_Max - 1);
+                        nom_fichierDOT[longueur_Max - 1] = '\0';
+                        break;
+                    case 14:
+                        strncpy(nom_fichierDOT, "ForetEuropeenne", longueur_Max - 1);
+                        nom_fichierDOT[longueur_Max - 1] = '\0';
+                        break;
+                }
+
+                lire_fichier_dot(nom_fichierDOT, ecosysteme->especes, &ecosysteme->nbEspeces);
+                modifier_espece(ecosysteme->especes, ecosysteme->nbEspeces, nom_espece);
+                mettre_a_jour_fichier_dot(nom_fichierDOT, ecosysteme->especes, ecosysteme->nbEspeces);
                 break;
 
             case '7':
@@ -127,7 +148,8 @@ void Menu() {
         libererGraph(ecosysteme);
     }
 }
-int main(){
+
+int main() {
     Menu();
     return 0;
 }

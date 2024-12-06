@@ -294,11 +294,11 @@ Graph* modifierEspece(Graph* graph){
             scanf("%d",&choix);
             switch(choix){
                 case 1:
-                    printf("Quel nouvelle valeur pour la population de %s (%f):\n",graph->especes[a].nom,graph->especes[a].population);
+                    printf("Quel nouvelle valeur pour la population de %s (%2.f):\n",graph->especes[a].nom,graph->especes[a].population);
                     scanf("%f",&graph->especes[a].population);
                     break;
                 case 2:
-                    printf("Quel nouvelle valeur pour le taux d'accroissement de %s (%f):\n", graph->especes[a].nom, graph->especes[a].taux_accroissement);
+                    printf("Quel nouvelle valeur pour le taux d'accroissement de %s (%2.f):\n", graph->especes[a].nom, graph->especes[a].taux_accroissement);
                     scanf("%f",&graph->especes[a].taux_accroissement);
                     break;
                 default:

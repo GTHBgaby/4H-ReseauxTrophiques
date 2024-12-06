@@ -4,7 +4,7 @@
 #include "generationDOT.h"
 #include "Graph.h"
 
-void lire_fichier_dot(const char* nom_fichier, Especes* especes, int* nb_especes) {
+void lire_fichier_dot(const char* nom_fichier, Especes * especes, int* nb_especes) {
     char filepath[256];
     snprintf(filepath, sizeof(filepath), "../GrapheDOT/%s.dot", nom_fichier);
 
