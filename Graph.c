@@ -11,6 +11,7 @@
 
 Graph* lireGraphFichier(const char* nomFichier) {
     int nbArrete, n, p, a;
+    double coef;
     FILE* fichier = fopen(nomFichier, "r");
     if (!fichier) return NULL;
 
@@ -50,7 +51,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
     // Lecture des arêtes
     for (int i = 0; i < nbArrete; i++) {
         a = 0;  // Commencer à l'index 0 pour les tableaux pred et suc
-        fscanf(fichier, "%d%d", &n, &p);
+        fscanf(fichier, "%d%d%lf", &n, &p, &coef);
 
         // Vérifier que les indices sont valides
         if (n > 0 && n <= graph->nbEspeces && p > 0 && p <= graph->nbEspeces) {
@@ -68,11 +69,34 @@ Graph* lireGraphFichier(const char* nomFichier) {
             if (a < MAX_connexion) {
                 graph->especes[p].suc[a] = n;
             }
+
+            // Création du nouvel arc
+            Arc* nouveauArc = (Arc*)malloc(sizeof(Arc));
+            if (nouveauArc != NULL) {
+                nouveauArc->IDb = p;     // ID de base (source)
+                nouveauArc->IDs = n;     // ID suivant (destination)
+                nouveauArc->infl = coef; // Coefficient d'influence
+                nouveauArc->arcsuivant = NULL;
+
+                // Ajout de l'arc à la liste des arcs de l'espèce p
+                if (graph->especes[p].arc == NULL) {
+                    graph->especes[p].arc = nouveauArc;
+                } else {
+                    // On ajoute l'arc à la fin de la liste
+                    Arc* current = graph->especes[p].arc;
+                    while (current->arcsuivant != NULL) {
+                        current = current->arcsuivant;
+                    }
+                    current->arcsuivant = nouveauArc;
+                }
+            } else {
+                printf("Erreur d'allocation mémoire pour l'arc\n");
+            }
         }
     }
 
     // Création des arcs
-    for (int i = 1; i <= graph->nbEspeces; i++) {
+    /*for (int i = 1; i <= graph->nbEspeces; i++) {
         Arc* dernierArc = NULL;
         for (int j = 0; j < MAX_connexion && graph->especes[i].suc[j] != -1; j++) {
             Arc* nouvelArc = (Arc*)malloc(sizeof(Arc));
@@ -80,7 +104,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
 
             nouvelArc->IDb = i;
             nouvelArc->IDs = graph->especes[i].suc[j];
-            nouvelArc->infl = 0.1;
+            nouvelArc->infl = coef;
             nouvelArc->arcsuivant = NULL;
 
             if (!graph->especes[i].arc) {
@@ -90,7 +114,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
             }
             dernierArc = nouvelArc;
         }
-    }
+    }*/
     fclose(fichier);
     return graph;
 }
@@ -388,7 +412,7 @@ Graph* supprEspece(Graph* graph){
         graph->especes[a].arc = ark->arcsuivant;
         free(ark);
     }
-
+    graph->especes[a].supp = true;
     strncpy(graph->especes[a].nom, "Supprime", longueur_Max - 1);
     graph->especes[a].nom[longueur_Max - 1] = '\0';
     return graph;
