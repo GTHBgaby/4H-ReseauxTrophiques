@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+
 #define MAX_especes 100
 #define longueur_Max 50
 #define MAX_connexion 10
@@ -49,6 +50,8 @@ Graph* modifierEspece(Graph* graph);
 Graph* modifierCoeff(Graph* graph);
 Graph* preset(Graph* graph);
 Graph* supprEspece(Graph* graph);
+
+void A_star();
 
 
 

@@ -3,8 +3,10 @@
 #include "generationDOT.h"
 #include <stdlib.h>
 #include "stdio.h"
-#include "star.h"
 #include "Trophiques.h"
+
+
+
 
 
 
@@ -109,11 +111,13 @@ void Menu() {
             case '5':
                 ecosysteme = modifierGraph(ecosysteme);
                 break;
+
             case '6':
                 //code gab
                 break;
+
             case '7':
-                choix_a_star();
+                A_star();
                 break;
         }
     } while(input != '8');
