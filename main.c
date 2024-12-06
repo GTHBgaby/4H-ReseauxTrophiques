@@ -32,6 +32,7 @@ void Menu() {
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
         printf("7. Chemin le plus rapide\n");
+        printf("8. Connexité\n");
         printf("8. Quitter\n");
         printf("\nVotre choix (1-8): ");
 
@@ -139,8 +140,13 @@ void Menu() {
             case '7':
                 A_star();
                 break;
+
+            case '8':
+                k_connexite();
+                break;
+
         }
-    } while(input != '8');
+    } while(input != '9');
 
     // Libération de la mémoire avant de quitter
     if(ecosysteme) {
