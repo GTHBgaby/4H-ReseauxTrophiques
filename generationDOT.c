@@ -127,7 +127,7 @@ void mettre_a_jour_fichier_dot(const char* nom_fichier, Especes* especes, int nb
             sprintf(recherche, "\"%s\" [label=\"%s\\n[", especes[i].nom, especes[i].nom);
 
             if (strstr(ligne, recherche)) {
-                snprintf(ligne_modifiee, MAX_LIGNE, "    \"%s\" [label=\"%s\\n[%d]\\n%.2f%%\"]\n",
+                snprintf(ligne_modifiee, MAX_LIGNE, "    \"%s\" [label=\"%s\\n[%.0f]\\n%.2f%%\"]\n",
                          especes[i].nom, especes[i].nom,
                          especes[i].population, especes[i].taux_accroissement);
                 break;

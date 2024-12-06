@@ -132,8 +132,8 @@ void Menu() {
                         break;
                 }
 
-                lire_fichier_dot(nom_fichierDOT, ecosysteme->especes, &ecosysteme->nbEspeces);
-                modifier_espece(ecosysteme->especes, ecosysteme->nbEspeces, nom_espece);
+                /*lire_fichier_dot(nom_fichierDOT, ecosysteme->especes, &ecosysteme->nbEspeces);
+                modifier_espece(ecosysteme->especes, ecosysteme->nbEspeces, nom_espece);*/
                 mettre_a_jour_fichier_dot(nom_fichierDOT, ecosysteme->especes, ecosysteme->nbEspeces);
                 break;
 

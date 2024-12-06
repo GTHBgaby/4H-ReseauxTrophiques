@@ -294,7 +294,7 @@ Graph* modifierEspece(Graph* graph){
             scanf("%d",&choix);
             switch(choix){
                 case 1:
-                    printf("Quel nouvelle valeur pour la population de %s (%2.f):\n",graph->especes[a].nom,graph->especes[a].population);
+                    printf("Quel nouvelle valeur pour la population de %s (%0.f):\n",graph->especes[a].nom,graph->especes[a].population);
                     scanf("%f",&graph->especes[a].population);
                     break;
                 case 2:
