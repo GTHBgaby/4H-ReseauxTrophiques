@@ -783,7 +783,7 @@ void k_connexite() {
     int kSommetConnexite = 0;
 
     for (int i = 0; i < nombreAnimaux; i++) {
-        int visité[MAX_ANIMAUX] = {0};
+        int visite[MAX_ANIMAUX] = {0};
         int pile[MAX_ANIMAUX];
         int top = -1;
 
@@ -791,7 +791,7 @@ void k_connexite() {
         for (int j = 0; j < nombreAnimaux; j++) {
             if (j != i) {
                 pile[++top] = j;
-                visité[j] = 1;
+                visite[j] = 1;
                 break;
             }
         }
@@ -800,8 +800,8 @@ void k_connexite() {
         while (top >= 0) {
             int v = pile[top--];
             for (int j = 0; j < nombreAnimaux; j++) {
-                if (!visité[j] && graphe[v][j] == 1 && j != i) {
-                    visité[j] = 1;
+                if (!visite[j] && graphe[v][j] == 1 && j != i) {
+                    visite[j] = 1;
                     pile[++top] = j;
                 }
             }
@@ -810,7 +810,7 @@ void k_connexite() {
         // Vérifier si tous les sommets non exclus sont visités
         int connexe = 1;
         for (int j = 0; j < nombreAnimaux; j++) {
-            if (j != i && !visité[j]) {
+            if (j != i && !visite[j]) {
                 connexe = 0;
                 break;
             }
