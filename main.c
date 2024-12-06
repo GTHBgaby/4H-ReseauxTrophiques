@@ -30,7 +30,7 @@ void Menu() {
         printf("7. Chemin le plus rapide\n");
         printf("8. Connexité\n");
         printf("8. Quitter\n");
-        printf("\nVotre choix (1-8): ");
+        printf("\nVotre choix (1-9): ");
 
         // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
         scanf(" %c", &input);
