@@ -93,7 +93,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
                     current->arcsuivant = nouveauArc;
                 }
             } else {
-                printf("Erreur d'allocation mémoire pour l'arc\n");
+                printf("Erreur d'allocation memoire pour l'arc\n");
             }
         }
     }
@@ -746,7 +746,7 @@ void k_connexite() {
     }
 
     // Demander à l'utilisateur de choisir un animal
-    printf("\nEntrez le numéro de l'animal que vous choisissez : ");
+    printf("\nEntrez le numero de l'animal que vous choisissez : ");
     scanf("%d", &choix);
 
     if (choix < 1 || choix > nombreAnimaux) {
@@ -823,8 +823,8 @@ void k_connexite() {
     }
 
     // Affichage des résultats
-    printf("\nLa K-connexité de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
-    printf("La connexité totale du graphe est : %d\n", connexiteTotale);
-    printf("La k-arête-connexité du graphe est : %d\n", kAreteConnexite);
-    printf("La k-sommet-connexité du graphe est : %d\n", kSommetConnexite);
+    printf("\nLa K-connexite de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
+    printf("La connexite totale du graphe est : %d\n", connexiteTotale);
+    printf("La k-arete-connexite du graphe est : %d\n", kAreteConnexite);
+    printf("La k-sommet-connexite du graphe est : %d\n", kSommetConnexite);
 }

@@ -28,7 +28,7 @@ void Menu() {
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
         printf("7. Chemin le plus rapide\n");
-        printf("8. Connexité\n");
+        printf("8. Connexite\n");
         printf("8. Quitter\n");
         printf("\nVotre choix (1-9): ");
 
