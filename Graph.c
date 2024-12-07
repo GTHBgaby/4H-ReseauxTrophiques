@@ -164,7 +164,7 @@ void printEcosysteme(Graph* g) {
     printf("SUCCESSEURS ET PREDECESSEURS:\n");
     printf("----------------------------\n");
     for (int i = 1; i <= g->nbEspeces; i++) {
-        if (g->especes[i].nom[0] != '\0') {  // Vérifier que l'espèce existe
+        if (g->especes[i].supp == false) {  // Vérifier que l'espèce existe
             printf("Espece %d (%s):\n", g->especes[i].id, g->especes[i].nom);
 
             // Affichage des successeurs
@@ -180,6 +180,8 @@ void printEcosysteme(Graph* g) {
                 printf("%d ", g->especes[i].pred[j]);
             }
             printf("\n\n");
+        }else{
+            printf("Espece supprimee\n\n");
         }
     }
     printf("\nAppuyer sur n'importe quelle touche pour continuer\n");
@@ -671,4 +673,83 @@ void A_star() {
     free(visited);
     free(heuristic);
     libererGraph(graph);
+}
+void afficherChaine(Graph* graph, int* chaine, int taille) {
+    // Affiche une chaîne alimentaire
+    for(int i = 0; i < taille; i++) {
+        printf("%s", graph->especes[chaine[i]].nom);
+        if(i < taille - 1) {
+            printf(" -> ");
+        }
+    }
+    printf("\n");
+}
+
+void trouverChaines(Graph* graph, int espece, int* chaine, int taille, bool* visite) {
+    // Ajoute l'espèce courante à la chaîne
+    chaine[taille] = espece;
+    taille++;
+
+    // Marque l'espèce comme visitée
+    visite[espece] = true;
+
+    // Si l'espèce n'a pas de prédécesseurs, affiche la chaîne
+    if(graph->especes[espece].pred[0] == -1) {
+        afficherChaine(graph, chaine, taille);
+    } else {
+        // Pour chaque prédécesseur
+        for(int i = 0; graph->especes[espece].pred[i] != -1 && i < MAX_connexion; i++) {
+            int pred = graph->especes[espece].pred[i];
+            // Si le prédécesseur n'a pas déjà été visité (évite les cycles)
+            if(!visite[pred]) {
+                trouverChaines(graph, pred, chaine, taille, visite);
+            }
+        }
+    }
+    visite[espece] = false;
+}
+
+void chainesEspece(Graph* graph) {
+    char nom[longueur_Max];
+    int espece_id = -1;
+
+    // Demande le nom de l'espèce
+    printf("Entrez le nom de l'espece : ");
+    scanf("%s", nom);
+
+    // Trouve l'ID de l'espèce
+    for(int i = 1; i <= graph->nbEspeces; i++) {
+        if(strcmp(graph->especes[i].nom, nom) == 0) {
+            espece_id = i;
+            break;
+        }
+    }
+
+    if(espece_id == -1) {
+        printf("Espece non trouvee.\n");
+        return;
+    }
+
+    // Initialise les structures pour la recherche
+    int* chaine = (int*)malloc(graph->nbEspeces * sizeof(int));
+    bool* visite = (bool*)malloc((graph->nbEspeces + 1) * sizeof(bool));
+
+    if(chaine == NULL || visite == NULL) {
+        printf("Erreur d'allocation memoire.\n");
+        free(chaine);
+        free(visite);
+        return;
+    }
+
+    // Initialise le tableau des visites
+    for(int i = 0; i <= graph->nbEspeces; i++) {
+        visite[i] = false;
+    }
+
+    printf("Chaines alimentaires menant a %s :\n", nom);
+    trouverChaines(graph, espece_id, chaine, 0, visite);
+
+    // Libère la mémoire
+    free(chaine);
+    free(visite);
 }

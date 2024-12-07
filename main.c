@@ -32,7 +32,8 @@ void Menu() {
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
         printf("7. Chemin le plus rapide\n");
-        printf("8. Quitter\n");
+        printf("9. Chaines d'une espece\n");
+        printf("10. Quitter\n");
         printf("\nVotre choix (1-8): ");
 
         // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
@@ -139,8 +140,11 @@ void Menu() {
             case '7':
                 A_star();
                 break;
+            case '8':
+
+                break;
         }
-    } while(input != '8');
+    } while(input != '9');
 
     // Libération de la mémoire avant de quitter
     if(ecosysteme) {
