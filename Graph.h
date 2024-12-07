@@ -52,6 +52,7 @@ Graph* preset(Graph* graph);
 Graph* supprEspece(Graph* graph);
 
 void A_star();
+void k_connexite();
 
 //Fonctions de chaines d'especes
 void chainesEspece(Graph* graph);

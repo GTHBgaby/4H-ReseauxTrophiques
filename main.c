@@ -13,10 +13,6 @@
 
 void Menu() {
     char input;
-    char nom_fichierDOT[longueur_Max];
-    char nom_espece[longueur_Max];
-    int fichier_valide;
-    char choix;
     Graph* ecosysteme = NULL;
 
     // Initialisation de l'écosystème
@@ -32,9 +28,9 @@ void Menu() {
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
         printf("7. Chemin le plus rapide\n");
-        printf("9. Chaines d'une espece\n");
-        printf("10. Quitter\n");
-        printf("\nVotre choix (1-8): ");
+        printf("8. Connexite\n");
+        printf("8. Quitter\n");
+        printf("\nVotre choix (1-9): ");
 
         // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
         scanf(" %c", &input);
@@ -117,32 +113,15 @@ void Menu() {
                 break;
 
             case '6':
-                switch (ecosysteme->nbEspeces) {
-                    case 9 :
-                        strncpy(nom_fichierDOT, "CoursDeau", longueur_Max - 1);
-                        nom_fichierDOT[longueur_Max - 1] = '\0';
-                        break;
-                    case 13:
-                        strncpy(nom_fichierDOT, "Savane", longueur_Max - 1);
-                        nom_fichierDOT[longueur_Max - 1] = '\0';
-                        break;
-                    case 14:
-                        strncpy(nom_fichierDOT, "ForetEuropeenne", longueur_Max - 1);
-                        nom_fichierDOT[longueur_Max - 1] = '\0';
-                        break;
-                }
-
-                lire_fichier_dot(nom_fichierDOT, ecosysteme->especes, &ecosysteme->nbEspeces);
-                modifier_espece(ecosysteme->especes, ecosysteme->nbEspeces, nom_espece);
-                mettre_a_jour_fichier_dot(nom_fichierDOT, ecosysteme->especes, ecosysteme->nbEspeces);
                 break;
-
             case '7':
                 A_star();
                 break;
-            case '8':
 
+            case '8':
+                k_connexite();
                 break;
+
         }
     } while(input != '9');
 

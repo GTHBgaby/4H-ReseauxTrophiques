@@ -4,7 +4,10 @@
 #include <string.h>
 #include <stdbool.h>
 #include <limits.h>
+#include "generationDOT.h"
 
+#define MAX_ANIMAUX 100
+#define MAX_LIGNES 100
 #define TAUX_BASE 30
 #define POP_BASE 100.00
 #define CAP_BASE 1200.00
@@ -92,7 +95,7 @@ Graph* lireGraphFichier(const char* nomFichier) {
                     current->arcsuivant = nouveauArc;
                 }
             } else {
-                printf("Erreur d'allocation mémoire pour l'arc\n");
+                printf("Erreur d'allocation memoire pour l'arc\n");
             }
         }
     }
@@ -287,7 +290,7 @@ Graph* modifierEspece(Graph* graph){
             scanf("%d",&choix);
             switch(choix){
                 case 1:
-                    printf("Quel nouvelle valeur pour la population de %s (%2.f):\n",graph->especes[a].nom,graph->especes[a].population);
+                    printf("Quel nouvelle valeur pour la population de %s (%0.f):\n",graph->especes[a].nom,graph->especes[a].population);
                     scanf("%f",&graph->especes[a].population);
                     break;
                 case 2:
@@ -557,6 +560,7 @@ Graph* preset(Graph* graph){
 }
 
 void A_star() {
+
     const char* filename = NULL;
 
     switch (choix) {
@@ -569,9 +573,6 @@ void A_star() {
         case 3:
             filename = "../Savane.txt";
             break;
-        default:
-            printf("Erreur : choix invalide.\n");
-            return;
     }
 
     Graph* graph = lireGraphFichier(filename);
@@ -674,6 +675,139 @@ void A_star() {
     free(heuristic);
     libererGraph(graph);
 }
+
+/*int choix; // Choix de l'utilisateur
+
+// Fonction principale pour calculer la connexité, k-arête-connexité et k-sommet-connexité
+void k_connexite() {
+    const char* filename = NULL;
+
+    switch (choix) {
+        case 1:
+            filename = "../CoursDeau.txt";
+            break;
+        case 2:
+            filename = "../ForetEuropeenne.txt";
+            break;
+        case 3:
+            filename = "../Savane.txt";
+            break;
+        default:
+            printf("Erreur : choix invalide.\n");
+            return;
+    }
+
+    // Ouvrir le fichier
+    FILE* file = fopen(filename, "r");
+    if (!file) {
+        printf("Erreur : Impossible d'ouvrir le fichier %s\n", filename);
+        return;
+    }
+
+    // Lire le nombre d'animaux
+    int nombreAnimaux;
+    fscanf(file, "%d", &nombreAnimaux);
+
+    // Lire le nombre de relations
+    int nombreRelations;
+    fscanf(file, "%d", &nombreRelations);
+
+    // Lire les noms des animaux
+    char animaux[MAX_ANIMAUX][MAX_LIGNES];
+    for (int i = 0; i < nombreAnimaux; i++) {
+        fscanf(file, "%s", animaux[i]);
+    }
+
+    // Afficher les animaux
+    printf("\nListe des animaux :\n");
+    for (int i = 0; i < nombreAnimaux; i++) {
+        printf("%d - %s\n", i + 1, animaux[i]);
+    }
+
+    // Demander à l'utilisateur de choisir un animal
+    printf("\nEntrez le numero de l'animal que vous choisissez : ");
+    scanf("%d", &choix);
+
+    if (choix < 1 || choix > nombreAnimaux) {
+        printf("Erreur : choix invalide.\n");
+        fclose(file);
+        return;
+    }
+
+    // Représentation du graphe sous forme de matrice d'adjacence
+    int graphe[MAX_ANIMAUX][MAX_ANIMAUX] = {0};
+    int kConnexite = 0;
+    int connexiteTotale = 0;
+
+    // Lire les relations et remplir la matrice d'adjacence
+    int source, cible;
+    float poids;
+    while (fscanf(file, "%d %d %f", &source, &cible, &poids) == 3) {
+        graphe[source - 1][cible - 1] = 1;
+        graphe[cible - 1][source - 1] = 1;  // Graphe non orienté
+
+        // Calculer la connexité de l'animal choisi
+        if (source == choix || cible == choix) {
+            kConnexite++;
+        }
+
+        // Connexité totale du graphe
+        connexiteTotale++;
+    }
+
+    fclose(file);
+
+    // Calcul de la k-arête-connexité et k-sommet-connexité
+    int kAreteConnexite = 0;
+    int kSommetConnexite = 0;
+
+    for (int i = 0; i < nombreAnimaux; i++) {
+        int visite[MAX_ANIMAUX] = {0};
+        int pile[MAX_ANIMAUX];
+        int top = -1;
+
+        // Débuter à partir du premier sommet non exclu
+        for (int j = 0; j < nombreAnimaux; j++) {
+            if (j != i) {
+                pile[++top] = j;
+                visite[j] = 1;
+                break;
+            }
+        }
+
+        // DFS pour marquer les sommets atteignables
+        while (top >= 0) {
+            int v = pile[top--];
+            for (int j = 0; j < nombreAnimaux; j++) {
+                if (!visite[j] && graphe[v][j] == 1 && j != i) {
+                    visite[j] = 1;
+                    pile[++top] = j;
+                }
+            }
+        }
+
+        // Vérifier si tous les sommets non exclus sont visités
+        int connexe = 1;
+        for (int j = 0; j < nombreAnimaux; j++) {
+            if (j != i && !visite[j]) {
+                connexe = 0;
+                break;
+            }
+        }
+
+        if (connexe) {
+            kAreteConnexite++;
+            kSommetConnexite++;
+        }
+    }
+
+    // Affichage des résultats
+    printf("\nLa K-connexite de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
+    printf("La connexite totale du graphe est : %d\n", connexiteTotale);
+    printf("La k-arete-connexite du graphe est : %d\n", kAreteConnexite);
+    printf("La k-sommet-connexite du graphe est : %d\n", kSommetConnexite);
+}*/
+
 void afficherChaine(Graph* graph, int* chaine, int taille) {
     // Affiche une chaîne alimentaire
     for(int i = 0; i < taille; i++) {
