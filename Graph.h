@@ -54,6 +54,11 @@ Graph* supprEspece(Graph* graph);
 void A_star();
 void k_connexite();
 
+//Fonctions de chaines d'especes
+void chainesEspece(Graph* graph);
+void trouverChaines(Graph* graph, int espece, int* chaine, int taille, bool* visite);
+void afficherChaine(Graph* graph, int* chaine, int taille);
+
 
 
 #endif //INC_4E_RESEAUXTROPHIQUES_GRAPH_H

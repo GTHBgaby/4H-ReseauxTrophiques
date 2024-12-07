@@ -6,6 +6,8 @@
 #include <limits.h>
 #include "generationDOT.h"
 
+#define MAX_ANIMAUX 100
+#define MAX_LIGNES 100
 #define TAUX_BASE 30
 #define POP_BASE 100.00
 #define CAP_BASE 1200.00
@@ -165,7 +167,7 @@ void printEcosysteme(Graph* g) {
     printf("SUCCESSEURS ET PREDECESSEURS:\n");
     printf("----------------------------\n");
     for (int i = 1; i <= g->nbEspeces; i++) {
-        if (g->especes[i].nom[0] != '\0') {  // Vérifier que l'espèce existe
+        if (g->especes[i].supp == false) {  // Vérifier que l'espèce existe
             printf("Espece %d (%s):\n", g->especes[i].id, g->especes[i].nom);
 
             // Affichage des successeurs
@@ -181,6 +183,8 @@ void printEcosysteme(Graph* g) {
                 printf("%d ", g->especes[i].pred[j]);
             }
             printf("\n\n");
+        }else{
+            printf("Espece supprimee\n\n");
         }
     }
     printf("\nAppuyer sur n'importe quelle touche pour continuer\n");
@@ -188,38 +192,30 @@ void printEcosysteme(Graph* g) {
 }
 
 Graph* choisirGraph() {
-    int a;
+    int choix;
     Graph* ecosysteme = NULL;
+
     do {
-        a = 0;
-        system("cls");
         printf("Choisissez votre graphe :\n");
         printf("1. Cours d'eau\n");
         printf("2. Foret Europeenne\n");
         printf("3. Savane\n");
-        scanf("%d", &choix);
+
+        if (scanf("%d", &choix) != 1 || choix < 1 || choix > 3) {
+            printf("Choix invalide\n");
+            while(getchar() != '\n'); // Vide le buffer
+            continue;
+        }
 
         switch (choix) {
-            case 1:
-                ecosysteme = lireGraphFichier("../CoursDeau.txt");
-                printEcosysteme(ecosysteme);
-                break;
-            case 2:
-                ecosysteme = lireGraphFichier("../ForetEuropeenne.txt");
-                printEcosysteme(ecosysteme);
-                break;
-            case 3:
-                ecosysteme = lireGraphFichier("../Savane.txt");
-                printEcosysteme(ecosysteme);
-                break;
-            default:
-                printf("Votre choix n'est pas valable\n\n");
-                a = 1;
-                break;
+            case 1: return lireGraphFichier("../CoursDeau.txt");
+            case 2: return lireGraphFichier("../ForetEuropeenne.txt");
+            case 3: return lireGraphFichier("../Savane.txt");
+            default: return NULL;
         }
-    } while (a);
-    return ecosysteme;
+    } while(1);
 }
+
 
 
 void libererGraph(Graph* graph) {
@@ -418,7 +414,6 @@ Graph* supprEspece(Graph* graph){
 }
 
 Graph* preset(Graph* graph){
-    char nom_fichierDOT[longueur_Max];
 
     switch(graph->nbEspeces){
 
@@ -454,9 +449,6 @@ Graph* preset(Graph* graph){
             // Prédateur au sommet
             graph->especes[9].population = 50;       // Brochet
             graph->especes[9].taux_accroissement = 0.9f;
-
-            strncpy(nom_fichierDOT, "CoursDeau", longueur_Max - 1);
-            nom_fichierDOT[longueur_Max - 1] = '\0';
 
             printf("\nLe preset Cours d'eau a ete ajoute\n");
             break;
@@ -505,9 +497,6 @@ Graph* preset(Graph* graph){
 
             graph->especes[13].population = 150;     // Vautour
             graph->especes[13].taux_accroissement = 0.9f;
-
-            strncpy(nom_fichierDOT, "Savane", longueur_Max - 1);
-            nom_fichierDOT[longueur_Max - 1] = '\0';
 
             printf("\nLe preset Savane a ete ajoute\n");
             break;
@@ -560,9 +549,6 @@ Graph* preset(Graph* graph){
             graph->especes[14].population = 40;      // Loup
             graph->especes[14].taux_accroissement = 0.8f;
 
-            strncpy(nom_fichierDOT, "ForetEuropeenne", longueur_Max - 1);
-            nom_fichierDOT[longueur_Max - 1] = '\0';
-
             printf("\nLe preset Foret a ete ajoute\n");
             break;
 
@@ -570,7 +556,6 @@ Graph* preset(Graph* graph){
             printf("\nLe preset n'a pas marche\n");
             break;
     }
-    mettre_a_jour_fichier_dot(nom_fichierDOT, graph->especes, graph->nbEspeces);
     return graph;
 }
 
@@ -691,13 +676,7 @@ void A_star() {
     libererGraph(graph);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#define MAX_ANIMAUX 100
-#define MAX_LIGNES 100
-
-int choix; // Choix de l'utilisateur
+/*int choix; // Choix de l'utilisateur
 
 // Fonction principale pour calculer la connexité, k-arête-connexité et k-sommet-connexité
 void k_connexite() {
@@ -827,4 +806,84 @@ void k_connexite() {
     printf("La connexite totale du graphe est : %d\n", connexiteTotale);
     printf("La k-arete-connexite du graphe est : %d\n", kAreteConnexite);
     printf("La k-sommet-connexite du graphe est : %d\n", kSommetConnexite);
+}*/
+
+void afficherChaine(Graph* graph, int* chaine, int taille) {
+    // Affiche une chaîne alimentaire
+    for(int i = 0; i < taille; i++) {
+        printf("%s", graph->especes[chaine[i]].nom);
+        if(i < taille - 1) {
+            printf(" -> ");
+        }
+    }
+    printf("\n");
+}
+
+void trouverChaines(Graph* graph, int espece, int* chaine, int taille, bool* visite) {
+    // Ajoute l'espèce courante à la chaîne
+    chaine[taille] = espece;
+    taille++;
+
+    // Marque l'espèce comme visitée
+    visite[espece] = true;
+
+    // Si l'espèce n'a pas de prédécesseurs, affiche la chaîne
+    if(graph->especes[espece].pred[0] == -1) {
+        afficherChaine(graph, chaine, taille);
+    } else {
+        // Pour chaque prédécesseur
+        for(int i = 0; graph->especes[espece].pred[i] != -1 && i < MAX_connexion; i++) {
+            int pred = graph->especes[espece].pred[i];
+            // Si le prédécesseur n'a pas déjà été visité (évite les cycles)
+            if(!visite[pred]) {
+                trouverChaines(graph, pred, chaine, taille, visite);
+            }
+        }
+    }
+    visite[espece] = false;
+}
+
+void chainesEspece(Graph* graph) {
+    char nom[longueur_Max];
+    int espece_id = -1;
+
+    // Demande le nom de l'espèce
+    printf("Entrez le nom de l'espece : ");
+    scanf("%s", nom);
+
+    // Trouve l'ID de l'espèce
+    for(int i = 1; i <= graph->nbEspeces; i++) {
+        if(strcmp(graph->especes[i].nom, nom) == 0) {
+            espece_id = i;
+            break;
+        }
+    }
+
+    if(espece_id == -1) {
+        printf("Espece non trouvee.\n");
+        return;
+    }
+
+    // Initialise les structures pour la recherche
+    int* chaine = (int*)malloc(graph->nbEspeces * sizeof(int));
+    bool* visite = (bool*)malloc((graph->nbEspeces + 1) * sizeof(bool));
+
+    if(chaine == NULL || visite == NULL) {
+        printf("Erreur d'allocation memoire.\n");
+        free(chaine);
+        free(visite);
+        return;
+    }
+
+    // Initialise le tableau des visites
+    for(int i = 0; i <= graph->nbEspeces; i++) {
+        visite[i] = false;
+    }
+
+    printf("Chaines alimentaires menant a %s :\n", nom);
+    trouverChaines(graph, espece_id, chaine, 0, visite);
+
+    // Libère la mémoire
+    free(chaine);
+    free(visite);
 }
