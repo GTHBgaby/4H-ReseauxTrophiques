@@ -7,7 +7,7 @@
 
 
 
-void evoluerPopulations(Graph* g);
+Graph* evoluerPopulations(Graph* g);
 
 
 

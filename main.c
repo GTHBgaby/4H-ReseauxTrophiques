@@ -29,7 +29,7 @@ void Menu() {
         printf("6. Affichage des schemas (en .jpg)\n");
         printf("7. Chemin le plus rapide\n");
         printf("8. Connexite\n");
-        printf("8. Quitter\n");
+        printf("9. Quitter\n");
         printf("\nVotre choix (1-9): ");
 
         // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
@@ -88,12 +88,13 @@ void Menu() {
                     printf("%-20s | %-15s\n", "Espece", "Population");
                     printf("----------------------------------------\n");
 
-                    for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                        printf("%-20s | %11.2f\n",
-                            ecosysteme->especes[i].nom,
-                            ecosysteme->especes[i].population);
+                        for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                            if (ecosysteme->especes[i].supp==false) {
+                            printf("%-20s | %11.2f\n",
+                                ecosysteme->especes[i].nom,
+                                ecosysteme->especes[i].population);
+                        }
                     }
-
                     if (t < tempsSimulation) {
                         printf("\nAppuyez sur Entree pour continuer ou 'q' pour quitter... ");
                         simInput = getchar();
