@@ -10,7 +10,7 @@ Graph * evoluerPopulations(Graph* g) {
 
     // Calculer les nouvelles populations pour chaque espèce
     for (int i = 1; i <= g->nbEspeces; i++) {
-        if (g->especes[i].supp==false) {
+
             double K = g->especes[i].capacite; //capacite max
             double r = g->especes[i].taux_accroissement / 100.0; //conversion decimal
             int N = g->especes[i].population; //pop
@@ -73,7 +73,7 @@ Graph * evoluerPopulations(Graph* g) {
         for (int i = 1; i <= g->nbEspeces; i++) {
             g->especes[i].population = nouvelles_populations[i];
         }
-    }
+
         free(nouvelles_populations);
         return g;
 

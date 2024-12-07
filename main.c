@@ -120,7 +120,7 @@ void Menu() {
                 break;
 
             case '8':
-                k_connexite();
+                //k_connexite();
                 break;
 
         }
