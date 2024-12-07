@@ -117,11 +117,11 @@ void Menu() {
                 break;
 
             case '7':
-                A_star();
+                A_star(ecosysteme);
                 break;
 
             case '8':
-                k_connexite();
+                k_connexite(ecosysteme);
                 break;
 
         }
