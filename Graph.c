@@ -726,7 +726,7 @@ void k_connexite() {
     }
 
     // Demander à l'utilisateur de choisir un animal
-    printf("\nEntrez le numéro de l'animal que vous choisissez : ");
+    printf("\nEntrez le numero de l'animal que vous choisissez : ");
     scanf("%d", &choix);
 
     if (choix < 1 || choix > nombreAnimaux) {
@@ -745,8 +745,7 @@ void k_connexite() {
     float poids;
     while (fscanf(file, "%d %d %f", &source, &cible, &poids) == 3) {
         graphe[source - 1][cible - 1] = 1;
-        graphe[cible - 1][source - 1] = 1;  // Graphe non orienté
-
+        graphe[cible - 1][source - 1] = 1;  // Graphe non oriente
         // Calculer la connexité de l'animal choisi
         if (source == choix || cible == choix) {
             kConnexite++;
@@ -803,10 +802,10 @@ void k_connexite() {
     }
 
     // Affichage des résultats
-    printf("\nLa K-connexité de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
-    printf("La connexité totale du graphe est : %d\n", connexiteTotale);
-    printf("La k-arête-connexité du graphe est : %d\n", kAreteConnexite);
-    printf("La k-sommet-connexité du graphe est : %d\n", kSommetConnexite);
+    printf("\nLa K-connexite de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
+    printf("La connexite totale du graphe est : %d\n", connexiteTotale);
+    printf("La k-arete-connexite du graphe est : %d\n", kAreteConnexite);
+    printf("La k-sommet-connexite du graphe est : %d\n", kSommetConnexite);
 }
 
 
