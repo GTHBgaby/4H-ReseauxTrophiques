@@ -12,6 +12,7 @@
 
 
 void Menu() {
+
     char input;
     Graph* ecosysteme = NULL;
 
@@ -108,19 +109,19 @@ void Menu() {
                 break;
             }
 
-                // Ajoutez les autres cas ici
             case '5':
                 ecosysteme = modifierGraph(ecosysteme);
                 break;
 
             case '6':
                 break;
+
             case '7':
                 A_star();
                 break;
 
             case '8':
-                //k_connexite();
+                k_connexite();
                 break;
 
         }

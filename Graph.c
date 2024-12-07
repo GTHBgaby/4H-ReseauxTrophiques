@@ -191,32 +191,33 @@ void printEcosysteme(Graph* g) {
     scanf("%d",&fini);
 }
 
-Graph* choisirGraph() {
-    int choix;
-    Graph* ecosysteme = NULL;
 
+
+Graph* choisirGraph() {
+    int a;
+    Graph* ecosysteme = NULL;
     do {
+        a = 0;
         printf("Choisissez votre graphe :\n");
         printf("1. Cours d'eau\n");
         printf("2. Foret Europeenne\n");
         printf("3. Savane\n");
-
-        if (scanf("%d", &choix) != 1 || choix < 1 || choix > 3) {
-            printf("Choix invalide\n");
-            while(getchar() != '\n'); // Vide le buffer
-            continue;
-        }
+        scanf("%d", &choix);
 
         switch (choix) {
-            case 1: return lireGraphFichier("../CoursDeau.txt");
-            case 2: return lireGraphFichier("../ForetEuropeenne.txt");
-            case 3: return lireGraphFichier("../Savane.txt");
-            default: return NULL;
+            case 1:
+                ecosysteme = lireGraphFichier("../CoursDeau.txt");
+                break;
+            case 2:
+                ecosysteme = lireGraphFichier("../ForetEuropeenne.txt");
+                break;
+            case 3:
+                ecosysteme = lireGraphFichier("../Savane.txt");
+                break;
         }
-    } while(1);
+    } while (a);
+    return ecosysteme;
 }
-
-
 
 void libererGraph(Graph* graph) {
     if (!graph) return;
@@ -676,7 +677,7 @@ void A_star() {
     libererGraph(graph);
 }
 
-/*int choix; // Choix de l'utilisateur
+int choix; // Choix de l'utilisateur
 
 // Fonction principale pour calculer la connexité, k-arête-connexité et k-sommet-connexité
 void k_connexite() {
@@ -725,7 +726,7 @@ void k_connexite() {
     }
 
     // Demander à l'utilisateur de choisir un animal
-    printf("\nEntrez le numero de l'animal que vous choisissez : ");
+    printf("\nEntrez le numéro de l'animal que vous choisissez : ");
     scanf("%d", &choix);
 
     if (choix < 1 || choix > nombreAnimaux) {
@@ -762,7 +763,7 @@ void k_connexite() {
     int kSommetConnexite = 0;
 
     for (int i = 0; i < nombreAnimaux; i++) {
-        int visite[MAX_ANIMAUX] = {0};
+        int visité[MAX_ANIMAUX] = {0};
         int pile[MAX_ANIMAUX];
         int top = -1;
 
@@ -770,7 +771,7 @@ void k_connexite() {
         for (int j = 0; j < nombreAnimaux; j++) {
             if (j != i) {
                 pile[++top] = j;
-                visite[j] = 1;
+                visité[j] = 1;
                 break;
             }
         }
@@ -779,8 +780,8 @@ void k_connexite() {
         while (top >= 0) {
             int v = pile[top--];
             for (int j = 0; j < nombreAnimaux; j++) {
-                if (!visite[j] && graphe[v][j] == 1 && j != i) {
-                    visite[j] = 1;
+                if (!visité[j] && graphe[v][j] == 1 && j != i) {
+                    visité[j] = 1;
                     pile[++top] = j;
                 }
             }
@@ -789,7 +790,7 @@ void k_connexite() {
         // Vérifier si tous les sommets non exclus sont visités
         int connexe = 1;
         for (int j = 0; j < nombreAnimaux; j++) {
-            if (j != i && !visite[j]) {
+            if (j != i && !visité[j]) {
                 connexe = 0;
                 break;
             }
@@ -802,11 +803,13 @@ void k_connexite() {
     }
 
     // Affichage des résultats
-    printf("\nLa K-connexite de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
-    printf("La connexite totale du graphe est : %d\n", connexiteTotale);
-    printf("La k-arete-connexite du graphe est : %d\n", kAreteConnexite);
-    printf("La k-sommet-connexite du graphe est : %d\n", kSommetConnexite);
-}*/
+    printf("\nLa K-connexité de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
+    printf("La connexité totale du graphe est : %d\n", connexiteTotale);
+    printf("La k-arête-connexité du graphe est : %d\n", kAreteConnexite);
+    printf("La k-sommet-connexité du graphe est : %d\n", kSommetConnexite);
+}
+
+
 
 void afficherChaine(Graph* graph, int* chaine, int taille) {
     // Affiche une chaîne alimentaire
