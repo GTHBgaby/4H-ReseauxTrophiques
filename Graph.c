@@ -196,32 +196,33 @@ void printEcosysteme(Graph* g) {
     scanf("%d",&fini);
 }
 
-Graph* choisirGraph() {
-    int choix;
-    Graph* ecosysteme = NULL;
 
+
+Graph* choisirGraph() {
+    int a;
+    Graph* ecosysteme = NULL;
     do {
+        a = 0;
         printf("Choisissez votre graphe :\n");
         printf("1. Cours d'eau\n");
         printf("2. Foret Europeenne\n");
         printf("3. Savane\n");
-
-        if (scanf("%d", &choix) != 1 || choix < 1 || choix > 3) {
-            printf("Choix invalide\n");
-            while(getchar() != '\n'); // Vide le buffer
-            continue;
-        }
+        scanf("%d", &choix);
 
         switch (choix) {
-            case 1: return lireGraphFichier("../CoursDeau.txt");
-            case 2: return lireGraphFichier("../ForetEuropeenne.txt");
-            case 3: return lireGraphFichier("../Savane.txt");
-            default: return NULL;
+            case 1:
+                ecosysteme = lireGraphFichier("../CoursDeau.txt");
+                break;
+            case 2:
+                ecosysteme = lireGraphFichier("../ForetEuropeenne.txt");
+                break;
+            case 3:
+                ecosysteme = lireGraphFichier("../Savane.txt");
+                break;
         }
-    } while(1);
+    } while (a);
+    return ecosysteme;
 }
-
-
 
 void libererGraph(Graph* graph) {
     if (!graph) return;
@@ -608,25 +609,10 @@ Graph* preset(Graph* graph){
     return graph;
 }
 
-void A_star() {
-
-    const char* filename = NULL;
-
-    switch (choix) {
-        case 1:
-            filename = "../CoursDeau.txt";
-            break;
-        case 2:
-            filename = "../ForetEuropeenne.txt";
-            break;
-        case 3:
-            filename = "../Savane.txt";
-            break;
-    }
-
-    Graph* graph = lireGraphFichier(filename);
-    if (!graph) {
-        printf("Erreur : Impossible de charger le fichier %s.\n", filename);
+// Fonction principale pour l'algorithme A*
+void A_star(Graph* graph) {
+    if (!graph || !graph->especes) {
+        printf("Erreur : Graphe invalide ou non initialise.\n");
         return;
     }
 
@@ -642,8 +628,7 @@ void A_star() {
     scanf("%d", &sourceId);
 
     if (sourceId < 1 || sourceId > graph->nbEspeces) {
-        printf("Erreur : numero source invalide.\n");
-        libererGraph(graph);
+        printf("Erreur : numero source invalide (%d).\n", sourceId);
         return;
     }
 
@@ -651,8 +636,7 @@ void A_star() {
     scanf("%d", &destId);
 
     if (destId < 1 || destId > graph->nbEspeces) {
-        printf("Erreur : numero destination invalide.\n");
-        libererGraph(graph);
+        printf("Erreur : numero destination invalide (%d).\n", destId);
         return;
     }
 
@@ -660,13 +644,19 @@ void A_star() {
     double* dist = malloc((graph->nbEspeces + 1) * sizeof(double)); // Distance minimale
     int* prev = malloc((graph->nbEspeces + 1) * sizeof(int)); // Prédécesseur
     bool* visited = malloc((graph->nbEspeces + 1) * sizeof(bool)); // Visité ou non
-    double* heuristic = malloc((graph->nbEspeces + 1) * sizeof(double)); // Heuristique
+
+    if (!dist || !prev || !visited) {
+        printf("Erreur : Allocation de memoire echouee.\n");
+        free(dist);
+        free(prev);
+        free(visited);
+        return;
+    }
 
     for (int i = 1; i <= graph->nbEspeces; i++) {
         dist[i] = (i == sourceId) ? 0 : INT_MAX;
         prev[i] = -1;
         visited[i] = false;
-        heuristic[i] = 0;  // Vous pouvez définir une heuristique ici
     }
 
     // A* algorithm
@@ -674,9 +664,9 @@ void A_star() {
         int u = -1;
         double minDist = INT_MAX;
 
-        // Trouver le sommet avec la distance minimale + heuristique
+        // Trouver le sommet avec la distance minimale
         for (int j = 1; j <= graph->nbEspeces; j++) {
-            if (!visited[j] && (dist[j] < minDist)) {
+            if (!visited[j] && dist[j] < minDist) {
                 minDist = dist[j];
                 u = j;
             }
@@ -712,99 +702,63 @@ void A_star() {
         printf("Distance totale : %.2f\n", dist[destId]);
         printf("Chemin : ");
         for (int i = pathIndex - 1; i >= 0; i--) {
-            printf("%s ", graph->especes[path[i]].nom);
+            printf("%s%s", graph->especes[path[i]].nom, (i > 0) ? " -> " : "\n");
         }
-        printf("\n");
     }
 
     // Libération des ressources
     free(dist);
     free(prev);
     free(visited);
-    free(heuristic);
-    libererGraph(graph);
 }
 
-/*int choix; // Choix de l'utilisateur
+
 
 // Fonction principale pour calculer la connexité, k-arête-connexité et k-sommet-connexité
-void k_connexite() {
-    const char* filename = NULL;
-
-    switch (choix) {
-        case 1:
-            filename = "../CoursDeau.txt";
-            break;
-        case 2:
-            filename = "../ForetEuropeenne.txt";
-            break;
-        case 3:
-            filename = "../Savane.txt";
-            break;
-        default:
-            printf("Erreur : choix invalide.\n");
-            return;
-    }
-
-    // Ouvrir le fichier
-    FILE* file = fopen(filename, "r");
-    if (!file) {
-        printf("Erreur : Impossible d'ouvrir le fichier %s\n", filename);
+void k_connexite(Graph* graph) {
+    if (!graph) {
+        printf("Erreur : Graphe invalide.\n");
         return;
     }
 
-    // Lire le nombre d'animaux
-    int nombreAnimaux;
-    fscanf(file, "%d", &nombreAnimaux);
-
-    // Lire le nombre de relations
-    int nombreRelations;
-    fscanf(file, "%d", &nombreRelations);
-
-    // Lire les noms des animaux
-    char animaux[MAX_ANIMAUX][MAX_LIGNES];
-    for (int i = 0; i < nombreAnimaux; i++) {
-        fscanf(file, "%s", animaux[i]);
-    }
-
-    // Afficher les animaux
-    printf("\nListe des animaux :\n");
-    for (int i = 0; i < nombreAnimaux; i++) {
-        printf("%d - %s\n", i + 1, animaux[i]);
-    }
-
-    // Demander à l'utilisateur de choisir un animal
-    printf("\nEntrez le numero de l'animal que vous choisissez : ");
-    scanf("%d", &choix);
-
-    if (choix < 1 || choix > nombreAnimaux) {
-        printf("Erreur : choix invalide.\n");
-        fclose(file);
-        return;
-    }
+    int nombreAnimaux = graph->nbEspeces;
 
     // Représentation du graphe sous forme de matrice d'adjacence
     int graphe[MAX_ANIMAUX][MAX_ANIMAUX] = {0};
     int kConnexite = 0;
     int connexiteTotale = 0;
 
-    // Lire les relations et remplir la matrice d'adjacence
-    int source, cible;
-    float poids;
-    while (fscanf(file, "%d %d %f", &source, &cible, &poids) == 3) {
-        graphe[source - 1][cible - 1] = 1;
-        graphe[cible - 1][source - 1] = 1;  // Graphe non orienté
+    // Construire la matrice d'adjacence à partir des arcs du graphe
+    for (int i = 1; i <= nombreAnimaux; i++) {
+        Arc* arc_courant = graph->especes[i].arc;
+        while (arc_courant) {
+            graphe[arc_courant->IDb - 1][arc_courant->IDs - 1] = 1;
+            graphe[arc_courant->IDs - 1][arc_courant->IDb - 1] = 1; // Graphe non orienté
 
-        // Calculer la connexité de l'animal choisi
-        if (source == choix || cible == choix) {
-            kConnexite++;
+            // Calculer la connexité de l'animal choisi
+            if (arc_courant->IDb == i || arc_courant->IDs == i) {
+                kConnexite++;
+            }
+
+            // Connexité totale du graphe
+            connexiteTotale++;
+            arc_courant = arc_courant->arcsuivant;
         }
-
-        // Connexité totale du graphe
-        connexiteTotale++;
     }
 
-    fclose(file);
+    // Demander à l'utilisateur de choisir un animal
+    printf("\nListe des animaux :\n");
+    for (int i = 1; i <= nombreAnimaux; i++) {
+        printf("%d - %s\n", i, graph->especes[i].nom);
+    }
+
+    printf("\nEntrez le numero de l'animal que vous choisissez : ");
+    scanf("%d", &choix);
+
+    if (choix < 1 || choix > nombreAnimaux) {
+        printf("Erreur : choix invalide.\n");
+        return;
+    }
 
     // Calcul de la k-arête-connexité et k-sommet-connexité
     int kAreteConnexite = 0;
@@ -851,11 +805,13 @@ void k_connexite() {
     }
 
     // Affichage des résultats
-    printf("\nLa K-connexite de l'animal '%s' est : %d\n", animaux[choix - 1], kConnexite);
+    printf("\nLa connexite de l'animal '%s' est : %d\n", graph->especes[choix].nom, kConnexite);
     printf("La connexite totale du graphe est : %d\n", connexiteTotale);
     printf("La k-arete-connexite du graphe est : %d\n", kAreteConnexite);
     printf("La k-sommet-connexite du graphe est : %d\n", kSommetConnexite);
-}*/
+}
+
+
 
 void afficherChaine(Graph* graph, int* chaine, int taille) {
     // Affiche une chaîne alimentaire

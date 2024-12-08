@@ -6,20 +6,18 @@
 #include "stdio.h"
 #include "Trophiques.h"
 
-
-
-
-
-
 void Menu() {
+
     char input;
     Graph* ecosysteme = NULL;
+    const char* current_graph = "ecosysteme";
 
     // Initialisation de l'écosystème
     ecosysteme = choisirGraph();
     if (!ecosysteme) return;
 
     do {
+        system("cls");
         printf("\n=== MENU PRINCIPAL ===\n");
         printf("1. Changer de graphe\n");
         printf("2. Afficher les especes \n");
@@ -35,6 +33,7 @@ void Menu() {
         // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
         scanf(" %c", &input);
         getchar();
+        system("cls");
 
         switch(input) {
             case '1': {
@@ -51,7 +50,20 @@ void Menu() {
                 break;
 
             case '3': {
+                printf("\nCalcul des niveaux trophiques :\n\n");
+                calculNiveauTrophique(ecosysteme);
 
+                for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                    if (ecosysteme->especes[i].pred[0] == -1) {
+                        printf("%-20s --> producteur primaire (niveau 1)\n", ecosysteme->especes[i].nom);
+                    } else {
+                        printf("%-20s --> niveau trophique %d\n",
+                               ecosysteme->especes[i].nom,
+                               (int) ecosysteme->especes[i].niveauTrophique);
+                    }
+                }
+                printf("\nAppuyez sur Entree pour continuer...");
+                getchar();
                 break;
             }
 
@@ -95,25 +107,29 @@ void Menu() {
                 break;
             }
 
-                // Ajoutez les autres cas ici
             case '5':
                 ecosysteme = modifierGraph(ecosysteme);
                 break;
 
             case '6':
+                genererFichierDot(ecosysteme, current_graph);
+                printf("Appuyez sur entree");
+                getchar();
                 break;
-            case '7':
 
+            case '7':
+                A_star(ecosysteme);
                 break;
 
             case '8':
-                //k_connexite();
+                k_connexite(ecosysteme);
                 break;
 
         }
     } while(input != '9');
 
-    // Libération de la mémoire avant de quitter
+    DelTempFile(current_graph);
+
     if(ecosysteme) {
         libererGraph(ecosysteme);
     }
@@ -123,51 +139,3 @@ int main() {
     Menu();
     return 0;
 }
-
-
-/*int main(){
-    Arc* man = malloc(sizeof (Arc));
-    char nomFichier[50];
-
-    char nom_fichierDOT[100];
-    char nom_espece[100];
-    Especes especes[MAX_ESPECES];
-    int nb_especes;
-    char choix;
-    int fichier_valide;
-
-    /*Graph* graph = NULL;
-    //printf("Donnez le nom du fichier a analyser :");
-    //scanf("%s", nomFichier);
-    graph = lireGraphFichier(nomFichier,man);
-    printEcosysteme(graph);*/
-
-    /*do {
-        do {
-            nb_especes = 0;
-            printf("Entrez le nom du fichier a modifier (sans extension):\n");
-            scanf("%s", nom_fichierDOT);
-
-            lire_fichier_dot(nom_fichierDOT, especes, &nb_especes);
-
-            if (nb_especes == 0) {
-                printf("Fichier invalide ou vide. Veuillez reessayer.\n\n");
-                fichier_valide = 0;
-            } else {
-                fichier_valide = 1;
-            }
-        } while (!fichier_valide);
-
-        printf("Entrez le nom de l'espece a modifier :\n");
-        scanf("%s", nom_espece);
-
-        if (modifier_espece(especes, nb_especes, nom_espece)) {
-            mettre_a_jour_fichier_dot(nom_fichierDOT, especes, nb_especes);
-            printf("Fichier mis a jour avec succes.\n");
-        }
-
-        printf("Voulez-vous modifier une autre espece ? (y/n):\n");
-        scanf(" %c", &choix);
-    } while (choix == 'y' || choix == 'Y');
-    return 0;
-}*/
