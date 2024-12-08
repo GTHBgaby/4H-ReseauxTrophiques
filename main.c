@@ -51,20 +51,7 @@ void Menu() {
                 break;
 
             case '3': {
-                printf("\nCalcul des niveaux trophiques :\n\n");
-                calculNiveauTrophique(ecosysteme);
 
-                for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                    if (ecosysteme->especes[i].pred[0] == -1) {
-                        printf("%-20s --> producteur primaire (niveau 1)\n", ecosysteme->especes[i].nom);
-                    } else {
-                        printf("%-20s --> niveau trophique %d\n",
-                               ecosysteme->especes[i].nom,
-                               (int) ecosysteme->especes[i].niveauTrophique);
-                    }
-                }
-                printf("\nAppuyez sur Entree pour continuer...");
-                getchar();
                 break;
             }
 
@@ -116,7 +103,7 @@ void Menu() {
             case '6':
                 break;
             case '7':
-                A_star();
+
                 break;
 
             case '8':

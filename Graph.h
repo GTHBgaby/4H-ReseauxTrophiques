@@ -38,6 +38,15 @@ typedef struct {
 } Graph;
 
 void Menu();
+//Fonctions de questions
+void menuQuestion(Graph* graph);
+void A_star();
+void k_connexite();
+//Fonctions de chaines d'especes
+void chainesEspece(Graph* graph);
+void trouverChaines(Graph* graph, int espece, int* chaine, int taille, bool* visite);
+void afficherChaine(Graph* graph, int* chaine, int taille);
+
 // Fonctions de base pour la manipulation des graphes
 Graph* lireGraphFichier(const char* nomFichier);
 Graph* choisirGraph();
@@ -51,13 +60,9 @@ Graph* modifierCoeff(Graph* graph);
 Graph* preset(Graph* graph);
 Graph* supprEspece(Graph* graph);
 
-void A_star();
-void k_connexite();
 
-//Fonctions de chaines d'especes
-void chainesEspece(Graph* graph);
-void trouverChaines(Graph* graph, int espece, int* chaine, int taille, bool* visite);
-void afficherChaine(Graph* graph, int* chaine, int taille);
+
+
 
 
 

@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <limits.h>
 #include "generationDOT.h"
+#include "Trophiques.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_LIGNES 100
@@ -140,12 +141,16 @@ void printEcosysteme(Graph* g) {
     printf("------------------\n");
 
     for (int i = 1; i <= g->nbEspeces; i++) {
-        if (g->especes[i].nom[0] != '\0') {  // Vérifier que l'espèce existe
-            printf("Espece %d: %s\n", g->especes[i].id, g->especes[i].nom);
-            printf("  Population: %.2f\n", g->especes[i].population);
-            printf("  Taux de croissance: %.2f\n", g->especes[i].taux_accroissement);
-            printf("  Capacite maximale: %.2f\n", g->especes[i].capacite);
-            printf("  Niveau trophique: %d\n\n", g->especes[i].niveauTrophique);
+        if(g->especes[i].supp == false){
+            if (g->especes[i].nom[0] != '\0') {  // Vérifier que l'espèce existe
+                printf("Espece %d: %s\n", g->especes[i].id, g->especes[i].nom);
+                printf("  Population: %.2f\n", g->especes[i].population);
+                printf("  Taux de croissance: %.2f\n", g->especes[i].taux_accroissement);
+                printf("  Capacite maximale: %.2f\n", g->especes[i].capacite);
+                printf("  Niveau trophique: %.1f\n\n", g->especes[i].niveauTrophique);
+            }
+        }else{
+            printf("Espece supprimee\n\n");
         }
     }
     // 2. Affichage de la liste des arcs avec leurs pondérations
@@ -231,6 +236,50 @@ void libererGraph(Graph* graph) {
     }
     free(graph->especes);
     free(graph);
+}
+void menuQuestion(Graph* graph){
+    int a;
+    do{
+        printf("Quelle est votre question :\n");
+        printf("1. Chemin le plus rapide en deux especes\n");
+        printf("2. k-connexite\n");
+        printf("3. Chaine d'une espece specifique\n");
+        printf("4. Niveau trophique\n");
+        printf("5. Quitter\n");
+        scanf("%d",&a);
+        switch(a){
+            case 1:
+                A_star();
+                break;
+            case 2:
+                //fonction de eliott
+                break;
+            case 3:
+                chainesEspece(graph);
+                break;
+            case 4:
+                printf("\nCalcul des niveaux trophiques :\n\n");
+                calculNiveauTrophique(graph);
+
+                for (int i = 1; i <= graph->nbEspeces; i++) {
+                    if (graph->especes[i].pred[0] == -1) {
+                        printf("%-20s --> producteur primaire (niveau 1)\n", graph->especes[i].nom);
+                    } else {
+                        printf("%-20s --> niveau trophique %d\n",
+                               graph->especes[i].nom,
+                               (int) graph->especes[i].niveauTrophique);
+                    }
+                }
+                printf("\nAppuyez sur Entree pour continuer...");
+                getchar();
+                break;
+            case 5:
+                return;
+            default:
+                printf("Choix non valide\n");
+                break;
+        }
+    }while(1);
 }
 Graph* modifierGraph(Graph* graph){
     int a;
