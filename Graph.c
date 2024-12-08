@@ -815,10 +815,10 @@ void k_connexite(Graph* graph) {
 
 
 void afficherChaine(Graph* graph, int* chaine, int taille) {
-    // Affiche une chaîne alimentaire
-    for(int i = 0; i < taille; i++) {
+    // Affiche une chaîne alimentaire dans l'ordre inverse
+    for(int i = taille - 1; i >= 0; i--) {
         printf("%s", graph->especes[chaine[i]].nom);
-        if(i < taille - 1) {
+        if(i > 0) {
             printf(" -> ");
         }
     }
