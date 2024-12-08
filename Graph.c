@@ -250,15 +250,15 @@ void menuQuestion(Graph* graph){
         scanf("%d",&a);
         switch(a){
             case 1:
-                A_star();
+                A_star(graph);
                 break;
             case 2:
-                //fonction de eliott
+                k_connexite(graph);
                 break;
             case 3:
                 chainesEspece(graph);
                 break;
-            case 4:
+            case 4: {
                 printf("\nCalcul des niveaux trophiques :\n\n");
                 calculNiveauTrophique(graph);
 
@@ -274,6 +274,7 @@ void menuQuestion(Graph* graph){
                 printf("\nAppuyez sur Entree pour continuer...");
                 getchar();
                 break;
+            }
             case 5:
                 return;
             default:

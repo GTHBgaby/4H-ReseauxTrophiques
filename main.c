@@ -21,14 +21,12 @@ void Menu() {
         printf("\n=== MENU PRINCIPAL ===\n");
         printf("1. Changer de graphe\n");
         printf("2. Afficher les especes \n");
-        printf("3. Niveau Trophique\n");
+        printf("3. Questions\n");
         printf("4. Simulation \n");
         printf("5. Modifier les valeurs\n");
         printf("6. Affichage des schemas (en .jpg)\n");
-        printf("7. Chemin le plus rapide\n");
-        printf("8. Connexite\n");
-        printf("9. Quitter\n");
-        printf("\nVotre choix (1-9): ");
+        printf("7. Quitter\n");
+        printf("\nVotre choix (1-7): ");
 
         // Lecture du choix avec un espace avant %c pour ignorer les caractères speciaux
         scanf(" %c", &input);
@@ -49,23 +47,9 @@ void Menu() {
                 printEcosysteme(ecosysteme);
                 break;
 
-            case '3': {
-                printf("\nCalcul des niveaux trophiques :\n\n");
-                calculNiveauTrophique(ecosysteme);
-
-                for (int i = 1; i <= ecosysteme->nbEspeces; i++) {
-                    if (ecosysteme->especes[i].pred[0] == -1) {
-                        printf("%-20s --> producteur primaire (niveau 1)\n", ecosysteme->especes[i].nom);
-                    } else {
-                        printf("%-20s --> niveau trophique %d\n",
-                               ecosysteme->especes[i].nom,
-                               (int) ecosysteme->especes[i].niveauTrophique);
-                    }
-                }
-                printf("\nAppuyez sur Entree pour continuer...");
-                getchar();
+            case '3':
+                menuQuestion(ecosysteme);
                 break;
-            }
 
             case '4': {
                 int tempsSimulation;
@@ -116,17 +100,8 @@ void Menu() {
                 printf("Appuyez sur entree");
                 getchar();
                 break;
-
-            case '7':
-                A_star(ecosysteme);
-                break;
-
-            case '8':
-                k_connexite(ecosysteme);
-                break;
-
         }
-    } while(input != '9');
+    } while(input != '7');
 
     DelTempFile(current_graph);
 
