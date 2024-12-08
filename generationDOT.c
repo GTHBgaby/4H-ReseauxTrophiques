@@ -5,9 +5,6 @@
 #include "generationDOT.h"
 #include "Graph.h"
 
-#define MKDIR(dir) _mkdir(dir)
-#define DOT_PATH "C:\\Program Files\\Graphviz\\bin\\dot.exe"
-
 void openImage(const char* file) {
     char commande[512];
     snprintf(commande, sizeof(commande), "start \"\" \"%s\"", file);

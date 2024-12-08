@@ -5,6 +5,7 @@
 #include <string.h>
 #include "stdio.h"
 #include "Trophiques.h"
+#include "generationGraphique.h"
 
 void Menu() {
 
@@ -61,6 +62,12 @@ void Menu() {
                 }
                 while (getchar() != '\n') {};
 
+                // Allouer la mémoire pour stocker l'historique de chaque espèce
+                float** historiques = malloc((ecosysteme->nbEspeces + 1) * sizeof(float*));
+                for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                    historiques[i] = malloc(tempsSimulation * sizeof(float));
+                }
+
                 int t = 1;
                 char simInput;
 
@@ -73,7 +80,8 @@ void Menu() {
 
                         for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
                             if (ecosysteme->especes[i].supp==false) {
-                            printf("%-20s | %11.2f\n",
+                                historiques[i][t-1] = ecosysteme->especes[i].population;
+                                printf("%-20s | %11.2f\n",
                                 ecosysteme->especes[i].nom,
                                 ecosysteme->especes[i].population);
                         }
@@ -88,6 +96,66 @@ void Menu() {
                     }
                     t++;
                 } while (t <= tempsSimulation);
+
+                char choixGraph;
+                do {
+                    printf("\nVoulez-vous voir un graphique d'evolution ?\n");
+                    printf("1. Oui\n");
+                    printf("2. Non\n");
+                    printf("Votre choix : ");
+                    scanf(" %c", &choixGraph);
+                    getchar();
+
+                    switch(choixGraph) {
+                        case '1': {
+                            printf("\nEspeces disponibles:\n");
+                            for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                                if(!ecosysteme->especes[i].supp) {
+                                    printf("- %s\n", ecosysteme->especes[i].nom);
+                                }
+                            }
+
+                            char nom_espece[50];
+                            printf("\nEntrez le nom de l'espece: ");
+                            scanf("%s", nom_espece);
+                            getchar();
+
+                            int id_espece = -1;
+                            for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                                if(strcmp(ecosysteme->especes[i].nom, nom_espece) == 0) {
+                                    id_espece = i;
+                                    break;
+                                }
+                            }
+
+                            if(id_espece != -1) {
+                                genererGraphiqueEvolution(nom_espece, historiques[id_espece], t-1);
+                                printf("\nAppuyez sur Entree pour continuer...");
+                                getchar();
+
+                                // Supprimer les fichiers temporaires
+                                char nom_fichier[256];
+                                snprintf(nom_fichier, sizeof(nom_fichier), "evolution_%s", nom_espece);
+                                DelTempFile(nom_fichier);
+                            } else {
+                                printf("Espece non trouvee\n");
+                            }
+                            break;
+                        }
+                        case '2':
+                            break;
+                        default:
+                            printf("Option non valide\n");
+                            break;
+                    }
+                } while(choixGraph != '2');
+
+                // Libérer la mémoire des historiques
+                for(int i = 1; i <= ecosysteme->nbEspeces; i++) {
+                    free(historiques[i]);
+                }
+                free(historiques);
+
                 break;
             }
 
