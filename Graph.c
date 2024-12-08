@@ -271,8 +271,8 @@ void menuQuestion(Graph* graph){
                                (int) graph->especes[i].niveauTrophique);
                     }
                 }
-                printf("\nAppuyez sur Entree pour continuer...");
-                getchar();
+                printf("\n\n");
+
                 break;
             }
             case 5:
