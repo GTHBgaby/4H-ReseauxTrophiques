@@ -815,7 +815,6 @@ void k_connexite(Graph* graph) {
 
 
 void afficherChaine(Graph* graph, int* chaine, int taille) {
-    // Affiche une chaîne alimentaire dans l'ordre inverse
     for(int i = taille - 1; i >= 0; i--) {
         printf("%s", graph->especes[chaine[i]].nom);
         if(i > 0) {
@@ -826,21 +825,18 @@ void afficherChaine(Graph* graph, int* chaine, int taille) {
 }
 
 void trouverChaines(Graph* graph, int espece, int* chaine, int taille, bool* visite) {
-    // Ajoute l'espèce courante à la chaîne
     chaine[taille] = espece;
     taille++;
 
-    // Marque l'espèce comme visitée
     visite[espece] = true;
 
-    // Si l'espèce n'a pas de prédécesseurs, affiche la chaîne
     if(graph->especes[espece].pred[0] == -1) {
         afficherChaine(graph, chaine, taille);
     } else {
         // Pour chaque prédécesseur
         for(int i = 0; graph->especes[espece].pred[i] != -1 && i < MAX_connexion; i++) {
             int pred = graph->especes[espece].pred[i];
-            // Si le prédécesseur n'a pas déjà été visité (évite les cycles)
+            // Si pas visité
             if(!visite[pred]) {
                 trouverChaines(graph, pred, chaine, taille, visite);
             }
@@ -853,11 +849,9 @@ void chainesEspece(Graph* graph) {
     char nom[longueur_Max];
     int espece_id = -1;
 
-    // Demande le nom de l'espèce
     printf("Entrez le nom de l'espece : ");
     scanf("%s", nom);
 
-    // Trouve l'ID de l'espèce
     for(int i = 1; i <= graph->nbEspeces; i++) {
         if(strcmp(graph->especes[i].nom, nom) == 0) {
             espece_id = i;
@@ -870,7 +864,7 @@ void chainesEspece(Graph* graph) {
         return;
     }
 
-    // Initialise les structures pour la recherche
+    // structures pour la recherche
     int* chaine = (int*)malloc(graph->nbEspeces * sizeof(int));
     bool* visite = (bool*)malloc((graph->nbEspeces + 1) * sizeof(bool));
 
@@ -881,7 +875,7 @@ void chainesEspece(Graph* graph) {
         return;
     }
 
-    // Initialise le tableau des visites
+    // tableau des visite
     for(int i = 0; i <= graph->nbEspeces; i++) {
         visite[i] = false;
     }
@@ -889,7 +883,6 @@ void chainesEspece(Graph* graph) {
     printf("Chaines alimentaires menant a %s :\n", nom);
     trouverChaines(graph, espece_id, chaine, 0, visite);
 
-    // Libère la mémoire
     free(chaine);
     free(visite);
 }
